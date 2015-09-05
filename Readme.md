@@ -26,4 +26,3 @@ An app that will help you make choices by asking other people that dont know you
  [ ] As a user I want too see choices based on popularity
  [ ] As a user I want to be able to follow other users
 
-
