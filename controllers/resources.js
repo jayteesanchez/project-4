@@ -1,31 +1,31 @@
-var Resource = require('../models/Resource');
+var Post = require('../models/Post');
 
 var index = function(req, res, next) {
-  Resource.find({}, function (err, resources) {
+  Post.find({}, function (err, post) {
     if (err) res.send(err);
 
-    res.json({resources: resources});
+    res.json({posts: posts});
   });
 };
 
 var show = function(req, res, next) {
-  Resource.findById(req.params.id, function(err, resource) {
+  Post.findById(req.params.id, function(err, post) {
     if (err) res.send(err);
 
-    res.render('resources/show', {resource: resource});
+    res.render('posts/show', {post: post});
   });
 };
 
 // 'new' is a keyword in JS, so we can't use it for a variable!
 var newRoute = function(req, res, next) {
-  res.render('resources/new');
+  res.render('posts/new');
 };
 
 var create = function(req, res, next) {
-  Resource.create(req.body.resource, function (err, resource) {
+  Post.create(req.body.post, function (err, post) {
     if (err) res.send(err);
 
-    res.redirect('/resources/' + resource.id);
+    res.redirect('/posts/' + post.id);
   });
 };
 
