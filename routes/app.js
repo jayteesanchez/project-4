@@ -1,18 +1,30 @@
-// import Express and the Express Router
-var express = require('express');
-var router = express.Router();
+var express = require('express'),
+    router = express.Router(),
+    bodyParser = require('body-parser'), //parses information from POST
+    methodOverride = require('method-override'); //used to manipulate POST
 
-// import controllers for resources
-var resourcesController = require('../controllers/resources');
+var questionsController = require('../controllers/questions');
 
-// define routes for our application, and send them to route handlers
+// http://127.0.0.1:3000/questions
+router.route('/questions')
 
-router.get(    '/resources',          resourcesController.index);
-// router.get(    '/resources/new',      resourcesController.new)
-// router.get(    '/resources/:id',      resourcesController.show)
-// router.get(    '/resources/:id/edit', resourcesController.edit)
-// router.post(   '/resources',          resourcesController.create)
-// router.put(    '/resources/:id',      resourcesController.update)
-// router.delete( '/resources/:id',      resourcesController.destroy)
+  // all questions
+  .get(questionsController.getAll)
 
-module.exports = router;
+  // a new Question
+  .post(questionsController.createQuestion);
+
+
+router.route('/questions/:id')
+
+  // return specific Question
+  .get(questionsController.getQuestion)
+
+  // update existing Question
+  .patch(questionsController.updateQuestion)
+
+  // remove specific Question from DB
+  .delete(questionsController.removeQuestion);
+
+
+module.exports = router
