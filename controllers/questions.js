@@ -14,7 +14,19 @@ function createQuestion(request, response) {
   console.log('in Question');
   console.log('body:',request.body);
 
-  var question = new Question(request.body);
+  var question = new Question({
+  question:             req.body.question,
+  choice1:              req.body.choice1,
+  choice1_img:          req.body.choice1_img,
+  choice2:              req.body.choice2,
+  choice2_img:          req.body.choice2_img,
+  expiration:           req.body.expiration,
+  user_id:              req.user.id
+});
+
+Question.prototype.expireAt = function() {
+  return (this.posted_date + this.expiration)
+}
 
   question.save(function(error) {
     if(error) response.json({messsage: 'Could not ceate question b/c:' + error});
