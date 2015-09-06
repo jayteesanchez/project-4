@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 
 var QuestionSchema = new mongoose.Schema({
-  user_id:              String,
   question:             String,
   choice1:              String,
   choice1_img:          String,
@@ -10,7 +9,8 @@ var QuestionSchema = new mongoose.Schema({
   choice2_img:          String,
   votes_choice_2:       { type: Number, default: 0 },
   downVote:             { type: Number, default: 0 },
-  expiration:           String
+  expiration:           String,
+  user_id:              { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });
 
 module.exports = mongoose.model('Question', QuestionSchema);
