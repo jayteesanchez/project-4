@@ -5,6 +5,13 @@ var favicon      = require('serve-favicon');
 var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
+var async = require('async');
+var mongoose = require('mongoose');
+var React = require('react');
+var Router = require('react-router');
+var _ = require('underscore');
+
+
 
 // check that MongoD is running...
 require('net').connect(27017, 'localhost').on('error', function() {
@@ -16,7 +23,6 @@ require('net').connect(27017, 'localhost').on('error', function() {
 var routes = require('./routes/app');
 
 // load mongoose and connect to a database
-var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/project-4');
 
 // start running express, and save the configurations for the express
