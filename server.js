@@ -5,33 +5,24 @@ var favicon      = require('serve-favicon');
 var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
-var async = require('async');
-var mongoose = require('mongoose');
-var React = require('react');
-var Router = require('react-router');
-var _ = require('underscore');
+var async        = require('async');
+var mongoose     = require('mongoose');
+var React        = require('react');
+var Router       = require('react-router');
+var _            = require('underscore');
 
 
+// start running express, and save the configurations for the express
+// "app" with the variable `app`.
+var app = express();
 
 // check that MongoD is running...
 require('net').connect(27017, 'localhost').on('error', function() {
   console.log("YOU MUST BOW BEFORE THE MONGOD FIRST, MORTAL!");
   process.exit(0);
 });
-
-// loading routes defined in the /routes folder
-var routes = require('./routes/app');
-
 // load mongoose and connect to a database
 mongoose.connect('mongodb://localhost/project-4');
-
-// start running express, and save the configurations for the express
-// "app" with the variable `app`.
-var app = express();
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -41,7 +32,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// insert middleware that points to our route definitions
+// loading routes defined in the /routes folder
+var routes = require('./routes/app');
 
 // DEFINED ROUTES ARE IN HERE >> routes, ie './routes/index'
 app.use('/', routes);
@@ -53,6 +45,13 @@ app.use(function(req, res, next) {
   next(err);
 });
 
+app.use(function(req, res) {
+  Router.run(routes, req.path, function(Handler) {
+    var html = React.renderToString(React.createElement(Handler));
+    var page = swig.renderFile('views/index.html', { html: html });
+    res.send(page);
+  });
+});
 // error handlers
 
 // development error handler
@@ -78,4 +77,26 @@ app.use(function(err, req, res, next) {
 });
 
 
-module.exports = app;
+/**
+ * Socket.io stuff.
+ */
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
+var onlineUsers = 0;
+
+io.sockets.on('connection', function(socket) {
+  onlineUsers++;
+
+  io.sockets.emit('onlineUsers', { onlineUsers: onlineUsers });
+
+  socket.on('disconnect', function() {
+    onlineUsers--;
+    io.sockets.emit('onlineUsers', { onlineUsers: onlineUsers });
+  });
+});
+
+server.listen(app.get('port'), function() {
+  console.log('Express server listening on port ' + app.get('port'));
+});
+
+module.exports = app
