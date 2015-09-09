@@ -16,7 +16,7 @@ class NavbarActions {
 
   findQuestion(payload) {
     $.ajax({
-      url: '/api/questions/search',
+      url: '/questions/search',
       data: { name: payload.searchQuery }
     })
       .done((data) => {
@@ -29,7 +29,7 @@ class NavbarActions {
   }
 
   getQuestionCount() {
-    $.ajax({ url: '/api/questions/count' })
+    $.ajax({ url: '/questions/count' })
       .done((data) => {
         this.actions.getQuestionCountSuccess(data)
       })

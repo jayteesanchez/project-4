@@ -26,5 +26,12 @@ router.route('/questions/:id')
   // remove specific Question from DB
   .delete(questionsController.removeQuestion);
 
+router.get('/questions/top', questionsController.topQuestions);
+
+router.get('/questions/count', questionsController.questionCount);
+
+router.get('/questions/search', questionsController.searchQuestions);
+
 
 module.exports = router
+

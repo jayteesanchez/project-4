@@ -1,5 +1,6 @@
 // requiring/loading all of our dependencies/libaries
 var express      = require('express');
+var http         = require('http');
 var path         = require('path');
 var favicon      = require('serve-favicon');
 var logger       = require('morgan');
@@ -80,8 +81,8 @@ app.use(function(err, req, res, next) {
 /**
  * Socket.io stuff.
  */
-var server = require('http').createServer(app);
-var io = require('socket.io')(server);
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
 var onlineUsers = 0;
 
 io.sockets.on('connection', function(socket) {

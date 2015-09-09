@@ -1,5 +1,9 @@
 var Question = require('../models/Question');
 
+Question.prototype.totalVote = function() {
+  return (votes_choice_1 + votes_choice_2);
+}
+
 // GET
 function getAll(request, response) {
   Question.find(function(error, question) {
@@ -81,10 +85,60 @@ function removeQuestion(request, response) {
   });
 }
 
+function searchQuestions(request, response) {
+  var question = new RegExp(request.query.question, 'i');
+
+  Question.findOne({ question: question }, function(err, question) {
+    if (err) return next(err);
+
+    if (!question) {
+      return res.status(404).send({ message: 'Question not found.' });
+    }
+
+    response.send(question);
+  });
+};
+
+function questionCount (request, response) {
+  Question.count({}, function(err, count) {
+    if (err) return next(err);
+    response.send({ count: count });
+  });
+};
+
+function topQuestions (request, response) {
+  var params = request.query;
+  var conditions = {};
+
+  _.each(params, function(value, key) {
+    conditions[key] = new RegExp('^' + value + '$', 'i');
+  });
+
+  Question
+    .find(conditions)
+    .sort('-totalVote')
+    .limit(100)
+    .exec(function(err, questions) {
+      if (err) return next(err);
+
+      questions.sort(function(a, b) {
+        if (a < b) { return 1; }
+        if (a > b) { return -1; }
+        return 0;
+      });
+
+      response.send(questions);
+    });
+};
+
+
 module.exports = {
   getAll: getAll,
   createQuestion: createQuestion,
   getQuestion: getQuestion,
   updateQuestion: updateQuestion,
-  removeQuestion: removeQuestion
+  removeQuestion: removeQuestion,
+  searchQuestions: searchQuestions,
+  questionCount: questionCount,
+  topQuestions: topQuestions
 }

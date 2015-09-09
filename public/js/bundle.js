@@ -30,7 +30,7 @@ var NavbarActions = (function () {
       var _this = this;
 
       $.ajax({
-        url: '/api/questions/search',
+        url: '/questions/search',
         data: { name: payload.searchQuery }
       }).done(function (data) {
         (0, _underscore.assign)(payload, data);
@@ -44,7 +44,7 @@ var NavbarActions = (function () {
     value: function getQuestionCount() {
       var _this2 = this;
 
-      $.ajax({ url: '/api/questions/count' }).done(function (data) {
+      $.ajax({ url: '/questions/count' }).done(function (data) {
         _this2.actions.getQuestionCountSuccess(data);
       }).fail(function (jqXhr) {
         _this2.actions.getQuestionCountFail(jqXhr);
@@ -176,11 +176,11 @@ var Navbar = (function (_React$Component) {
       _storesNavbarStore2['default'].listen(this.onChange);
       _actionsNavbarActions2['default'].getQuestionCount();
 
-      var socket = io.connect();
+      // let socket = io.connect();
 
-      socket.on('onlineUsers', function (data) {
-        _actionsNavbarActions2['default'].updateOnlineUsers(data);
-      });
+      // socket.on('onlineUsers', (data) => {
+      //   NavbarActions.updateOnlineUsers(data);
+      // });
 
       $(document).ajaxStart(function () {
         _actionsNavbarActions2['default'].updateAjaxAnimation('fadeIn');
@@ -241,25 +241,7 @@ var Navbar = (function (_React$Component) {
           _react2['default'].createElement(
             _reactRouter.Link,
             { to: '/', className: 'navbar-brand' },
-            _react2['default'].createElement(
-              'span',
-              { ref: 'triangles', className: 'triangles animated ' + this.state.ajaxAnimationClass },
-              _react2['default'].createElement('div', { className: 'tri invert' }),
-              _react2['default'].createElement('div', { className: 'tri invert' }),
-              _react2['default'].createElement('div', { className: 'tri' }),
-              _react2['default'].createElement('div', { className: 'tri invert' }),
-              _react2['default'].createElement('div', { className: 'tri invert' }),
-              _react2['default'].createElement('div', { className: 'tri' }),
-              _react2['default'].createElement('div', { className: 'tri invert' }),
-              _react2['default'].createElement('div', { className: 'tri' }),
-              _react2['default'].createElement('div', { className: 'tri invert' })
-            ),
-            'CHOICES',
-            _react2['default'].createElement(
-              'span',
-              { className: 'badge badge-up badge-danger' },
-              this.state.onlineUsers
-            )
+            'CHOICES'
           )
         ),
         _react2['default'].createElement(
@@ -300,7 +282,7 @@ var Navbar = (function (_React$Component) {
               null,
               _react2['default'].createElement(
                 _reactRouter.Link,
-                { to: '/top' },
+                { to: '/questions/top' },
                 'Top Questions'
               )
             ),
@@ -309,8 +291,22 @@ var Navbar = (function (_React$Component) {
               null,
               _react2['default'].createElement(
                 _reactRouter.Link,
-                { to: '/ask' },
+                { to: '/questions/ask' },
                 'Ask a Question'
+              )
+            ),
+            _react2['default'].createElement(
+              'li',
+              { className: 'navbar-right' },
+              _react2['default'].createElement(
+                _reactRouter.Link,
+                { to: '/#' },
+                'Users Online',
+                _react2['default'].createElement(
+                  'span',
+                  { className: 'badge badge-up badge-danger' },
+                  this.state.onlineUsers
+                )
               )
             )
           )

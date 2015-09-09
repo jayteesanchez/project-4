@@ -3,6 +3,7 @@ import {Link} from 'react-router';
 import NavbarStore from '../stores/NavbarStore';
 import NavbarActions from '../actions/NavbarActions';
 
+
 class Navbar extends React.Component {
   constructor(props) {
     super(props);
@@ -14,11 +15,11 @@ class Navbar extends React.Component {
     NavbarStore.listen(this.onChange);
     NavbarActions.getQuestionCount();
 
-    let socket = io.connect();
+    // let socket = io.connect();
 
-    socket.on('onlineUsers', (data) => {
-      NavbarActions.updateOnlineUsers(data);
-    });
+    // socket.on('onlineUsers', (data) => {
+    //   NavbarActions.updateOnlineUsers(data);
+    // });
 
     $(document).ajaxStart(() => {
       NavbarActions.updateAjaxAnimation('fadeIn');
@@ -55,6 +56,7 @@ class Navbar extends React.Component {
 
   render() {
     return (
+
       <nav className='navbar navbar-default navbar-static-top'>
         <div className='navbar-header'>
           <button type='button' className='navbar-toggle collapsed' data-toggle='collapse' data-target='#navbar'>
@@ -64,19 +66,7 @@ class Navbar extends React.Component {
             <span className='icon-bar'></span>
           </button>
           <Link to='/' className='navbar-brand'>
-            <span ref='triangles' className={'triangles animated ' + this.state.ajaxAnimationClass}>
-              <div className='tri invert'></div>
-              <div className='tri invert'></div>
-              <div className='tri'></div>
-              <div className='tri invert'></div>
-              <div className='tri invert'></div>
-              <div className='tri'></div>
-              <div className='tri invert'></div>
-              <div className='tri'></div>
-              <div className='tri invert'></div>
-            </span>
             CHOICES
-            <span className='badge badge-up badge-danger'>{this.state.onlineUsers}</span>
           </Link>
         </div>
         <div id='navbar' className='navbar-collapse collapse'>
@@ -90,8 +80,14 @@ class Navbar extends React.Component {
           </form>
           <ul className='nav navbar-nav'>
             <li><Link to='/'>Home</Link></li>
-            <li><Link to='/top'>Top Questions</Link></li>
-            <li><Link to='/ask'>Ask a Question</Link></li>
+            <li><Link to='/questions/top'>Top Questions</Link></li>
+            <li><Link to='/questions/ask'>Ask a Question</Link></li>
+            <li className='navbar-right'>
+              <Link to='/#'>
+                Users Online
+                <span className='badge badge-up badge-danger'>{this.state.onlineUsers}</span>
+              </Link>
+            </li>
           </ul>
         </div>
       </nav>
