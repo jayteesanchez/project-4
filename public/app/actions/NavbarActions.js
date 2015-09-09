@@ -31,10 +31,10 @@ class NavbarActions {
   getQuestionCount() {
     $.ajax({ url: '/questions/count' })
       .done((data) => {
-        this.actions.getQuestionCountSuccess(data)
+        this.actions.getQuestionCountSuccess(data);
       })
       .fail((jqXhr) => {
-        this.actions.getQuestionCountFail(jqXhr)
+        this.actions.getQuestionCountFail(jqXhr);
       });
   }
 }

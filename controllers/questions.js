@@ -1,9 +1,5 @@
 var Question = require('../models/Question');
 
-Question.prototype.totalVote = function() {
-  return (votes_choice_1 + votes_choice_2);
-}
-
 // GET
 function getAll(request, response) {
   Question.find(function(error, question) {
@@ -30,6 +26,10 @@ function createQuestion(request, response) {
 
 Question.prototype.expireAt = function() {
   return (this.posted_date + this.expiration)
+}
+
+Question.prototype.totalVote = function() {
+  return (votes_choice_1 + votes_choice_2);
 }
 
   question.save(function(error) {
