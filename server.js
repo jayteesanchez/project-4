@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var async        = require('async');
 var mongoose     = require('mongoose');
+var request      = require('request');
 var React        = require('react');
 var Router       = require('react-router');
 var _            = require('underscore');
