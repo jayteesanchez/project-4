@@ -12,7 +12,7 @@ class Navbar extends React.Component {
 
   componentDidMount() {
     NavbarStore.listen(this.onChange);
-    NavbarActions.getCharacterCount();
+    NavbarActions.getQuestionCount();
 
     let socket = io.connect();
 
@@ -75,22 +75,21 @@ class Navbar extends React.Component {
               <div className='tri'></div>
               <div className='tri invert'></div>
             </span>
-            NEF
+            CHOICES
             <span className='badge badge-up badge-danger'>{this.state.onlineUsers}</span>
           </Link>
         </div>
         <div id='navbar' className='navbar-collapse collapse'>
           <form ref='searchForm' className='navbar-form navbar-left animated' onSubmit={this.handleSubmit.bind(this)}>
             <div className='input-group'>
-              <input type='text' className='form-control' placeholder={this.state.totalCharacters + ' characters'} value={this.state.searchQuery} onChange={NavbarActions.updateSearchQuery} />
+              <input type='text' className='form-control' placeholder={this.state.totalCharacters + ' Questions'} value={this.state.searchQuery} onChange={NavbarActions.updateSearchQuery} />
               <span className='input-group-btn'>
-                <button className='btn btn-default' onClick={this.handleSubmit.bind(this)}><span className='glyphicon glyphicon-search'></span></button>
+                <button className='btn btn-default' onClick={this.handleSubmit.bind(this)}>SEARCH</button>
               </span>
             </div>
           </form>
           <ul className='nav navbar-nav'>
             <li><Link to='/'>Home</Link></li>
-            <li><Link to='/stats'>Stats</Link></li>
             <li><Link to='/top'>Top Questions</Link></li>
             <li><Link to='/ask'>Ask a Question</Link></li>
           </ul>
