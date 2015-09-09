@@ -23,18 +23,31 @@ class Home extends React.Component {
     this.setState(state);
   }
 
-  handleClick(character) {
-    var winner = question.;
-    var loser = this.state.characters[1 - this.state.characters.indexOf(winner)].characterId;
-    HomeActions.vote(winner, loser);
+  handleClick(question) {
+    var choice = question.votes_choice_ + (1 || 2);
+    var loser = this.state.questions[1 - this.state.questions.indexOf(choice)]._id;
+    HomeActions.vote(choice, loser);
   }
 
   render() {
     var question = this.state.questions.map((question, index) => {
       return (
-        <div key={question._id} className='col-xs-6 col-sm-6 col-md-5'>
+        <div key={question._id} className='col-xs-6 col-sm-8 col-md-12'>
+
           <div className='thumbnail fadeInUp animated'>
-            <img onClick={this.handleClick.bind(this, question)} src={question.choice1_img}/>
+            <img onClick={this.handleClick.bind(this, question.votes_choice_1)} src={question.choice1_img}/>
+            <div className='caption text-center'>
+              <li><strong>Choice 1:</strong> {question.choice1}</li>
+            </div>
+          <div>
+
+          <div className='thumbnail fadeInUp animated'>
+            <img onClick={this.handleClick.bind(this, question.votes_choice_2)} src={question.choice2_img}/>
+            <div className='caption text-center'>
+              <li><strong>Choice 2:</strong> {question.choice2}</li>
+            </div>
+          </div>
+
             <div className='caption text-center'>
               <ul className='list-inline'>
                 <li><strong>Posted Date:</strong> {question.posted_date}</li>
