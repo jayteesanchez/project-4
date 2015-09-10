@@ -11,7 +11,7 @@ class NavbarStore {
   }
 
   onFindQuestionSuccess(payload) {
-    payload.router.transitionTo('/questions/' + payload.questionId);
+    payload.router.transitionTo('/questions/' + payload.question._id);
   }
 
   onFindQuestionFail(payload) {
@@ -34,7 +34,7 @@ class NavbarStore {
   }
 
   onGetQuestionCountSuccess(data) {
-    this.totalQuestions = data.count;
+    this.getQuestionsCount = data.count;
   }
 
   onGetQuestionCountFail(jqXhr) {

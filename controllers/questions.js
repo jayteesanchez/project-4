@@ -1,15 +1,10 @@
 var Question = require('../models/Question');
 
-Question.prototype.totalVote = function() {
-  return (votes_choice_1 + votes_choice_2);
-}
-
 // GET
 function getAll(request, response) {
-  Question.find(function(error, question) {
+  Question.find(function(error, questions) {
     if(error) response.json({message: 'Could not find any questions'});
-
-    response.json({question: question});
+    response.json({questions: questions});
   });
 }
 
@@ -32,6 +27,10 @@ Question.prototype.expireAt = function() {
   return (this.posted_date + this.expiration)
 }
 
+Question.prototype.totalVote = function() {
+  return (votes_choice_1 + votes_choice_2);
+}
+
   question.save(function(error) {
     if(error) response.json({messsage: 'Could not ceate question b/c:' + error});
 
@@ -40,7 +39,7 @@ Question.prototype.expireAt = function() {
 }
 
 // GET
-function getQuestion(request, response) {
+function getOneQuestion(request, response) {
   var id = request.params.id;
 
   Question.findById({_id: id}, function(error, question) {
@@ -92,17 +91,17 @@ function searchQuestions(request, response) {
     if (err) return next(err);
 
     if (!question) {
-      return res.status(404).send({ message: 'Question not found.' });
+      return response.status(404).send({ message: 'Question not found.' });
     }
 
-    response.send(question);
+    return response.send(question);
   });
 };
 
 function questionCount (request, response) {
   Question.count({}, function(err, count) {
     if (err) return next(err);
-    response.send({ count: count });
+    return response.send({ count: count });
   });
 };
 
@@ -116,7 +115,7 @@ function topQuestions (request, response) {
 
   Question
     .find(conditions)
-    .sort('-totalVote')
+    .sort('totalVote')
     .limit(100)
     .exec(function(err, questions) {
       if (err) return next(err);
@@ -127,7 +126,7 @@ function topQuestions (request, response) {
         return 0;
       });
 
-      response.send(questions);
+      return response.send(questions);
     });
 };
 
@@ -135,7 +134,7 @@ function topQuestions (request, response) {
 module.exports = {
   getAll: getAll,
   createQuestion: createQuestion,
-  getQuestion: getQuestion,
+  getOneQuestion: getOneQuestion,
   updateQuestion: updateQuestion,
   removeQuestion: removeQuestion,
   searchQuestions: searchQuestions,

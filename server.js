@@ -1,21 +1,23 @@
 // requiring/loading all of our dependencies/libaries
+var path         = require('path');
 var express      = require('express');
 var http         = require('http');
-var path         = require('path');
-var favicon      = require('serve-favicon');
-var logger       = require('morgan');
-var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
+var cookieParser = require('cookie-parser');
+var logger       = require('morgan');
 var async        = require('async');
 var mongoose     = require('mongoose');
+var request      = require('request');
 var React        = require('react');
 var Router       = require('react-router');
+var swig         = require('swig');
 var _            = require('underscore');
+var Routes       = require('./app/routes');
+var routes       = require( './routes/app');
 
 
 // start running express, and save the configurations for the express
 // "app" with the variable `app`.
-var app = express();
 
 // check that MongoD is running...
 require('net').connect(27017, 'localhost').on('error', function() {
@@ -25,19 +27,33 @@ require('net').connect(27017, 'localhost').on('error', function() {
 // load mongoose and connect to a database
 mongoose.connect('mongodb://localhost/project-4');
 
+
+var app = express();
+
+app.set('port', process.env.PORT || 3000);
+
+app.use('/', express.static(__dirname + 'public'));
+app.set('views', path.join(__dirname, 'views'));
+app.use('/questions', routes);
+app.set('view engine', 'ejs');
+
 // uncomment after placing your favicon in /public
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
-// loading routes defined in the /routes folder
-var routes = require('./routes/app');
 
 // DEFINED ROUTES ARE IN HERE >> routes, ie './routes/index'
-app.use('/', routes);
+
+app.use(function(req, res) {
+  Router.run(Routes, req.path, function(Handler) {
+    var html = React.renderToString(React.createElement(Handler));
+    var page = swig.renderFile('views/index.html', { html: html });
+    res.send(page);
+  });
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -46,13 +62,6 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-app.use(function(req, res) {
-  Router.run(routes, req.path, function(Handler) {
-    var html = React.renderToString(React.createElement(Handler));
-    var page = swig.renderFile('views/index.html', { html: html });
-    res.send(page);
-  });
-});
 // error handlers
 
 // development error handler
@@ -99,5 +108,3 @@ io.sockets.on('connection', function(socket) {
 server.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
 });
-
-module.exports = app
