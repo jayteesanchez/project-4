@@ -72,7 +72,7 @@ class Navbar extends React.Component {
         <div id='navbar' className='navbar-collapse collapse'>
           <form ref='searchForm' className='navbar-form navbar-left animated' onSubmit={this.handleSubmit.bind(this)}>
             <div className='input-group'>
-              <input type='text' className='form-control' placeholder={this.state.totalCharacters + ' Questions'} value={this.state.searchQuery} onChange={NavbarActions.updateSearchQuery} />
+              <input type='text' className='form-control' placeholder={' Questions'} value={this.state.searchQuery} onChange={NavbarActions.updateSearchQuery} />
               <span className='input-group-btn'>
                 <button className='btn btn-default' onClick={this.handleSubmit.bind(this)}>SEARCH</button>
               </span>
@@ -80,8 +80,8 @@ class Navbar extends React.Component {
           </form>
           <ul className='nav navbar-nav'>
             <li><Link to='/'>Home</Link></li>
-            <li><Link to='/questions/top'>Top Questions</Link></li>
-            <li><Link to='/questions/ask'>Ask a Question</Link></li>
+            <li><Link to='/top'>Top Questions</Link></li>
+            <li><Link to='/ask'>Ask a Question</Link></li>
             <li className='navbar-right'>
               <Link to='/#'>
                 Users Online

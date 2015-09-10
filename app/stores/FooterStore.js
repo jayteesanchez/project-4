@@ -7,11 +7,11 @@ class FooterStore {
     this.questions = [];
   }
 
-  onGetTopCharactersSuccess(data) {
+  onGetTopQuestionsSuccess(data) {
     this.questions = data.slice(0, 5);
   }
 
-  onGetTopCharactersFail(jqXhr) {
+  onGetTopQuestionsFail(jqXhr) {
     toastr.error(jqXhr.responseJSON && jqXhr.responseJSON.message || jqXhr.responseText || jqXhr.statusText);
   }
 }

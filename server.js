@@ -12,11 +12,12 @@ var React        = require('react');
 var Router       = require('react-router');
 var swig         = require('swig');
 var _            = require('underscore');
+var Routes       = require('./app/routes');
+var routes       = require( './routes/app');
 
 
 // start running express, and save the configurations for the express
 // "app" with the variable `app`.
-var app = express();
 
 // check that MongoD is running...
 require('net').connect(27017, 'localhost').on('error', function() {
@@ -26,28 +27,33 @@ require('net').connect(27017, 'localhost').on('error', function() {
 // load mongoose and connect to a database
 mongoose.connect('mongodb://localhost/project-4');
 
+
+var app = express();
+
+app.set('port', process.env.PORT || 3000);
+
+app.use('/', express.static(__dirname + 'public'));
+app.set('views', path.join(__dirname, 'views'));
+app.use('/questions', routes);
+app.set('view engine', 'ejs');
+
 // uncomment after placing your favicon in /public
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.set('port', process.env.PORT || 3000);
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+
+
+// DEFINED ROUTES ARE IN HERE >> routes, ie './routes/index'
 
 app.use(function(req, res) {
-  Router.run(routes, req.path, function(Handler) {
+  Router.run(Routes, req.path, function(Handler) {
     var html = React.renderToString(React.createElement(Handler));
     var page = swig.renderFile('views/index.html', { html: html });
     res.send(page);
   });
 });
-
-// loading routes defined in the /routes folder
-var routes = require('./routes/app');
-
-// DEFINED ROUTES ARE IN HERE >> routes, ie './routes/index'
-app.use('/', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

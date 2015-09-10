@@ -17,7 +17,7 @@ class NavbarActions {
   findQuestion(payload) {
     $.ajax({
       url: '/questions/search',
-      data: { name: payload.searchQuery }
+      data: { question: payload.searchQuery }
     })
       .done((data) => {
         assign(payload, data);

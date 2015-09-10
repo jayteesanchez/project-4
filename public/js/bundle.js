@@ -74,7 +74,7 @@ var NavbarActions = (function () {
 
       $.ajax({
         url: '/questions/search',
-        data: { name: payload.searchQuery }
+        data: { question: payload.searchQuery }
       }).done(function (data) {
         (0, _underscore.assign)(payload, data);
         _this.actions.findQuestionSuccess(payload);
@@ -237,14 +237,14 @@ var Footer = (function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var topQuestions = this.state.questions.map(function (question) {
+      var topQuestions = this.state.questions.map(function (Question) {
         return _react2['default'].createElement(
           'li',
-          { key: question._id },
+          { key: Question._id },
           _react2['default'].createElement(
             _reactRouter.Link,
-            { to: '/questions/' + question._id },
-            _react2['default'].createElement('img', { className: 'thumb-md', src: question.choice1_img })
+            { to: '/questions/' + Question._id },
+            _react2['default'].createElement('img', { className: 'thumb-md', src: Question.choice1_img })
           )
         );
       });
@@ -259,81 +259,43 @@ var Footer = (function (_React$Component) {
             'div',
             { className: 'row' },
             _react2['default'].createElement(
-              'div',
-              { className: 'col-sm-5' },
+              'p',
+              null,
+              'Powered by ',
               _react2['default'].createElement(
-                'h3',
-                { className: 'lead' },
-                _react2['default'].createElement(
-                  'strong',
-                  null,
-                  'Information'
-                ),
-                ' and ',
-                _react2['default'].createElement(
-                  'strong',
-                  null,
-                  'Copyright'
-                )
-              ),
-              _react2['default'].createElement(
-                'p',
+                'strong',
                 null,
-                'Powered by ',
-                _react2['default'].createElement(
-                  'strong',
-                  null,
-                  'Node.js'
-                ),
-                ', ',
-                _react2['default'].createElement(
-                  'strong',
-                  null,
-                  'MongoDB'
-                ),
-                ' and ',
-                _react2['default'].createElement(
-                  'strong',
-                  null,
-                  'React'
-                ),
-                ' with Flux (alt) architecture and server-side rendering.'
+                'Node.js'
               ),
+              ', ',
               _react2['default'].createElement(
-                'p',
+                'strong',
                 null,
-                'You may view the ',
-                _react2['default'].createElement(
-                  'a',
-                  { href: 'https://github.com/jayteesanchez/project-4' },
-                  'Source Code'
-                ),
-                ' behind this project on GitHub.'
+                'MongoDB'
               ),
+              ' and ',
               _react2['default'].createElement(
-                'p',
+                'strong',
                 null,
-                '© 2015 Jaytee Sanchez'
-              )
+                'React'
+              ),
+              ' with Flux (alt) architecture and server-side rendering.'
             ),
             _react2['default'].createElement(
-              'div',
-              { className: 'col-sm-7 hidden-xs' },
+              'p',
+              null,
+              'You may view the ',
               _react2['default'].createElement(
-                'h3',
-                { className: 'lead' },
-                _react2['default'].createElement(
-                  'strong',
-                  null,
-                  'Leaderboard'
-                ),
-                ' Top 5 Voted Questions'
+                'a',
+                { href: 'https://github.com/jayteesanchez/project-4' },
+                'Source Code'
               ),
-              _react2['default'].createElement(
-                'ul',
-                { className: 'list-inline' },
-                topQuestions
-              )
+              ' behind this project on GitHub.'
+            ),
+            _react2['default'].createElement(
+              'p',
+              null,
+              '© 2015 Jaytee Sanchez'
             )
           )
         )
@@ -472,7 +434,7 @@ var Navbar = (function (_React$Component) {
             _react2['default'].createElement(
               'div',
               { className: 'input-group' },
-              _react2['default'].createElement('input', { type: 'text', className: 'form-control', placeholder: this.state.totalCharacters + ' Questions', value: this.state.searchQuery, onChange: _actionsNavbarActions2['default'].updateSearchQuery }),
+              _react2['default'].createElement('input', { type: 'text', className: 'form-control', placeholder: ' Questions', value: this.state.searchQuery, onChange: _actionsNavbarActions2['default'].updateSearchQuery }),
               _react2['default'].createElement(
                 'span',
                 { className: 'input-group-btn' },
@@ -501,7 +463,7 @@ var Navbar = (function (_React$Component) {
               null,
               _react2['default'].createElement(
                 _reactRouter.Link,
-                { to: '/questions/top' },
+                { to: '/top' },
                 'Top Questions'
               )
             ),
@@ -510,7 +472,7 @@ var Navbar = (function (_React$Component) {
               null,
               _react2['default'].createElement(
                 _reactRouter.Link,
-                { to: '/questions/ask' },
+                { to: '/ask' },
                 'Ask a Question'
               )
             ),
@@ -617,13 +579,13 @@ var FooterStore = (function () {
   }
 
   _createClass(FooterStore, [{
-    key: 'onGetTopCharactersSuccess',
-    value: function onGetTopCharactersSuccess(data) {
+    key: 'onGetTopQuestionsSuccess',
+    value: function onGetTopQuestionsSuccess(data) {
       this.questions = data.slice(0, 5);
     }
   }, {
-    key: 'onGetTopCharactersFail',
-    value: function onGetTopCharactersFail(jqXhr) {
+    key: 'onGetTopQuestionsFail',
+    value: function onGetTopQuestionsFail(jqXhr) {
       toastr.error(jqXhr.responseJSON && jqXhr.responseJSON.message || jqXhr.responseText || jqXhr.statusText);
     }
   }]);
@@ -697,7 +659,7 @@ var NavbarStore = (function () {
   }, {
     key: 'onGetQuestionCountSuccess',
     value: function onGetQuestionCountSuccess(data) {
-      this.totalQuestions = data.count;
+      this.getQuestionsCount = data.count;
     }
   }, {
     key: 'onGetQuestionCountFail',

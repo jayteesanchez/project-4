@@ -34,7 +34,7 @@ class NavbarStore {
   }
 
   onGetQuestionCountSuccess(data) {
-    this.totalQuestions = data.count;
+    this.getQuestionsCount = data.count;
   }
 
   onGetQuestionCountFail(jqXhr) {
