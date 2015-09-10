@@ -6,9 +6,9 @@ var express = require('express'),
 var questionsController = require('../controllers/questions');
 
 var allowCrossDomain = function(request, response, next) {
-  response.header('Access-Control-Allow-Origin', '*');
-  response.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
-  response.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  response.setHeader('Access-Control-Allow-Origin', '*');
+  response.setHeader('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
+  response.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Authorization');
 
   if("OPTIONS" == request.method) {
     response.send(200);
