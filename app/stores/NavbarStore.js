@@ -11,7 +11,7 @@ class NavbarStore {
   }
 
   onFindQuestionSuccess(payload) {
-    payload.router.transitionTo('/questions/' + payload.questionId);
+    payload.router.transitionTo('/questions/' + payload.question._id);
   }
 
   onFindQuestionFail(payload) {

@@ -1,15 +1,16 @@
 // requiring/loading all of our dependencies/libaries
+var path         = require('path');
 var express      = require('express');
 var http         = require('http');
-var path         = require('path');
-var logger       = require('morgan');
-var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
+var cookieParser = require('cookie-parser');
+var logger       = require('morgan');
 var async        = require('async');
 var mongoose     = require('mongoose');
 var request      = require('request');
 var React        = require('react');
 var Router       = require('react-router');
+var swig         = require('swig');
 var _            = require('underscore');
 
 
@@ -27,11 +28,20 @@ mongoose.connect('mongodb://localhost/project-4');
 
 // uncomment after placing your favicon in /public
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.set('port', process.env.PORT || 3000);
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(function(req, res) {
+  Router.run(routes, req.path, function(Handler) {
+    var html = React.renderToString(React.createElement(Handler));
+    var page = swig.renderFile('views/index.html', { html: html });
+    res.send(page);
+  });
+});
 
 // loading routes defined in the /routes folder
 var routes = require('./routes/app');
@@ -46,13 +56,6 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-app.use(function(req, res) {
-  Router.run(routes, req.path, function(Handler) {
-    var html = React.renderToString(React.createElement(Handler));
-    var page = swig.renderFile('views/index.html', { html: html });
-    res.send(page);
-  });
-});
 // error handlers
 
 // development error handler
@@ -99,5 +102,3 @@ io.sockets.on('connection', function(socket) {
 server.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
 });
-
-module.exports = app

@@ -395,11 +395,11 @@ var Navbar = (function (_React$Component) {
       _storesNavbarStore2['default'].listen(this.onChange);
       _actionsNavbarActions2['default'].getQuestionCount();
 
-      // let socket = io.connect();
+      var socket = io.connect();
 
-      // socket.on('onlineUsers', (data) => {
-      //   NavbarActions.updateOnlineUsers(data);
-      // });
+      socket.on('onlineUsers', function (data) {
+        _actionsNavbarActions2['default'].updateOnlineUsers(data);
+      });
 
       $(document).ajaxStart(function () {
         _actionsNavbarActions2['default'].updateAjaxAnimation('fadeIn');
@@ -669,7 +669,7 @@ var NavbarStore = (function () {
   _createClass(NavbarStore, [{
     key: 'onFindQuestionSuccess',
     value: function onFindQuestionSuccess(payload) {
-      payload.router.transitionTo('/questions/' + payload.questionId);
+      payload.router.transitionTo('/questions/' + payload.question._id);
     }
   }, {
     key: 'onFindQuestionFail',

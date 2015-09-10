@@ -116,7 +116,7 @@ function topQuestions (request, response) {
 
   Question
     .find(conditions)
-    .sort('-totalVote')
+    .sort('totalVote')
     .limit(100)
     .exec(function(err, questions) {
       if (err) return next(err);
