@@ -1,7 +1,6 @@
 // requiring/loading all of our dependencies/libaries
 var path         = require('path');
 var express      = require('express');
-var http         = require('http');
 var bodyParser   = require('body-parser');
 var cookieParser = require('cookie-parser');
 var logger       = require('morgan');
@@ -12,8 +11,9 @@ var React        = require('react');
 var Router       = require('react-router');
 var swig         = require('swig');
 var _            = require('underscore');
-var routes       = require( './routes/app');
-
+var http         = require('http');
+var apiRoutes    = require( './routes/app');
+var routes       = require('./app/routes');
 
 // start running express, and save the configurations for the express
 // "app" with the variable `app`.
@@ -27,30 +27,26 @@ require('net').connect(27017, 'localhost').on('error', function() {
 // load mongoose and connect to a database
 mongoose.connect('mongodb://localhost/project-4');
 
+
 app.set('port', process.env.PORT || 3000);
-
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
-// uncomment after placing your favicon in /public
-// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+// uncomment after placing your favicon in /public
+// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(express.static(path.join(__dirname + '/views')));
 
+app.use('/api', apiRoutes);
 
-app.use(express.static(path.join(__dirname + 'public')));
-app.use('/questions', routes);
 
 // DEFINED ROUTES ARE IN HERE >> routes, ie './routes/index'
 
 app.use(function(req, res) {
-  var routes = require('./app/routes');
-  Router.run(routes, req.path, function(Handler) {
-    var html = React.renderToString(React.createElement(Handler));
+  Router.run(routes, req.path, function(Handler, state) {
+    var html = React.renderToString(<Handler routerState={state} />);
     var page = swig.renderFile('views/index.html', { html: html });
-    res.send(page);
+    res.render(page);
   });
 });
 
