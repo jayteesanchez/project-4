@@ -357,11 +357,11 @@ var Navbar = (function (_React$Component) {
       _storesNavbarStore2['default'].listen(this.onChange);
       _actionsNavbarActions2['default'].getQuestionCount();
 
-      var socket = io.connect();
+      // let socket = io.connect();
 
-      socket.on('onlineUsers', function (data) {
-        _actionsNavbarActions2['default'].updateOnlineUsers(data);
-      });
+      // socket.on('onlineUsers', (data) => {
+      //   NavbarActions.updateOnlineUsers(data);
+      // });
 
       $(document).ajaxStart(function () {
         _actionsNavbarActions2['default'].updateAjaxAnimation('fadeIn');

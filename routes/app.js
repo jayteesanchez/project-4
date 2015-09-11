@@ -5,45 +5,45 @@ var express = require('express'),
 
 var questionsController = require('../controllers/questions');
 
-var allowCrossDomain = function(request, response, next) {
-  response.setHeader('Access-Control-Allow-Origin', '*');
-  response.setHeader('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
-  response.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Authorization');
+// var AllowCrossOrigin function(request, response, next) {
+//   response.header('Access-Control-Allow-Origin', '*');
+//   response.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
+//   response.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
-  if("OPTIONS" == request.method) {
-    response.send(200);
-  }
-  else {
-    next();
-  }
-};
+//   if("OPTIONS" == request.method) {
+//     response.send(200);
+//   }
+//   else {
+//     next();
+//   }
+// };
 
 // http://127.0.0.1:3000/questions
-router.route('/')
+router.route('/questions')
 
   // all questions
-  .get(allowCrossDomain, questionsController.getAll)
+  .get(questionsController.getAll)
 
   // a new Question
-  .post(allowCrossDomain, questionsController.createQuestion);
+  .post(questionsController.createQuestion);
 
 
-router.route('/:id')
+router.route('/questions/:id')
 
   // return specific Question
-  .get(allowCrossDomain, questionsController.getOneQuestion)
+  .get(questionsController.getOneQuestion)
 
   // update existing Question
-  .patch(allowCrossDomain, questionsController.updateQuestion)
+  .patch(questionsController.updateQuestion)
 
   // remove specific Question from DB
-  .delete(allowCrossDomain, questionsController.removeQuestion);
+  .delete(questionsController.removeQuestion);
 
-router.get('/top', allowCrossDomain, questionsController.topQuestions);
+router.get('/questions/top', questionsController.topQuestions);
 
-router.get('/count', allowCrossDomain, questionsController.questionCount);
+router.get('/questions/count', questionsController.questionCount);
 
-router.get('/search', allowCrossDomain, questionsController.searchQuestions);
+router.get('/questions/search', questionsController.searchQuestions);
 
 
 
