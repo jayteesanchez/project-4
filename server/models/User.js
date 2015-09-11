@@ -2,7 +2,7 @@ var bcrypt = require('bcrypt-nodejs');
 var mongoose = require('mongoose');
 var crypto = require('crypto');
 
-var UserSchema = new mongoose.Schema({
+var UserSchema = mongoose.Schema({
   email: { type: String, unique: true, lowercase: true},
   password: String,
   tokens: Array,
@@ -39,6 +39,11 @@ UserSchema.methods = {
       if(err) return cb(err);
       cb(null, isMatch);
     })
+  },
+  setUp: function(username, password) {
+    this.username = username,
+    this.password = password
+    return this;
   }
 };
 

@@ -3,7 +3,7 @@ import QuestionActions from 'actions/QuestionActions';
 
 import styles from 'scss/components/_vote';
 
-export default class TopicItem extends React.Component {
+export default class QuestionItem extends React.Component {
   _onIncrement = () => {
     QuestionActions.increment(this.props.id);
   }
@@ -25,14 +25,14 @@ export default class TopicItem extends React.Component {
         </span>
 
         <span className={styles['question-item__question']}>
-          <p>{this.props.choice1}<p>
-          <p>{this.props.choice1_img}<p>
+          <p>{this.props.choice1}</p>
+          <p>{this.props.choice1_img}</p>
           <button className={styles['question-item__button'] + ' ' + styles['question-item__button--increment']} onClick={this.votes.votes_choice_1._onIncrement}>+</button>
           <button className={styles['question-item__button'] + ' ' + styles['question-item__button--decrement']} onClick={this.votes.votes_choice_1._onDecrement}>-</button>
         </span>
         <span className={styles['question-item__question']}>
-          <p>{this.props.choice2}
-          <p>{this.props.choice2_img}
+          <p>{this.props.choice2}</p>
+          <p>{this.props.choice2_img}</p>
           <button className={styles['question-item__button'] + ' ' + styles['question-item__button--increment']} onClick={this.votes.votes_choice_2._onIncrement}>+</button>
           <button className={styles['question-item__button'] + ' ' + styles['question-item__button--decrement']} onClick={this.votes.votes_choice_2._onDecrement}>-</button>
         </span>
@@ -42,7 +42,7 @@ export default class TopicItem extends React.Component {
   }
 }
 
-TopicItem.propTypes = {
+QuestionItem.propTypes = {
   id: React.PropTypes.string,
   text: React.PropTypes.string
 };

@@ -6,7 +6,7 @@ var mongoose            = require('mongoose');
 var questionsController = require('../controllers/questions');
 var usersController     = require('../controllers/users');
 var _                   = require('lodash');
-var Question            = mongoose.model('Topic');
+var Question            = mongoose.model('Question');
 var Header              = require('../../public/assets/header.server');
 var App                 = require('../../public/assets/app.server');
 

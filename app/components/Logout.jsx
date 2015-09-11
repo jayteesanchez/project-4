@@ -10,3 +10,4 @@ export default class Logout extends React.Component {
       </div>
     );
   }
+}

@@ -3,9 +3,9 @@
  Code modified from : https://github.com/madhums/node-express-mongoose-demo/blob/master/config/passport/local.js
  */
 
-var mongoose = require('mongoose');
+var mongoose       = require('mongoose');
 var LocalStrategy = require('passport-local').Strategy;
-var User = require('../../models/user');
+var User          = require('../../models/user');
 
 /*
  By default, LocalStrategy expects to find credentials in parameters named username and password.
