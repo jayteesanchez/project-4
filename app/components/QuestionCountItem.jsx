@@ -18,7 +18,7 @@ QuestionCountItem.propTypes = {
   key: React.PropTypes.string,
   question: React.PropTypes.string,
   votes: {
-    votes_choice_1:  React.PropTypes.number,
-    votes_choice_2:  React.PropTypes.number
+    votes_choice_1: React.PropTypes.number,
+    votes_choice_2: React.PropTypes.number
   }
 };

@@ -1,5 +1,5 @@
 var _ = require('lodash');
-var User = require('../models/user');
+var User = require('../models/User');
 var passport = require('passport');
 
 /**
@@ -36,13 +36,15 @@ function logout(req, res, next) {
  * Create a new local account
  */
 function signUp(req, res, next) {
-  var user =  new User();
+  var user =  new User({
+    email: req.body.email,
+    password: req.body.password
+  });
 
   User.findOne({email: req.body.email}, function(err, existingUser) {
     if(existingUser) {
       req.flash('errors', { msg: 'Account with that email address already exists' });
     }
-    user.setUp(req.params.username, req.params.password);
     user.save(function(err) {
       if(err) return next(err);
       req.logIn(user, function(err) {

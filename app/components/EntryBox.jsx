@@ -22,7 +22,7 @@ export default class EntryBox extends React.Component {
   render() {
     return (
       <div className={styles.entrybox}>
-        <h1 className={styles.entrybox__header}>Vote for your top hack idea</h1>
+        <h1 className={styles.entrybox__header}>Help make these choices!</h1>
         <QuestionTextInput className={styles.entrybox__input} value={this.props.question} placeholder="Question..." onChange={this._onChange} onSave={this._onSave} />
         <QuestionTextInput className={styles.entrybox__input} value={this.props.choice1} placeholder="Choice 1" onChange={this._onChange} onSave={this._onSave} />
         <QuestionTextInput className={styles.entrybox__input} value={this.props.choice1_img} placeholder="Choice 1 Image URL" onChange={this._onChange} onSave={this._onSave} />
@@ -33,4 +33,11 @@ export default class EntryBox extends React.Component {
   }
 }
 
-EntryBox.propTypes = { question: React.PropTypes.string };
+EntryBox.propTypes = {
+  question: React.PropTypes.string,
+  choice1: React.PropTypes.string,
+  choice1_img: React.PropTypes.string,
+  choice2: React.PropTypes.string,
+  choice2_img: React.PropTypes.string
+
+  };

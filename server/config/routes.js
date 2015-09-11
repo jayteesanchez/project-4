@@ -12,9 +12,9 @@ var App                 = require('../../public/assets/app.server');
 
 module.exports = function(app, passport) {
   // user routes
-  app.post('/login',  usersController.postLogin);
-  app.post('/signup', usersController.postSignUp);
-  app.get('/logout',  usersController.getLogout);
+  app.post('/login',  usersController.login);
+  app.post('/signup', usersController.signUp);
+  app.get('/logout',  usersController.logout);
 
   // question routes
   app.get('/questions', questionsController.getAllQuestions);

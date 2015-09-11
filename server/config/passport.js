@@ -1,5 +1,5 @@
 /* Initializing passport.js */
-var User = require('../models/user');
+var User = require('../models/User');
 var local = require('./passport/local');
 /*
  * Expose

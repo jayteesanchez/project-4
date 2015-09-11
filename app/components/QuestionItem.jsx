@@ -44,5 +44,9 @@ export default class QuestionItem extends React.Component {
 
 QuestionItem.propTypes = {
   id: React.PropTypes.string,
-  text: React.PropTypes.string
+  question: React.PropTypes.string,
+  choice1: React.PropTypes.string,
+  choice1_img: React.PropTypes.string,
+  choice2: React.PropTypes.string,
+  choice2_img: React.PropTypes.string
 };

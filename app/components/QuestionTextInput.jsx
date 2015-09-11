@@ -2,9 +2,9 @@ import React from 'react';
 const ENTER_KEY_CODE = 13;
 
 /*
- * Code modified from https://github.com/facebook/flux/blob/master/examples/flux-todomvc/js/components/TopicTextInput.react.js
+ * Code modified from https://github.com/facebook/flux/blob/master/examples/flux-todomvc/js/components/QuestionTextInput.react.js
  */
-export default class TopicTextInput extends React.Component {
+export default class QuestionTextInput extends React.Component {
   /*
    * Invokes the callback passed in as onSave, allowing this component to be
    * used in different ways. I personally think this makes it more reusable.
@@ -39,10 +39,10 @@ export default class TopicTextInput extends React.Component {
   }
 }
 
-TopicTextInput.propTypes = {
+QuestionTextInput.propTypes = {
   className: React.PropTypes.string,
   placeholder: React.PropTypes.string,
-  value: React.PropTypes.string,
+  value: React.PropTypes.object,
   onSave: React.PropTypes.func,
   onChange: React.PropTypes.func
 };

@@ -13,11 +13,11 @@ class QuestionActions {
       const id = Date.now().toString();
       const data = {
         id: id,
-        question: question,
-        choice1: choice1,
-        choice1_img: choice1_img,
-        choice2: choice2,
-        choice2_img: choice2_img
+        question: question.question,
+        choice1: question.choice1,
+        choice1_img: question.choice1_img,
+        choice2: question.choice2,
+        choice2_img: question.choice2_img
       };
 
       // This dispatches for views to make optimistic updates
@@ -36,19 +36,19 @@ class QuestionActions {
   /*
    * @param String Question id to increment with
    */
-  increment(id, vote) {
-    this.dispatch(id, vote);
+  increment(id) {
+    this.dispatch(id);
 
-    QuestionWebAPIUtils.updateQuestion({ id: id, votes: vote }, false, true);
+    QuestionWebAPIUtils.updateQuestion({ id: id}, false, true);
   }
 
   /*
    * @param String Question id to decrement with
    */
-  decrement(id, vote) {
-    this.dispatch(id, vote);
+  decrement(id) {
+    this.dispatch(id);
 
-    QuestionWebAPIUtils.updateQuestion({ id: id, votes: vote}, false, false);
+    QuestionWebAPIUtils.updateQuestion({ id: id}, false, false);
   }
 
   /*
