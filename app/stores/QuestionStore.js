@@ -40,17 +40,17 @@ class QuestionStore {
     this.newquestion = '';
   }
 
-  handleIncrement(id) {
+  handleIncrement(id, vote) {
     const question = this.questions.get(id);
-    const count = question.get('count');
-    this.questions = this.questions.set(id, question.set('count', count + 1));
+    const votes = question.get('votes');
+    this.questions = this.questions.set(id, question.set('votes', votes.vote + 1));
     this.emitChange();
   }
 
-  handleDecrement(id) {
+  handleDecrement(id, vote) {
     const question = this.questions.get(id);
-    const count = question.get('count');
-    this.questions = this.questions.set(id, question.set('count', count - 1));
+    const votes = question.get('votes');
+    this.questions = this.questions.set(id, question.set('votes', votes.vote - 1));
     this.emitChange();
   }
 

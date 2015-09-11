@@ -4,17 +4,20 @@ import QuestionWebAPIUtils from 'utils/QuestionWebAPIUtils';
 class QuestionActions {
 
   /*
-   * @param text that user wishes to save
+   * @param question that user wishes to save
    */
-  create(text) {
+  create(question) {
     // Remove whitespace
-    if (text.trim().length > 0) {
+    if (question.trim().length > 0) {
       // Using the current timestamp in place of a real id.
       const id = Date.now().toString();
       const data = {
         id: id,
-        count: 1,
-        text: text
+        question: question,
+        choice1: choice1,
+        choice1_img: choice1_img,
+        choice2: choice2,
+        choice2_img: choice2_img
       };
 
       // This dispatches for views to make optimistic updates
@@ -33,19 +36,19 @@ class QuestionActions {
   /*
    * @param String Question id to increment with
    */
-  increment(id) {
-    this.dispatch(id);
+  increment(id, vote) {
+    this.dispatch(id, vote);
 
-    QuestionWebAPIUtils.updateQuestion({ id: id }, false, true);
+    QuestionWebAPIUtils.updateQuestion({ id: id, votes: vote }, false, true);
   }
 
   /*
    * @param String Question id to decrement with
    */
-  decrement(id) {
-    this.dispatch(id);
+  decrement(id, vote) {
+    this.dispatch(id, vote);
 
-    QuestionWebAPIUtils.updateQuestion({ id: id }, false, false);
+    QuestionWebAPIUtils.updateQuestion({ id: id, votes: vote}, false, false);
   }
 
   /*
@@ -59,10 +62,10 @@ class QuestionActions {
   }
 
   /*
-   *  @param String text that user is typing in input field
+   *  @param String question that user is typing in input field
    */
-  typing(text) {
-    this.dispatch(text);
+  typing(question) {
+    this.dispatch(question);
   }
 
 }
