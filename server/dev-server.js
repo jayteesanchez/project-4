@@ -2,10 +2,10 @@
  Modified from:
  http://www.christianalfoni.com/articles/2015_04_19_The-ultimate-webpack-setup
 */
-var webpack = require('webpack');
+var webpack          = require('webpack');
 var webpackDevServer = require('webpack-dev-server');
-var path = require('path');
-var fs = require('fs');
+var path             = require('path');
+var fs               = require('fs');
 
 var webpackConfig = require('../webpack/webpack-hot-dev-server.config.js');
 

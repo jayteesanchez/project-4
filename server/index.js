@@ -1,8 +1,8 @@
-var express = require('express');
-var fs = require('fs');
+var express  = require('express');
+var fs       = require('fs');
 var mongoose = require('mongoose');
 var passport = require('passport');
-var secrets = require('./config/secrets');
+var secrets  = require('./config/secrets');
 
 var app = express();
 
@@ -21,17 +21,17 @@ connect();
 mongoose.connection.on('error', console.log);
 mongoose.connection.on('disconnected', connect);
 
-// Bootstrap models
+// Source in models
 fs.readdirSync(__dirname + '/models').forEach(function(file) {
   if(~file.indexOf('.js')) require(__dirname + '/models/' + file);
 });
 
-// Bootstrap passport config
+// Source in passport config
 require('./config/passport')(app, passport);
 
-// Bootstrap application settings
+// Source in application settings
 require('./config/express')(app, passport);
-// Bootstrap routes
+// Source in routes
 require('./config/routes')(app, passport);
 
 
