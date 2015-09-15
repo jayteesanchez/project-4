@@ -41,7 +41,29 @@ var FooterActions = (function () {
 exports['default'] = _alt2['default'].createActions(FooterActions);
 module.exports = exports['default'];
 
-},{"../alt":3}],2:[function(require,module,exports){
+},{"../alt":4}],2:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var HomeActions = function HomeActions() {
+  _classCallCheck(this, HomeActions);
+};
+
+exports['default'] = _alt2['default'].createActions(HomeActions);
+module.exports = exports['default'];
+
+},{"../alt":4}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -101,7 +123,7 @@ var NavbarActions = (function () {
 exports['default'] = _alt2['default'].createActions(NavbarActions);
 module.exports = exports['default'];
 
-},{"../alt":3,"underscore":"underscore"}],3:[function(require,module,exports){
+},{"../alt":4,"underscore":"underscore"}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -117,7 +139,7 @@ var _alt2 = _interopRequireDefault(_alt);
 exports['default'] = new _alt2['default']();
 module.exports = exports['default'];
 
-},{"alt":"alt"}],4:[function(require,module,exports){
+},{"alt":"alt"}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -176,7 +198,7 @@ var App = (function (_React$Component) {
 exports['default'] = App;
 module.exports = exports['default'];
 
-},{"./Footer":5,"./Navbar":6,"react":"react","react-router":"react-router"}],5:[function(require,module,exports){
+},{"./Footer":6,"./Navbar":8,"react":"react","react-router":"react-router"}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -309,7 +331,174 @@ var Footer = (function (_React$Component) {
 exports['default'] = Footer;
 module.exports = exports['default'];
 
-},{"../actions/FooterActions":1,"../stores/FooterStore":9,"react":"react","react-router":"react-router"}],6:[function(require,module,exports){
+},{"../actions/FooterActions":1,"../stores/FooterStore":11,"react":"react","react-router":"react-router"}],7:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouter = require('react-router');
+
+var _storesHomeStore = require('../stores/HomeStore');
+
+var _storesHomeStore2 = _interopRequireDefault(_storesHomeStore);
+
+var _actionsHomeActions = require('../actions/HomeActions');
+
+var _actionsHomeActions2 = _interopRequireDefault(_actionsHomeActions);
+
+var Home = (function (_React$Component) {
+  _inherits(Home, _React$Component);
+
+  function Home(props) {
+    _classCallCheck(this, Home);
+
+    _get(Object.getPrototypeOf(Home.prototype), 'constructor', this).call(this, props);
+    this.state = _storesHomeStore2['default'].getState();
+    this.onChange = this.onChange.bind(this);
+  }
+
+  _createClass(Home, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      _storesHomeStore2['default'].listen(this.onChange);
+      _actionsHomeActions2['default'].getQuestion();
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      _storesHomeStore2['default'].unlisten(this.onChange);
+    }
+  }, {
+    key: 'onChange',
+    value: function onChange(state) {
+      this.setState(state);
+    }
+  }, {
+    key: 'handleClick',
+    value: function handleClick(question) {
+      var winner = 'winner';
+      var loser = 'loser';
+      _actionsHomeActions2['default'].vote(winner, loser);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var imageResize = {
+        width: '300px',
+        height: '300px'
+      };
+
+      var newQuestions = [{
+        user_id: '55d2ad76f7985b32e5f68ad2',
+        question: 'What should I eat?',
+        choice1: 'Taco Bell?',
+        choice1_img: 'http://hackthemenu.com/wp-content/uploads/2013/08/taco-bell-logo.jpg',
+        votes_choice_1: '2',
+        choice2: 'KFC',
+        choice2_img: 'http://allworldtowns.com/data_images/countries/las-vegas/las-vegas-09.jpg',
+        votes_choice_2: '2',
+        expiration: '4.0'
+      }, {
+        user_id: '55d2ad76f7985b32e5f68ad2',
+        question: 'Where Should I go',
+        choice2: 'San Diego',
+        choice2_img: 'http://www.sandiego.com/sites/sandiego.com/files/styles/large/public/content/featured-content/sd-tour-1.jpg?itok=8KDQcQ5u',
+        votes_choice_1: '1',
+        choice1: 'KFC?',
+        choice1_img: 'http://www.bluemaumau.org/sites/default/files/KFCLogo.jpg',
+        votes_choice_2: '0',
+        downVote: '1',
+        expiration: '2.0'
+      }];
+      var question = newQuestions.map(function (question, index) {
+        return _react2['default'].createElement(
+          'div',
+          { className: index === 0 ? 'col-xs-6 col-sm-6 col-md-5 col-md-offset-1' : 'col-xs-6 col-sm-6 col-md-5' },
+          _react2['default'].createElement(
+            'div',
+            { className: 'thumbnail fadeInUp animated' },
+            _react2['default'].createElement('img', { style: imageResize, src: question.choice1_img }),
+            _react2['default'].createElement(
+              'div',
+              { className: 'caption text-center' },
+              _react2['default'].createElement(
+                'ul',
+                { className: 'list-inline' },
+                _react2['default'].createElement(
+                  'li',
+                  null,
+                  _react2['default'].createElement(
+                    'strong',
+                    null,
+                    ' '
+                  ),
+                  ' '
+                ),
+                _react2['default'].createElement(
+                  'li',
+                  null,
+                  _react2['default'].createElement(
+                    'strong',
+                    null,
+                    question.choice1
+                  ),
+                  ' '
+                )
+              ),
+              _react2['default'].createElement(
+                'h4',
+                null,
+                _react2['default'].createElement(
+                  _reactRouter.Link,
+                  { to: '/questions/' },
+                  _react2['default'].createElement('strong', null)
+                )
+              )
+            )
+          )
+        );
+      });
+
+      return _react2['default'].createElement(
+        'div',
+        { className: 'container' },
+        _react2['default'].createElement(
+          'h3',
+          { className: 'text-center' },
+          'What should I eat for dinner tonight?'
+        ),
+        _react2['default'].createElement(
+          'div',
+          { className: 'row' },
+          question
+        )
+      );
+    }
+  }]);
+
+  return Home;
+})(_react2['default'].Component);
+
+exports['default'] = Home;
+module.exports = exports['default'];
+
+},{"../actions/HomeActions":2,"../stores/HomeStore":12,"react":"react","react-router":"react-router"}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -506,7 +695,7 @@ Navbar.contextTypes = {
 exports['default'] = Navbar;
 module.exports = exports['default'];
 
-},{"../actions/NavbarActions":2,"../stores/NavbarStore":10,"react":"react","react-router":"react-router"}],7:[function(require,module,exports){
+},{"../actions/NavbarActions":3,"../stores/NavbarStore":13,"react":"react","react-router":"react-router"}],9:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -527,7 +716,7 @@ _reactRouter2['default'].run(_routes2['default'], _reactRouter2['default'].Histo
   _react2['default'].render(_react2['default'].createElement(Handler, null), document.getElementById('app'));
 });
 
-},{"./routes":8,"react":"react","react-router":"react-router"}],8:[function(require,module,exports){
+},{"./routes":10,"react":"react","react-router":"react-router"}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -546,10 +735,18 @@ var _componentsApp = require('./components/App');
 
 var _componentsApp2 = _interopRequireDefault(_componentsApp);
 
-exports['default'] = _react2['default'].createElement(_reactRouter.Route, { handler: _componentsApp2['default'] });
+var _componentsHome = require('./components/Home');
+
+var _componentsHome2 = _interopRequireDefault(_componentsHome);
+
+exports['default'] = _react2['default'].createElement(
+  _reactRouter.Route,
+  { handler: _componentsApp2['default'] },
+  _react2['default'].createElement(_reactRouter.Route, { handler: _componentsHome2['default'] })
+);
 module.exports = exports['default'];
 
-},{"./components/App":4,"react":"react","react-router":"react-router"}],9:[function(require,module,exports){
+},{"./components/App":5,"./components/Home":7,"react":"react","react-router":"react-router"}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -596,7 +793,33 @@ var FooterStore = (function () {
 exports['default'] = _alt2['default'].createStore(FooterStore);
 module.exports = exports['default'];
 
-},{"../actions/FooterActions":1,"../alt":3}],10:[function(require,module,exports){
+},{"../actions/FooterActions":1,"../alt":4}],12:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var _actionsFooterActions = require('../actions/FooterActions');
+
+var _actionsFooterActions2 = _interopRequireDefault(_actionsFooterActions);
+
+var HomeStore = function HomeStore() {
+  _classCallCheck(this, HomeStore);
+};
+
+exports['default'] = _alt2['default'].createStore(HomeStore);
+module.exports = exports['default'];
+
+},{"../actions/FooterActions":1,"../alt":4}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -674,4 +897,4 @@ var NavbarStore = (function () {
 exports['default'] = _alt2['default'].createStore(NavbarStore);
 module.exports = exports['default'];
 
-},{"../actions/NavbarActions":2,"../alt":3}]},{},[7]);
+},{"../actions/NavbarActions":3,"../alt":4}]},{},[9]);
