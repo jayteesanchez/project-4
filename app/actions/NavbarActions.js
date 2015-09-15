@@ -6,11 +6,11 @@ class NavbarActions {
     this.generateActions(
       'updateOnlineUsers',
       'updateAjaxAnimation',
-      'updateSearchQuery',
-      'getQuestionCountSuccess',
-      'getQuestionCountFail',
-      'findQuestionSuccess',
-      'findQuestionFail'
+      'updateSearchQuery'
+      // 'getQuestionCountSuccess',
+      // 'getQuestionCountFail',
+      // 'findQuestionSuccess',
+      // 'findQuestionFail'
     );
   }
 

@@ -12,7 +12,7 @@ class Footer extends React.Component {
 
   componentDidMount() {
     FooterStore.listen(this.onChange);
-    FooterActions.getTopQuestions();
+    // FooterActions.getTopQuestions();
   }
 
   componentWillUnmount() {

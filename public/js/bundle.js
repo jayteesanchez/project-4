@@ -48,6 +48,8 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
@@ -56,9 +58,43 @@ var _alt = require('../alt');
 
 var _alt2 = _interopRequireDefault(_alt);
 
-var HomeActions = function HomeActions() {
-  _classCallCheck(this, HomeActions);
-};
+var HomeActions = (function () {
+  function HomeActions() {
+    _classCallCheck(this, HomeActions);
+
+    this.generateActions('getQuestionsSuccess', 'getQuestionsFail', 'voteFail');
+  }
+
+  _createClass(HomeActions, [{
+    key: 'getQuestions',
+    value: function getQuestions() {
+      var _this = this;
+
+      $.ajax({ url: '/api/questions' }).done(function (data) {
+        _this.actions.getQuestionsSuccess(data);
+      }).fail(function (jqXhr) {
+        _this.actions.getQuestionsFail(jqXhr.responseJSON.message);
+      });
+    }
+  }, {
+    key: 'vote',
+    value: function vote(choice, id) {
+      var _this2 = this;
+
+      $.ajax({
+        type: 'PUT',
+        url: '/api/questions' + id,
+        data: { votes: choice++ }
+      }).done(function () {
+        _this2.actions.getQuestions();
+      }).fail(function (jqXhr) {
+        _this2.actions.voteFail(jqXhr.responseJSON.message);
+      });
+    }
+  }]);
+
+  return HomeActions;
+})();
 
 exports['default'] = _alt2['default'].createActions(HomeActions);
 module.exports = exports['default'];
@@ -86,7 +122,12 @@ var NavbarActions = (function () {
   function NavbarActions() {
     _classCallCheck(this, NavbarActions);
 
-    this.generateActions('updateOnlineUsers', 'updateAjaxAnimation', 'updateSearchQuery', 'getQuestionCountSuccess', 'getQuestionCountFail', 'findQuestionSuccess', 'findQuestionFail');
+    this.generateActions('updateOnlineUsers', 'updateAjaxAnimation', 'updateSearchQuery'
+    // 'getQuestionCountSuccess',
+    // 'getQuestionCountFail',
+    // 'findQuestionSuccess',
+    // 'findQuestionFail'
+    );
   }
 
   _createClass(NavbarActions, [{
@@ -244,7 +285,7 @@ var Footer = (function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       _storesFooterStore2['default'].listen(this.onChange);
-      _actionsFooterActions2['default'].getTopQuestions();
+      // FooterActions.getTopQuestions();
     }
   }, {
     key: 'componentWillUnmount',
@@ -377,7 +418,7 @@ var Home = (function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       _storesHomeStore2['default'].listen(this.onChange);
-      _actionsHomeActions2['default'].getQuestion();
+      _actionsHomeActions2['default'].getQuestions();
     }
   }, {
     key: 'componentWillUnmount',
@@ -391,49 +432,29 @@ var Home = (function (_React$Component) {
     }
   }, {
     key: 'handleClick',
-    value: function handleClick(question) {
-      var winner = 'winner';
-      var loser = 'loser';
-      _actionsHomeActions2['default'].vote(winner, loser);
+    value: function handleClick(key, question) {
+      var id = question.id;
+      var choice = key;
+      _actionsHomeActions2['default'].vote(choice, id);
     }
   }, {
     key: 'render',
     value: function render() {
-      var imageResize = {
-        width: '300px',
-        height: '300px'
-      };
+      var _this = this;
 
-      var newQuestions = [{
-        user_id: '55d2ad76f7985b32e5f68ad2',
-        question: 'What should I eat?',
-        choice1: 'Taco Bell?',
-        choice1_img: 'http://hackthemenu.com/wp-content/uploads/2013/08/taco-bell-logo.jpg',
-        votes_choice_1: '2',
-        choice2: 'KFC',
-        choice2_img: 'http://allworldtowns.com/data_images/countries/las-vegas/las-vegas-09.jpg',
-        votes_choice_2: '2',
-        expiration: '4.0'
-      }, {
-        user_id: '55d2ad76f7985b32e5f68ad2',
-        question: 'Where Should I go',
-        choice2: 'San Diego',
-        choice2_img: 'http://www.sandiego.com/sites/sandiego.com/files/styles/large/public/content/featured-content/sd-tour-1.jpg?itok=8KDQcQ5u',
-        votes_choice_1: '1',
-        choice1: 'KFC?',
-        choice1_img: 'http://www.bluemaumau.org/sites/default/files/KFCLogo.jpg',
-        votes_choice_2: '0',
-        downVote: '1',
-        expiration: '2.0'
-      }];
-      var question = newQuestions.map(function (question, index) {
+      var questionDisplay = this.state.questions.map(function (question, index) {
         return _react2['default'].createElement(
           'div',
-          { className: index === 0 ? 'col-xs-6 col-sm-6 col-md-5 col-md-offset-1' : 'col-xs-6 col-sm-6 col-md-5' },
+          { key: question.id, className: index === 0 ? 'col-xs-12 col-sm-12 col-md-10 col-md-offset-1' : 'col-xs-12 col-sm-12 col-md-10' },
+          _react2['default'].createElement(
+            'h3',
+            { className: 'text-center' },
+            question.question
+          ),
           _react2['default'].createElement(
             'div',
             { className: 'thumbnail fadeInUp animated' },
-            _react2['default'].createElement('img', { style: imageResize, src: question.choice1_img }),
+            _react2['default'].createElement('img', { key: question.votes.votes_choice_1, onClick: _this.handleClick.bind(key, question), src: question.choice1_img }),
             _react2['default'].createElement(
               'div',
               { className: 'caption text-center' },
@@ -471,6 +492,48 @@ var Home = (function (_React$Component) {
                 )
               )
             )
+          ),
+          _react2['default'].createElement(
+            'div',
+            { className: 'thumbnail fadeInUp animated' },
+            _react2['default'].createElement('img', { key: question.votes.votes_choice_2, onClick: _this.handleClick.bind(key, question), src: question.choice2_img }),
+            _react2['default'].createElement(
+              'div',
+              { className: 'caption text-center' },
+              _react2['default'].createElement(
+                'ul',
+                { className: 'list-inline' },
+                _react2['default'].createElement(
+                  'li',
+                  null,
+                  _react2['default'].createElement(
+                    'strong',
+                    null,
+                    ' '
+                  ),
+                  ' '
+                ),
+                _react2['default'].createElement(
+                  'li',
+                  null,
+                  _react2['default'].createElement(
+                    'strong',
+                    null,
+                    question.choice2
+                  ),
+                  ' '
+                )
+              ),
+              _react2['default'].createElement(
+                'h4',
+                null,
+                _react2['default'].createElement(
+                  _reactRouter.Link,
+                  { to: '/questions/' },
+                  _react2['default'].createElement('strong', null)
+                )
+              )
+            )
           )
         );
       });
@@ -479,14 +542,9 @@ var Home = (function (_React$Component) {
         'div',
         { className: 'container' },
         _react2['default'].createElement(
-          'h3',
-          { className: 'text-center' },
-          'What should I eat for dinner tonight?'
-        ),
-        _react2['default'].createElement(
           'div',
           { className: 'row' },
-          question
+          questionDisplay
         )
       );
     }
@@ -544,13 +602,13 @@ var Navbar = (function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       _storesNavbarStore2['default'].listen(this.onChange);
-      _actionsNavbarActions2['default'].getQuestionCount();
+      // NavbarActions.getQuestionCount();
 
-      // let socket = io.connect();
+      var socket = io.connect();
 
-      // socket.on('onlineUsers', (data) => {
-      //   NavbarActions.updateOnlineUsers(data);
-      // });
+      socket.on('onlineUsers', function (data) {
+        _actionsNavbarActions2['default'].updateOnlineUsers(data);
+      });
 
       $(document).ajaxStart(function () {
         _actionsNavbarActions2['default'].updateAjaxAnimation('fadeIn');
@@ -742,7 +800,7 @@ var _componentsHome2 = _interopRequireDefault(_componentsHome);
 exports['default'] = _react2['default'].createElement(
   _reactRouter.Route,
   { handler: _componentsApp2['default'] },
-  _react2['default'].createElement(_reactRouter.Route, { handler: _componentsHome2['default'] })
+  _react2['default'].createElement(_reactRouter.Route, { path: '/', handler: _componentsHome2['default'] })
 );
 module.exports = exports['default'];
 
@@ -800,6 +858,8 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
@@ -808,18 +868,43 @@ var _alt = require('../alt');
 
 var _alt2 = _interopRequireDefault(_alt);
 
-var _actionsFooterActions = require('../actions/FooterActions');
+var _actionsHomeActions = require('../actions/HomeActions');
 
-var _actionsFooterActions2 = _interopRequireDefault(_actionsFooterActions);
+var _actionsHomeActions2 = _interopRequireDefault(_actionsHomeActions);
 
-var HomeStore = function HomeStore() {
-  _classCallCheck(this, HomeStore);
-};
+var HomeStore = (function () {
+  function HomeStore() {
+    _classCallCheck(this, HomeStore);
+
+    this.bindActions(_actionsHomeActions2['default']);
+    this.questions = [];
+  }
+
+  _createClass(HomeStore, [{
+    key: 'onGetQuestionsSuccess',
+    value: function onGetQuestionsSuccess(data) {
+      this.questions = data;
+      console.log(this.questions);
+    }
+  }, {
+    key: 'onGetQuestionsFail',
+    value: function onGetQuestionsFail(errorMessage) {
+      toastr.error(errorMessage);
+    }
+  }, {
+    key: 'onVoteFail',
+    value: function onVoteFail(errorMessage) {
+      toastr.error(errorMessage);
+    }
+  }]);
+
+  return HomeStore;
+})();
 
 exports['default'] = _alt2['default'].createStore(HomeStore);
 module.exports = exports['default'];
 
-},{"../actions/FooterActions":1,"../alt":4}],13:[function(require,module,exports){
+},{"../actions/HomeActions":2,"../alt":4}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
