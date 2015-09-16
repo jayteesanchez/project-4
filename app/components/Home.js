@@ -6,7 +6,7 @@ import HomeActions from '../actions/HomeActions';
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = HomeStore.getState();
+    this.state = { questions: HomeStore.getState() };
     this.onChange = this.onChange.bind(this);
   }
 
@@ -20,7 +20,7 @@ class Home extends React.Component {
   }
 
   onChange(state) {
-    this.setState(state);
+    this.setState({ questions: state});
   }
 
   handleClick(key, question) {
@@ -30,8 +30,11 @@ class Home extends React.Component {
   }
 
   render() {
-    var questionDisplay = this.state.questions.map((question, index) => {
+
       return (
+      <div className='container'>
+        <div className='row'>
+          { this.state.questions.questions.map((question, index) => {
           <div key={question.id} className={index === 0 ? 'col-xs-12 col-sm-12 col-md-10 col-md-offset-1' : 'col-xs-12 col-sm-12 col-md-10'}>
             <h3 className='text-center'>{question.question}</h3>
             <div className='thumbnail fadeInUp animated'>
@@ -59,17 +62,12 @@ class Home extends React.Component {
               </div>
             </div>
           </div>
-        );
-      });
-
-    return (
-      <div className='container'>
-        <div className='row'>
-          {questionDisplay}
+          })
+          }
         </div>
       </div>
-    );
+      );
+    }
   }
-}
 
 export default Home;

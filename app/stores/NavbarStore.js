@@ -4,7 +4,6 @@ import NavbarActions from '../actions/NavbarActions';
 class NavbarStore {
   constructor() {
     this.bindActions(NavbarActions);
-    this.totalQuestions = 0;
     this.onlineUsers = 0;
     this.searchQuery = '';
     this.ajaxAnimationClass = '';

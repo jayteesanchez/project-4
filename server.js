@@ -44,7 +44,7 @@ app.use('/api', apiRoutes);
 
 app.use(function(req, res) {
   Router.run(routes, req.path, function(Handler, state) {
-    var html = React.renderToString(<Handler routerState={state} />);
+    var html = React.renderToString(React.createElement(Handler));
     var page = swig.renderFile('views/index.html', { html: html });
     res.render(page);
   });
