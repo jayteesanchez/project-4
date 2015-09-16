@@ -5,8 +5,6 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
@@ -15,28 +13,11 @@ var _alt = require('../alt');
 
 var _alt2 = _interopRequireDefault(_alt);
 
-var FooterActions = (function () {
-  function FooterActions() {
-    _classCallCheck(this, FooterActions);
+var FooterActions = function FooterActions() {
+  _classCallCheck(this, FooterActions);
 
-    this.generateActions('getTopQuestionsSuccess', 'getTopQuestionsFail');
-  }
-
-  _createClass(FooterActions, [{
-    key: 'getTopQuestions',
-    value: function getTopQuestions() {
-      var _this = this;
-
-      $.ajax({ url: '/questions/top' }).done(function (data) {
-        _this.actions.getTopQuestionsSuccess(data);
-      }).fail(function (jqXhr) {
-        _this.actions.getTopQuestionsFail(jqXhr);
-      });
-    }
-  }]);
-
-  return FooterActions;
-})();
+  this.generateActions('getTopQuestionsSuccess', 'getTopQuestionsFail');
+};
 
 exports['default'] = _alt2['default'].createActions(FooterActions);
 module.exports = exports['default'];
@@ -106,8 +87,6 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
@@ -118,48 +97,11 @@ var _alt2 = _interopRequireDefault(_alt);
 
 var _underscore = require('underscore');
 
-var NavbarActions = (function () {
-  function NavbarActions() {
-    _classCallCheck(this, NavbarActions);
+var NavbarActions = function NavbarActions() {
+  _classCallCheck(this, NavbarActions);
 
-    this.generateActions('updateOnlineUsers', 'updateAjaxAnimation', 'updateSearchQuery'
-    // 'getQuestionCountSuccess',
-    // 'getQuestionCountFail',
-    // 'findQuestionSuccess',
-    // 'findQuestionFail'
-    );
-  }
-
-  _createClass(NavbarActions, [{
-    key: 'findQuestion',
-    value: function findQuestion(payload) {
-      var _this = this;
-
-      $.ajax({
-        url: '/questions/search',
-        data: { question: payload.searchQuery }
-      }).done(function (data) {
-        (0, _underscore.assign)(payload, data);
-        _this.actions.findQuestionSuccess(payload);
-      }).fail(function () {
-        _this.actions.findQuestionFail(payload);
-      });
-    }
-  }, {
-    key: 'getQuestionCount',
-    value: function getQuestionCount() {
-      var _this2 = this;
-
-      $.ajax({ url: '/questions/count' }).done(function (data) {
-        _this2.actions.getQuestionCountSuccess(data);
-      }).fail(function (jqXhr) {
-        _this2.actions.getQuestionCountFail(jqXhr);
-      });
-    }
-  }]);
-
-  return NavbarActions;
-})();
+  this.generateActions('updateOnlineUsers', 'updateAjaxAnimation', 'updateSearchQuery');
+};
 
 exports['default'] = _alt2['default'].createActions(NavbarActions);
 module.exports = exports['default'];
@@ -285,7 +227,6 @@ var Footer = (function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       _storesFooterStore2['default'].listen(this.onChange);
-      // FooterActions.getTopQuestions();
     }
   }, {
     key: 'componentWillUnmount',
@@ -300,18 +241,6 @@ var Footer = (function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var topQuestions = this.state.questions.map(function (Question) {
-        return _react2['default'].createElement(
-          'li',
-          { key: Question._id },
-          _react2['default'].createElement(
-            _reactRouter.Link,
-            { to: '/questions/' + Question._id },
-            _react2['default'].createElement('img', { className: 'thumb-md', src: Question.choice1_img })
-          )
-        );
-      });
-
       return _react2['default'].createElement(
         'footer',
         null,
@@ -602,7 +531,6 @@ var Navbar = (function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       _storesNavbarStore2['default'].listen(this.onChange);
-      // NavbarActions.getQuestionCount();
 
       var socket = io.connect();
 
@@ -710,15 +638,6 @@ var Navbar = (function (_React$Component) {
               null,
               _react2['default'].createElement(
                 _reactRouter.Link,
-                { to: '/top' },
-                'Top Questions'
-              )
-            ),
-            _react2['default'].createElement(
-              'li',
-              null,
-              _react2['default'].createElement(
-                _reactRouter.Link,
                 { to: '/ask' },
                 'Ask a Question'
               )
@@ -811,8 +730,6 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
@@ -825,28 +742,12 @@ var _actionsFooterActions = require('../actions/FooterActions');
 
 var _actionsFooterActions2 = _interopRequireDefault(_actionsFooterActions);
 
-var FooterStore = (function () {
-  function FooterStore() {
-    _classCallCheck(this, FooterStore);
+var FooterStore = function FooterStore() {
+  _classCallCheck(this, FooterStore);
 
-    this.bindActions(_actionsFooterActions2['default']);
-    this.questions = [];
-  }
-
-  _createClass(FooterStore, [{
-    key: 'onGetTopQuestionsSuccess',
-    value: function onGetTopQuestionsSuccess(data) {
-      this.questions = data.slice(0, 5);
-    }
-  }, {
-    key: 'onGetTopQuestionsFail',
-    value: function onGetTopQuestionsFail(jqXhr) {
-      toastr.error(jqXhr.responseJSON && jqXhr.responseJSON.message || jqXhr.responseText || jqXhr.statusText);
-    }
-  }]);
-
-  return FooterStore;
-})();
+  this.bindActions(_actionsFooterActions2['default']);
+  this.questions = [];
+};
 
 exports['default'] = _alt2['default'].createStore(FooterStore);
 module.exports = exports['default'];
@@ -884,7 +785,6 @@ var HomeStore = (function () {
     key: 'onGetQuestionsSuccess',
     value: function onGetQuestionsSuccess(data) {
       this.questions = data;
-      console.log(this.questions);
     }
   }, {
     key: 'onGetQuestionsFail',
@@ -937,19 +837,6 @@ var NavbarStore = (function () {
   }
 
   _createClass(NavbarStore, [{
-    key: 'onFindQuestionSuccess',
-    value: function onFindQuestionSuccess(payload) {
-      payload.router.transitionTo('/questions/' + payload.question._id);
-    }
-  }, {
-    key: 'onFindQuestionFail',
-    value: function onFindQuestionFail(payload) {
-      payload.searchForm.classList.add('shake');
-      setTimeout(function () {
-        payload.searchForm.classList.remove('shake');
-      }, 1000);
-    }
-  }, {
     key: 'onUpdateOnlineUsers',
     value: function onUpdateOnlineUsers(data) {
       this.onlineUsers = data.onlineUsers;
@@ -963,16 +850,6 @@ var NavbarStore = (function () {
     key: 'onUpdateSearchQuery',
     value: function onUpdateSearchQuery(event) {
       this.searchQuery = event.target.value;
-    }
-  }, {
-    key: 'onGetQuestionCountSuccess',
-    value: function onGetQuestionCountSuccess(data) {
-      this.getQuestionsCount = data.count;
-    }
-  }, {
-    key: 'onGetQuestionCountFail',
-    value: function onGetQuestionCountFail(jqXhr) {
-      toastr.error(jqXhr.responseJSON.message);
     }
   }]);
 

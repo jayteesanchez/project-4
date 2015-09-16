@@ -11,7 +11,7 @@ class HomeActions {
 
   getQuestions() {
     $.ajax({ url: '/api/questions' })
-      .done(data => {
+      .done((data) => {
         this.actions.getQuestionsSuccess(data);
       })
       .fail(jqXhr => {
