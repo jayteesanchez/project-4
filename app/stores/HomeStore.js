@@ -9,7 +9,6 @@ class HomeStore {
 
   onGetQuestionsSuccess(data) {
     this.questions = data;
-    console.log(this.questions);
   }
 
   onGetQuestionsFail(errorMessage) {

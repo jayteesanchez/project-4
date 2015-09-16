@@ -13,7 +13,6 @@ class Navbar extends React.Component {
 
   componentDidMount() {
     NavbarStore.listen(this.onChange);
-    // NavbarActions.getQuestionCount();
 
     let socket = io.connect();
 
@@ -80,7 +79,6 @@ class Navbar extends React.Component {
           </form>
           <ul className='nav navbar-nav'>
             <li><Link to='/'>Home</Link></li>
-            <li><Link to='/top'>Top Questions</Link></li>
             <li><Link to='/ask'>Ask a Question</Link></li>
             <li className='navbar-right'>
               <Link to='/#'>

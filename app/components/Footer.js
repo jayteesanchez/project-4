@@ -12,7 +12,6 @@ class Footer extends React.Component {
 
   componentDidMount() {
     FooterStore.listen(this.onChange);
-    // FooterActions.getTopQuestions();
   }
 
   componentWillUnmount() {
@@ -24,16 +23,6 @@ class Footer extends React.Component {
   }
 
   render() {
-    let topQuestions = this.state.questions.map(function(Question) {
-      return (
-        <li key={Question._id}>
-          <Link to={'/questions/' + Question._id}>
-            <img className='thumb-md' src={Question.choice1_img} />
-          </Link>
-        </li>
-      );
-    });
-
     return (
       <footer>
         <div className='container'>

@@ -9,18 +9,6 @@ class NavbarStore {
     this.searchQuery = '';
     this.ajaxAnimationClass = '';
   }
-
-  onFindQuestionSuccess(payload) {
-    payload.router.transitionTo('/questions/' + payload.question._id);
-  }
-
-  onFindQuestionFail(payload) {
-    payload.searchForm.classList.add('shake');
-    setTimeout(() => {
-      payload.searchForm.classList.remove('shake');
-    }, 1000);
-  }
-
   onUpdateOnlineUsers(data) {
     this.onlineUsers = data.onlineUsers;
   }
@@ -31,14 +19,6 @@ class NavbarStore {
 
   onUpdateSearchQuery(event) {
     this.searchQuery = event.target.value;
-  }
-
-  onGetQuestionCountSuccess(data) {
-    this.getQuestionsCount = data.count;
-  }
-
-  onGetQuestionCountFail(jqXhr) {
-    toastr.error(jqXhr.responseJSON.message);
   }
 }
 

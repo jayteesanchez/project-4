@@ -6,14 +6,6 @@ class FooterStore {
     this.bindActions(FooterActions);
     this.questions = [];
   }
-
-  onGetTopQuestionsSuccess(data) {
-    this.questions = data.slice(0, 5);
-  }
-
-  onGetTopQuestionsFail(jqXhr) {
-    toastr.error(jqXhr.responseJSON && jqXhr.responseJSON.message || jqXhr.responseText || jqXhr.statusText);
-  }
 }
 
 export default alt.createStore(FooterStore);
