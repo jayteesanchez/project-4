@@ -337,7 +337,7 @@ var Home = (function (_React$Component) {
     _classCallCheck(this, Home);
 
     _get(Object.getPrototypeOf(Home.prototype), 'constructor', this).call(this, props);
-    this.state = { questions: _storesHomeStore2['default'].getState() };
+    this.state = _storesHomeStore2['default'].getState();
     this.onChange = this.onChange.bind(this);
   }
 
@@ -355,7 +355,7 @@ var Home = (function (_React$Component) {
   }, {
     key: 'onChange',
     value: function onChange(state) {
-      this.setState({ questions: state });
+      this.setState(state);
     }
   }, {
     key: 'handleClick',
@@ -369,107 +369,124 @@ var Home = (function (_React$Component) {
     value: function render() {
       var _this = this;
 
+      if (this.state.questions.questions) {
+        var allQuestions = this.state.questions.questions.map(function (question, index) {
+          return _react2['default'].createElement(
+            'div',
+            { key: question.id, className: index === 0 ? 'col-xs-12 col-sm-12 col-md-10 col-md-offset-1' : 'col-xs-12 col-sm-12 col-md-10' },
+            _react2['default'].createElement(
+              'h3',
+              { className: 'text-center' },
+              question.question
+            ),
+            _react2['default'].createElement(
+              'div',
+              { className: 'thumbnail fadeInUp animated' },
+              _react2['default'].createElement('img', { key: question.votes.votes_choice_1, onClick: _this.handleClick.bind(_this.key, question), src: question.choice1_img }),
+              _react2['default'].createElement(
+                'div',
+                { className: 'caption text-center' },
+                _react2['default'].createElement(
+                  'ul',
+                  { className: 'list-inline' },
+                  _react2['default'].createElement(
+                    'li',
+                    null,
+                    _react2['default'].createElement(
+                      'strong',
+                      null,
+                      ' '
+                    ),
+                    ' '
+                  ),
+                  _react2['default'].createElement(
+                    'li',
+                    null,
+                    _react2['default'].createElement(
+                      'strong',
+                      null,
+                      question.choice1
+                    ),
+                    ' '
+                  )
+                ),
+                _react2['default'].createElement(
+                  'h4',
+                  null,
+                  _react2['default'].createElement(
+                    _reactRouter.Link,
+                    { to: '/questions/' },
+                    _react2['default'].createElement('strong', null)
+                  )
+                )
+              )
+            ),
+            _react2['default'].createElement(
+              'div',
+              { className: 'thumbnail fadeInUp animated' },
+              _react2['default'].createElement('img', { key: question.votes.votes_choice_2, onClick: _this.handleClick.bind(_this.key, question), src: question.choice2_img }),
+              _react2['default'].createElement(
+                'div',
+                { className: 'caption text-center' },
+                _react2['default'].createElement(
+                  'ul',
+                  { className: 'list-inline' },
+                  _react2['default'].createElement(
+                    'li',
+                    null,
+                    _react2['default'].createElement(
+                      'strong',
+                      null,
+                      ' '
+                    ),
+                    ' '
+                  ),
+                  _react2['default'].createElement(
+                    'li',
+                    null,
+                    _react2['default'].createElement(
+                      'strong',
+                      null,
+                      question.choice2
+                    ),
+                    ' '
+                  )
+                ),
+                _react2['default'].createElement(
+                  'h4',
+                  null,
+                  _react2['default'].createElement(
+                    _reactRouter.Link,
+                    { to: '/questions/' },
+                    _react2['default'].createElement('strong', null)
+                  )
+                )
+              )
+            )
+          );
+        });
+
+        return _react2['default'].createElement(
+          'div',
+          { className: 'container' },
+          _react2['default'].createElement(
+            'div',
+            { className: 'row' },
+            allQuestions
+          )
+        );
+      }
       return _react2['default'].createElement(
         'div',
         { className: 'container' },
         _react2['default'].createElement(
           'div',
           { className: 'row' },
-          this.state.questions.questions.map(function (question, index) {
-            _react2['default'].createElement(
-              'div',
-              { key: question.id, className: index === 0 ? 'col-xs-12 col-sm-12 col-md-10 col-md-offset-1' : 'col-xs-12 col-sm-12 col-md-10' },
-              _react2['default'].createElement(
-                'h3',
-                { className: 'text-center' },
-                question.question
-              ),
-              _react2['default'].createElement(
-                'div',
-                { className: 'thumbnail fadeInUp animated' },
-                _react2['default'].createElement('img', { key: question.votes.votes_choice_1, onClick: _this.handleClick.bind(key, question), src: question.choice1_img }),
-                _react2['default'].createElement(
-                  'div',
-                  { className: 'caption text-center' },
-                  _react2['default'].createElement(
-                    'ul',
-                    { className: 'list-inline' },
-                    _react2['default'].createElement(
-                      'li',
-                      null,
-                      _react2['default'].createElement(
-                        'strong',
-                        null,
-                        ' '
-                      ),
-                      ' '
-                    ),
-                    _react2['default'].createElement(
-                      'li',
-                      null,
-                      _react2['default'].createElement(
-                        'strong',
-                        null,
-                        question.choice1
-                      ),
-                      ' '
-                    )
-                  ),
-                  _react2['default'].createElement(
-                    'h4',
-                    null,
-                    _react2['default'].createElement(
-                      _reactRouter.Link,
-                      { to: '/questions/' },
-                      _react2['default'].createElement('strong', null)
-                    )
-                  )
-                )
-              ),
-              _react2['default'].createElement(
-                'div',
-                { className: 'thumbnail fadeInUp animated' },
-                _react2['default'].createElement('img', { key: question.votes.votes_choice_2, onClick: _this.handleClick.bind(key, question), src: question.choice2_img }),
-                _react2['default'].createElement(
-                  'div',
-                  { className: 'caption text-center' },
-                  _react2['default'].createElement(
-                    'ul',
-                    { className: 'list-inline' },
-                    _react2['default'].createElement(
-                      'li',
-                      null,
-                      _react2['default'].createElement(
-                        'strong',
-                        null,
-                        ' '
-                      ),
-                      ' '
-                    ),
-                    _react2['default'].createElement(
-                      'li',
-                      null,
-                      _react2['default'].createElement(
-                        'strong',
-                        null,
-                        question.choice2
-                      ),
-                      ' '
-                    )
-                  ),
-                  _react2['default'].createElement(
-                    'h4',
-                    null,
-                    _react2['default'].createElement(
-                      _reactRouter.Link,
-                      { to: '/questions/' },
-                      _react2['default'].createElement('strong', null)
-                    )
-                  )
-                )
-              )
-            );
-          })
+          _react2['default'].createElement(
+            'h1',
+            null,
+            this.state.questions
+          )
         )
       );
     }

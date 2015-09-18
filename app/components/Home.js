@@ -6,7 +6,7 @@ import HomeActions from '../actions/HomeActions';
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { questions: HomeStore.getState() };
+    this.state = HomeStore.getState();
     this.onChange = this.onChange.bind(this);
   }
 
@@ -20,7 +20,7 @@ class Home extends React.Component {
   }
 
   onChange(state) {
-    this.setState({ questions: state});
+    this.setState(state);
   }
 
   handleClick(key, question) {
@@ -31,14 +31,13 @@ class Home extends React.Component {
 
   render() {
 
+    if (this.state.questions.questions) {
+    var allQuestions = this.state.questions.questions.map((question, index) => {
       return (
-      <div className='container'>
-        <div className='row'>
-          { this.state.questions.questions.map((question, index) => {
           <div key={question.id} className={index === 0 ? 'col-xs-12 col-sm-12 col-md-10 col-md-offset-1' : 'col-xs-12 col-sm-12 col-md-10'}>
             <h3 className='text-center'>{question.question}</h3>
             <div className='thumbnail fadeInUp animated'>
-              <img key={question.votes.votes_choice_1} onClick={this.handleClick.bind(key, question)} src={question.choice1_img}/>
+              <img key={question.votes.votes_choice_1} onClick={this.handleClick.bind(this.key, question)} src={question.choice1_img}/>
               <div className='caption text-center'>
                 <ul className='list-inline'>
                   <li><strong> </strong> {}</li>
@@ -50,7 +49,7 @@ class Home extends React.Component {
               </div>
             </div>
             <div className='thumbnail fadeInUp animated'>
-              <img key={question.votes.votes_choice_2} onClick={this.handleClick.bind(key, question)} src={question.choice2_img}/>
+              <img key={question.votes.votes_choice_2} onClick={this.handleClick.bind(this.key, question)} src={question.choice2_img}/>
               <div className='caption text-center'>
                 <ul className='list-inline'>
                   <li><strong> </strong> {}</li>
@@ -62,12 +61,26 @@ class Home extends React.Component {
               </div>
             </div>
           </div>
-          })
-          }
+      );
+    });
+
+    return (
+      <div className='container'>
+        <div className='row'>
+          {allQuestions}
         </div>
       </div>
-      );
-    }
+    );
   }
+  return (
+    <div className='container'>
+        <div className='row'>
+          <h1>{this.state.questions}</h1>
+        </div>
+      </div>
+    );
+}
+
+}
 
 export default Home;
