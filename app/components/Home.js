@@ -27,6 +27,14 @@ class Home extends React.Component {
     var choice = event.target.alt;
     var id = question._id;
     HomeActions.vote(choice, id);
+    HomeActions.changeDisplay(question, id);
+  }
+
+  changeQuestions(question, event) {
+    var change = true;
+    if(question.display) return change = false
+    var id = question._id;
+    HomeActions.changeDisplay(id, change);
   }
 
   render() {
@@ -34,9 +42,10 @@ class Home extends React.Component {
       width: '300px',
       height: '300px'
     }
-
-    if (this.state.questions.questions) {
-    var allQuestions = this.state.questions.questions.map((question, index) => {
+    var currentQuestions = this.state.questions.questions;
+    if (currentQuestions) {
+    var allQuestions = currentQuestions.map((question, index) => {
+      if(question.display){
       return (
         <div key={question._id} className='row'>
             <h3 className='text-center'>{question.question}</h3>
@@ -70,6 +79,19 @@ class Home extends React.Component {
             </div>
         </div>
       );
+      }
+      if(!question.display){
+      return (
+      <div key={question._id} alt={ question.index } className='row thumbnail fadeInUp animated' onClick={this.changeQuestions.bind(this, question)}>
+            <h3 className='text-center'>{question.question}?</h3>
+            <h6 className='text-center'>
+            <strong>{question.choice1}</strong>
+            <text> or </text>
+            <strong>{question.choice2}</strong>
+            </h6>
+      </div>
+      );
+      }
     });
 
     return (

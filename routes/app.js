@@ -34,7 +34,7 @@ router.route('/questions/:id')
   .get(questionsController.getOneQuestion)
 
   // update existing Question
-  .patch(questionsController.updateQuestion)
+  .put(questionsController.updateQuestion)
 
   // remove specific Question from DB
   .delete(questionsController.removeQuestion);

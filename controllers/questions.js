@@ -23,12 +23,12 @@ function createQuestion(request, response) {
   user_id:              req.user.id
 });
 
-Question.prototype.expireAt = function() {
+question.prototype.expireAt = function() {
   return (this.posted_date + this.expiration)
 }
 
-Question.prototype.totalVote = function() {
-  return (votes_choice_1 + votes_choice_2);
+question.prototype.totalVote = function() {
+  return (this.votes.votes_choice_1 + this.votes.votes_choice_2);
 }
 
   question.save(function(error) {
@@ -55,18 +55,15 @@ function updateQuestion(request, response) {
   Question.findById({_id: id}, function(error, question) {
     if(error) response.json({message: 'Could not find question b/c:' + error});
 
-    if(request.body.question) question.question = request.body.question;
-    if(request.body.choice1) question.choice1 = request.body.choice1;
+    if(request.body.question)     question.question     = request.body.question;
+    if(request.body.choice1)      question.choice1      = request.body.choice1;
     if(request.body.choice_1_img) question.choice_1_img = request.body.choice_1_img;
-    if(request.body.votes_choice_1) question.votes_choice_1 = request.body.votes_choice_1;
-    if(request.body.choice2) question.choice2 = request.body.choice2;
+    if(request.body.choice2)      question.choice2      = request.body.choice2;
     if(request.body.choice_2_img) question.choice_2_img = request.body.choice_2_img;
-    if(request.body.votes_choice_2) question.votes_choice_2 = request.body.votes_choice_2;
-    if(request.body.downVote) question.downVote = request.body.downVote;
-    if(request.body.expiration) question.expiration = request.body.expiration;
+    if(request.body.display)      question.display      = request.body.display;
 
 
-    Question.save(function(error) {
+    question.save(function(error) {
       if(error) response.json({messsage: 'Could not update question b/c:' + error});
 
       response.json({message: 'Question successfully updated', question: question});

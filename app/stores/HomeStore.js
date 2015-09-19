@@ -18,6 +18,10 @@ class HomeStore {
   onVoteFail(errorMessage) {
     toastr.error(errorMessage);
   }
+
+  onChangeDisplayFail(errorMessage){
+    toastr.error(errorMessage);
+  }
 }
 
 export default alt.createStore(HomeStore);

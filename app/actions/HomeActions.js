@@ -5,7 +5,8 @@ class HomeActions {
     this.generateActions(
       'getQuestionsSuccess',
       'getQuestionsFail',
-      'voteFail'
+      'voteFail',
+      'changeDisplayFail'
     );
   }
 
@@ -27,6 +28,20 @@ class HomeActions {
       type: 'PUT',
       url: '/api/questions/' + id,
       data: { votes: setChoice++ }
+    })
+      .done(() => {
+        this.actions.getQuestions();
+      })
+      .fail((jqXhr) => {
+        this.actions.voteFail(jqXhr.responseJSON.message);
+      });
+  }
+
+  changeDisplay(id, change) {
+    $.ajax({
+      type: 'PUT',
+      url: '/api/questions/' + id,
+      data: { display: change }
     })
       .done(() => {
         this.actions.getQuestions();

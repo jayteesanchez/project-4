@@ -21,7 +21,8 @@ var newQuestions = [
   },
   choice2: 'KFC',
   choice2_img: 'http://digitaldeconstruction.com/wp-content/uploads/2015/07/KFC.jpg',
-  downVote: 1
+  downVote: 1,
+  display: true
   },
   {
   user_id: '55d2ad76f7985b32e5f68ad2',
@@ -34,7 +35,8 @@ var newQuestions = [
   },
   choice2: 'Las Vegas',
   choice2_img: 'http://allworldtowns.com/data_images/countries/las-vegas/las-vegas-09.jpg',
-  downVote: 1
+  downVote: 1,
+  display: false
   },
   {
   user_id: '55d2ad76f7985b32e5f68ad2',
@@ -47,7 +49,8 @@ var newQuestions = [
   },
   choice2: 'Black',
   choice2_img: 'http://digitaldeconstruction.com/wp-content/uploads/2015/07/KFC.jpg',
-  downVote: 1
+  downVote: 1,
+  display: false
   },
   {
   user_id: '55d2ad76f7985b32e5f68ad2',
@@ -60,7 +63,8 @@ var newQuestions = [
   },
   choice2: 'Drive',
   choice2_img: 'http://allworldtowns.com/data_images/countries/las-vegas/las-vegas-09.jpg',
-  downVote: 1
+  downVote: 1,
+  display: false
   },
     {
   user_id: '55d2ad76f7985b32e5f68ad2',
@@ -73,7 +77,8 @@ var newQuestions = [
   },
   choice2: 'General Assembly LA',
   choice2_img: 'http://digitaldeconstruction.com/wp-content/uploads/2015/07/KFC.jpg',
-  downVote: 1
+  downVote: 1,
+  display: false
   },
   {
   user_id: '55d2ad76f7985b32e5f68ad2',
@@ -86,7 +91,8 @@ var newQuestions = [
   },
   choice2: 'ReactJS',
   choice2_img: 'http://allworldtowns.com/data_images/countries/las-vegas/las-vegas-09.jpg',
-  downVote: 1
+  downVote: 1,
+  display: false
   },
     {
   user_id: '55d2ad76f7985b32e5f68ad2',
@@ -99,7 +105,8 @@ var newQuestions = [
   },
   choice2: 'Express/NodeJS',
   choice2_img: 'http://digitaldeconstruction.com/wp-content/uploads/2015/07/KFC.jpg',
-  downVote: 1
+  downVote: 1,
+  display: false
   },
   {
   user_id: '55d2ad76f7985b32e5f68ad2',
@@ -112,7 +119,8 @@ var newQuestions = [
   },
   choice2: 'Back-End Developer',
   choice2_img: 'http://allworldtowns.com/data_images/countries/las-vegas/las-vegas-09.jpg',
-  downVote: 1
+  downVote: 1,
+  display: false
   }
 
 ];

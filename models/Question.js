@@ -12,6 +12,7 @@ var QuestionSchema = new mongoose.Schema({
   choice2_img:          String,
   downVote:             { type: Number, default: 0 },
   posted_date:          { type: Date, default: Date.now },
+  display:              Boolean
 });
 
 
