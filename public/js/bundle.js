@@ -431,28 +431,8 @@ var Home = (function (_React$Component) {
                         _react2['default'].createElement(
                           'strong',
                           null,
-                          ' '
-                        ),
-                        ' '
-                      ),
-                      _react2['default'].createElement(
-                        'li',
-                        null,
-                        _react2['default'].createElement(
-                          'strong',
-                          null,
                           question.choice1
-                        ),
-                        ' '
-                      )
-                    ),
-                    _react2['default'].createElement(
-                      'h4',
-                      null,
-                      _react2['default'].createElement(
-                        _reactRouter.Link,
-                        { to: '/questions/' },
-                        _react2['default'].createElement('strong', null)
+                        )
                       )
                     )
                   )
@@ -477,28 +457,8 @@ var Home = (function (_React$Component) {
                         _react2['default'].createElement(
                           'strong',
                           null,
-                          ' '
-                        ),
-                        ' '
-                      ),
-                      _react2['default'].createElement(
-                        'li',
-                        null,
-                        _react2['default'].createElement(
-                          'strong',
-                          null,
                           question.choice2
-                        ),
-                        ' '
-                      )
-                    ),
-                    _react2['default'].createElement(
-                      'h4',
-                      null,
-                      _react2['default'].createElement(
-                        _reactRouter.Link,
-                        { to: '/questions/' },
-                        _react2['default'].createElement('strong', null)
+                        )
                       )
                     )
                   )

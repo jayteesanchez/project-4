@@ -54,12 +54,8 @@ class Home extends React.Component {
               <img style={resizeImg} alt={'votes_choice_1'} onClick={this.handleClick.bind(event, question)} src={question.choice1_img}/>
               <div className='caption text-center'>
                 <ul className='list-inline'>
-                  <li><strong> </strong> {}</li>
-                  <li><strong>{question.choice1}</strong> {}</li>
+                  <li><strong>{question.choice1}</strong></li>
                 </ul>
-                <h4>
-                  <Link to={'/questions/'}><strong>{}</strong></Link>
-                </h4>
               </div>
             </div>
           </div>
@@ -68,12 +64,8 @@ class Home extends React.Component {
                 <img style={resizeImg} alt={'votes_choice_2'} onClick={this.handleClick.bind(event, question)} src={question.choice2_img}/>
                 <div className='caption text-center'>
                   <ul className='list-inline'>
-                    <li><strong> </strong> {}</li>
-                    <li><strong>{question.choice2}</strong> {}</li>
+                    <li><strong>{question.choice2}</strong></li>
                   </ul>
-                  <h4>
-                    <Link to={'/questions/'}><strong>{}</strong></Link>
-                  </h4>
                 </div>
               </div>
             </div>
