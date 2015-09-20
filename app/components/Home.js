@@ -32,7 +32,7 @@ class Home extends React.Component {
 
   changeQuestions(question, event) {
     var change = true;
-    if(question.display) return change = false
+    if(question.display) var change = false;
     var id = question._id;
     HomeActions.changeDisplay(id, change);
   }
@@ -47,7 +47,7 @@ class Home extends React.Component {
     var allQuestions = currentQuestions.map((question, index) => {
       if(question.display){
       return (
-        <div key={question._id} className='row'>
+        <div key={question._id} className='row' onClick={this.changeQuestions.bind(this, question)}>
             <h3 className='text-center'>{question.question}</h3>
           <div className={'col-xs-6 col-sm-6 col-md-5 col-md-offset-1'}>
             <div className='thumbnail fadeInUp animated'>
@@ -96,6 +96,9 @@ class Home extends React.Component {
 
     return (
       <div className='container'>
+        <div className='row fadeInUp animated'>
+          <h6 className='text-center'>Click on a title to expand or shrink a question</h6>
+        </div>
           {allQuestions}
       </div>
     );

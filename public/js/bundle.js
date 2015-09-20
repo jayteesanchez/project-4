@@ -387,7 +387,7 @@ var Home = (function (_React$Component) {
     key: 'changeQuestions',
     value: function changeQuestions(question, event) {
       var change = true;
-      if (question.display) return change = false;
+      if (question.display) var change = false;
       var id = question._id;
       _actionsHomeActions2['default'].changeDisplay(id, change);
     }
@@ -406,7 +406,7 @@ var Home = (function (_React$Component) {
           if (question.display) {
             return _react2['default'].createElement(
               'div',
-              { key: question._id, className: 'row' },
+              { key: question._id, className: 'row', onClick: _this.changeQuestions.bind(_this, question) },
               _react2['default'].createElement(
                 'h3',
                 { className: 'text-center' },
@@ -542,6 +542,15 @@ var Home = (function (_React$Component) {
         return _react2['default'].createElement(
           'div',
           { className: 'container' },
+          _react2['default'].createElement(
+            'div',
+            { className: 'row fadeInUp animated' },
+            _react2['default'].createElement(
+              'h6',
+              { className: 'text-center' },
+              'Click on a title to expand or shrink a question'
+            )
+          ),
           allQuestions
         );
       }
