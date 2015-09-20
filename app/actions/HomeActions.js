@@ -21,13 +21,10 @@ class HomeActions {
   }
 
   vote(choice, id) {
-    console.log(choice === setChoice);
-    var setChoice = choice.replace(/^'(.*)'$/, '$1');
-    console.log(setChoice);
     $.ajax({
       type: 'PUT',
       url: '/api/questions/' + id,
-      data: { votes: setChoice++ }
+      data: { choice: choice + 1 }
     })
       .done(() => {
         this.actions.getQuestions();

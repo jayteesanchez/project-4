@@ -78,13 +78,13 @@ class Navbar extends React.Component {
             </div>
           </form>
           <ul className='nav navbar-nav'>
-            <li><Link to='/'>Home</Link></li>
+            <li><Link to='/' active>Home</Link></li>
             <li><Link to='/ask'>Ask a Question</Link></li>
             <li className='navbar-right'>
-              <Link to='/#'>
+              <p className='navbar-text navbar-right'>
                 Users Online
                 <span className='badge badge-up badge-danger'>{this.state.onlineUsers}</span>
-              </Link>
+              </p>
             </li>
           </ul>
         </div>

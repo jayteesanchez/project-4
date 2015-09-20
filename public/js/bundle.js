@@ -60,13 +60,10 @@ var HomeActions = (function () {
     value: function vote(choice, id) {
       var _this2 = this;
 
-      console.log(choice === setChoice);
-      var setChoice = choice.replace(/^'(.*)'$/, '$1');
-      console.log(setChoice);
       $.ajax({
         type: 'PUT',
         url: '/api/questions/' + id,
-        data: { votes: setChoice++ }
+        data: { choice: choice + 1 }
       }).done(function () {
         _this2.actions.getQuestions();
       }).fail(function (jqXhr) {
@@ -381,7 +378,6 @@ var Home = (function (_React$Component) {
       var choice = event.target.alt;
       var id = question._id;
       _actionsHomeActions2['default'].vote(choice, id);
-      _actionsHomeActions2['default'].changeDisplay(question, id);
     }
   }, {
     key: 'changeQuestions',
@@ -410,7 +406,8 @@ var Home = (function (_React$Component) {
               _react2['default'].createElement(
                 'h3',
                 { className: 'text-center' },
-                question.question
+                question.question,
+                question.totalVote
               ),
               _react2['default'].createElement(
                 'div',
@@ -680,7 +677,7 @@ var Navbar = (function (_React$Component) {
               null,
               _react2['default'].createElement(
                 _reactRouter.Link,
-                { to: '/' },
+                { to: '/', active: true },
                 'Home'
               )
             ),
@@ -697,8 +694,8 @@ var Navbar = (function (_React$Component) {
               'li',
               { className: 'navbar-right' },
               _react2['default'].createElement(
-                _reactRouter.Link,
-                { to: '/#' },
+                'p',
+                { className: 'navbar-text navbar-right' },
                 'Users Online',
                 _react2['default'].createElement(
                   'span',

@@ -1,5 +1,13 @@
 var Question = require('../models/Question');
 
+Question.prototype.expireAt = function() {
+  return (this.posted_date + this.expiration)
+}
+
+Question.prototype.totalVote = function() {
+  return (this.votes_choice_1 + this.votes_choice_2);
+}
+
 // GET
 function getAll(request, response) {
   Question.find(function(error, questions) {
@@ -19,17 +27,8 @@ function createQuestion(request, response) {
   choice1_img:          req.body.choice1_img,
   choice2:              req.body.choice2,
   choice2_img:          req.body.choice2_img,
-  expiration:           req.body.expiration,
   user_id:              req.user.id
 });
-
-question.prototype.expireAt = function() {
-  return (this.posted_date + this.expiration)
-}
-
-question.prototype.totalVote = function() {
-  return (this.votes.votes_choice_1 + this.votes.votes_choice_2);
-}
 
   question.save(function(error) {
     if(error) response.json({messsage: 'Could not ceate question b/c:' + error});
@@ -55,13 +54,14 @@ function updateQuestion(request, response) {
   Question.findById({_id: id}, function(error, question) {
     if(error) response.json({message: 'Could not find question b/c:' + error});
 
-    if(request.body.question)     question.question     = request.body.question;
-    if(request.body.choice1)      question.choice1      = request.body.choice1;
-    if(request.body.choice_1_img) question.choice_1_img = request.body.choice_1_img;
-    if(request.body.choice2)      question.choice2      = request.body.choice2;
-    if(request.body.choice_2_img) question.choice_2_img = request.body.choice_2_img;
-    if(request.body.display)      question.display      = request.body.display;
-
+    if(request.body.question)           question.question       = request.body.question;
+    if(request.body.choice1)            question.choice1        = request.body.choice1;
+    if(request.body.choice_1_img)       question.choice_1_img   = request.body.choice_1_img;
+    if(request.body.choice2)            question.choice2        = request.body.choice2;
+    if(request.body.choice_2_img)       question.choice_2_img   = request.body.choice_2_img;
+    if(request.body.votes_choice_1)     question.votes_choice_1 = request.body.votes_choice_1;
+    if(request.body.votes_choice_2)     question.votes_choice_2 = request.body.votes_choice_2;
+    if(request.body.display)            question.display        = request.body.display;
 
     question.save(function(error) {
       if(error) response.json({messsage: 'Could not update question b/c:' + error});
