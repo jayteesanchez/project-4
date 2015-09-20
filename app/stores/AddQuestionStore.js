@@ -10,6 +10,7 @@ class AddQuestionStore {
     this.choice2 = '';
     this.choice2_img = '';
     this.helpBlock = '';
+    this.askValidationState = '';
     this.questionValidationState = '';
     this.choice1ValidationState = '';
     this.choice1_imgValidationState = '';
@@ -18,18 +19,18 @@ class AddQuestionStore {
   }
 
   onAddQuestionSuccess(successMessage) {
-    this.nameValidationState = 'has-success';
+    this.askValidationState = 'has-success';
     this.helpBlock = successMessage;
   }
 
   onAddQuestionFail(errorMessage) {
-    this.nameValidationState = 'has-error';
+    this.askValidationState = 'has-error';
     this.helpBlock = errorMessage;
   }
 
   onUpdateQuestion(event) {
-    this.name = event.target.value;
-    this.nameValidationState = '';
+    this.question = event.target.value;
+    this.questionValidationState = '';
     this.helpBlock = '';
   }
 
@@ -39,8 +40,8 @@ class AddQuestionStore {
   }
 
   onUpdateChoice1_img(event) {
-    this.choice1 = event.target.value;
-    this.choice1ValidationState = '';
+    this.choice1_img = event.target.value;
+    this.choice1_imgValidationState = '';
   }
 
   onUpdateChoice2(event) {
@@ -49,14 +50,14 @@ class AddQuestionStore {
   }
 
   onUpdateChoice2_img(event) {
-    this.choice2 = event.target.value;
-    this.choice2ValidationState = '';
+    this.choice2_img = event.target.value;
+    this.choice2_imgValidationState = '';
   }
 
   onInvalid() {
-    this.nameValidationState = 'has-error';
+    this.questionValidationState = 'has-error';
     this.helpBlock = 'Something went wrong, Please try again.';
   }
-
+}
 
 export default alt.createStore(AddQuestionStore);

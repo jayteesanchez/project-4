@@ -19,10 +19,10 @@ class AddQuestionActions {
       type: 'POST',
       url: '/api/questions',
       data: {
-        question: question,
-        choice1: choice1
-        choice1_img: choice1_img
-        choice2: choice2
+        question:    question,
+        choice1:     choice1,
+        choice1_img: choice1_img,
+        choice2:     choice2,
         choice2_img: choice2_img
       }
     })

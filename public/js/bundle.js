@@ -5,6 +5,59 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var AddQuestionActions = (function () {
+  function AddQuestionActions() {
+    _classCallCheck(this, AddQuestionActions);
+
+    this.generateActions('addQuestionSuccess', 'addQuestionFail', 'updateQuestion', 'updateChoice1', 'updateChoice1_img', 'updateChoice2', 'updateChoice2_img', 'invalid');
+  }
+
+  _createClass(AddQuestionActions, [{
+    key: 'addQuestion',
+    value: function addQuestion(question, choice1, choice1_img, choice2, choice2_img) {
+      var _this = this;
+
+      $.ajax({
+        type: 'POST',
+        url: '/api/questions',
+        data: {
+          question: question,
+          choice1: choice1,
+          choice1_img: choice1_img,
+          choice2: choice2,
+          choice2_img: choice2_img
+        }
+      }).done(function (data) {
+        _this.actions.addQuestionSuccess(data.message);
+      }).fail(function (jqXhr) {
+        _this.actions.addQuestionFail(jqXhr.responseJSON.message);
+      });
+    }
+  }]);
+
+  return AddQuestionActions;
+})();
+
+exports['default'] = _alt2['default'].createActions(AddQuestionActions);
+module.exports = exports['default'];
+
+},{"../alt":5}],2:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
@@ -20,7 +73,7 @@ var FooterActions = function FooterActions() {
 exports['default'] = _alt2['default'].createActions(FooterActions);
 module.exports = exports['default'];
 
-},{"../alt":4}],2:[function(require,module,exports){
+},{"../alt":5}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -93,7 +146,7 @@ var HomeActions = (function () {
 exports['default'] = _alt2['default'].createActions(HomeActions);
 module.exports = exports['default'];
 
-},{"../alt":4}],3:[function(require,module,exports){
+},{"../alt":5}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -119,7 +172,7 @@ var NavbarActions = function NavbarActions() {
 exports['default'] = _alt2['default'].createActions(NavbarActions);
 module.exports = exports['default'];
 
-},{"../alt":4,"underscore":"underscore"}],4:[function(require,module,exports){
+},{"../alt":5,"underscore":"underscore"}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -135,7 +188,224 @@ var _alt2 = _interopRequireDefault(_alt);
 exports['default'] = new _alt2['default']();
 module.exports = exports['default'];
 
-},{"alt":"alt"}],5:[function(require,module,exports){
+},{"alt":"alt"}],6:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _storesAddQuestionStore = require('../stores/AddQuestionStore');
+
+var _storesAddQuestionStore2 = _interopRequireDefault(_storesAddQuestionStore);
+
+var _actionsAddQuestionActions = require('../actions/AddQuestionActions');
+
+var _actionsAddQuestionActions2 = _interopRequireDefault(_actionsAddQuestionActions);
+
+var AddQuestion = (function (_React$Component) {
+  _inherits(AddQuestion, _React$Component);
+
+  function AddQuestion(props) {
+    _classCallCheck(this, AddQuestion);
+
+    _get(Object.getPrototypeOf(AddQuestion.prototype), 'constructor', this).call(this, props);
+    this.state = _storesAddQuestionStore2['default'].getState();
+    this.onChange = this.onChange.bind(this);
+  }
+
+  _createClass(AddQuestion, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      _storesAddQuestionStore2['default'].listen(this.onChange);
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      _storesAddQuestionStore2['default'].unlisten(this.onChange);
+    }
+  }, {
+    key: 'onChange',
+    value: function onChange(state) {
+      this.setState(state);
+    }
+  }, {
+    key: 'handleSubmit',
+    value: function handleSubmit(event) {
+      event.preventDefault();
+      console.log(this.state);
+      var question = this.state.question.trim();
+      var choice1 = this.state.choice1;
+      var choice1_img = this.state.choice1_img;
+      var choice2 = this.state.choice2;
+      var choice2_img = this.state.choice2_img;
+
+      if (!question) {
+        _actionsAddQuestionActions2['default'].invalid();
+        this.refs.questionTextField.getDOMNode().focus();
+      }
+
+      if (!choice1) {
+        _actionsAddQuestionActions2['default'].invalid();
+      }
+
+      if (!choice1_img) {
+        _actionsAddQuestionActions2['default'].invalid();
+      }
+
+      if (!choice2) {
+        _actionsAddQuestionActions2['default'].invalid();
+      }
+
+      if (!choice2_img) {
+        _actionsAddQuestionActions2['default'].invalid();
+      }
+
+      if (question && choice1 && choice1_img && choice2 && choice2_img) {
+        _actionsAddQuestionActions2['default'].addQuestion(question, choice1, choice1_img, choice2, choice2_img);
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2['default'].createElement(
+        'div',
+        { className: 'container' },
+        _react2['default'].createElement(
+          'div',
+          { className: 'row fadeInUp animated' },
+          _react2['default'].createElement(
+            'div',
+            { className: 'col-sm-8 col-sm-offset-2' },
+            _react2['default'].createElement(
+              'div',
+              { className: 'panel panel-default' },
+              _react2['default'].createElement(
+                'div',
+                { className: 'panel-heading' },
+                'Add your Question!'
+              ),
+              _react2['default'].createElement(
+                'div',
+                { className: 'panel-body' },
+                _react2['default'].createElement(
+                  'form',
+                  { onSubmit: this.handleSubmit.bind(this) },
+                  _react2['default'].createElement(
+                    'div',
+                    { className: 'form-group ' + this.state.questionValidationState },
+                    _react2['default'].createElement(
+                      'label',
+                      { className: 'control-label' },
+                      'Question'
+                    ),
+                    _react2['default'].createElement('input', { type: 'text', className: 'form-control', ref: 'questionTextField', value: this.state.question,
+                      onChange: _actionsAddQuestionActions2['default'].updateQuestion, autoFocus: true }),
+                    _react2['default'].createElement(
+                      'span',
+                      { className: 'help-block' },
+                      this.state.helpBlock
+                    )
+                  ),
+                  _react2['default'].createElement(
+                    'div',
+                    { className: 'form-group ' + this.state.choice1ValidationState },
+                    _react2['default'].createElement(
+                      'label',
+                      { className: 'control-label' },
+                      'Choice 1'
+                    ),
+                    _react2['default'].createElement('input', { type: 'text', className: 'form-control', ref: 'choice1TextField', value: this.state.choice1,
+                      onChange: _actionsAddQuestionActions2['default'].updateChoice1, autoFocus: true }),
+                    _react2['default'].createElement(
+                      'span',
+                      { className: 'help-block' },
+                      this.state.helpBlock
+                    )
+                  ),
+                  _react2['default'].createElement(
+                    'div',
+                    { className: 'form-group ' + this.state.choice1_imgValidationState },
+                    _react2['default'].createElement(
+                      'label',
+                      { className: 'control-label' },
+                      'Choice 1 Image URL'
+                    ),
+                    _react2['default'].createElement('input', { type: 'text', className: 'form-control', ref: 'choice1_imgTextField', value: this.state.choice1_img,
+                      onChange: _actionsAddQuestionActions2['default'].updateChoice1_img, autoFocus: true }),
+                    _react2['default'].createElement(
+                      'span',
+                      { className: 'help-block' },
+                      this.state.helpBlock
+                    )
+                  ),
+                  _react2['default'].createElement(
+                    'div',
+                    { className: 'form-group ' + this.state.choice2ValidationState },
+                    _react2['default'].createElement(
+                      'label',
+                      { className: 'control-label' },
+                      'Choice 2'
+                    ),
+                    _react2['default'].createElement('input', { type: 'text', className: 'form-control', ref: 'choice2TextField', value: this.state.choice2,
+                      onChange: _actionsAddQuestionActions2['default'].updateChoice2, autoFocus: true }),
+                    _react2['default'].createElement(
+                      'span',
+                      { className: 'help-block' },
+                      this.state.helpBlock
+                    )
+                  ),
+                  _react2['default'].createElement(
+                    'div',
+                    { className: 'form-group ' + this.state.choice2_imgValidationState },
+                    _react2['default'].createElement(
+                      'label',
+                      { className: 'control-label' },
+                      'Choice 2 Image URL'
+                    ),
+                    _react2['default'].createElement('input', { type: 'text', className: 'form-control', ref: 'choice2_imgTextField', value: this.state.choice2_img,
+                      onChange: _actionsAddQuestionActions2['default'].updateChoice2_img, autoFocus: true }),
+                    _react2['default'].createElement(
+                      'span',
+                      { className: 'help-block' },
+                      this.state.helpBlock
+                    )
+                  ),
+                  _react2['default'].createElement(
+                    'button',
+                    { type: 'submit', className: 'btn btn-success' },
+                    'Submit'
+                  )
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return AddQuestion;
+})(_react2['default'].Component);
+
+exports['default'] = AddQuestion;
+module.exports = exports['default'];
+
+},{"../actions/AddQuestionActions":1,"../stores/AddQuestionStore":13,"react":"react"}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -194,7 +464,7 @@ var App = (function (_React$Component) {
 exports['default'] = App;
 module.exports = exports['default'];
 
-},{"./Footer":6,"./Navbar":8,"react":"react","react-router":"react-router"}],6:[function(require,module,exports){
+},{"./Footer":8,"./Navbar":10,"react":"react","react-router":"react-router"}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -314,7 +584,7 @@ var Footer = (function (_React$Component) {
 exports['default'] = Footer;
 module.exports = exports['default'];
 
-},{"../actions/FooterActions":1,"../stores/FooterStore":11,"react":"react","react-router":"react-router"}],7:[function(require,module,exports){
+},{"../actions/FooterActions":2,"../stores/FooterStore":14,"react":"react","react-router":"react-router"}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -402,7 +672,7 @@ var Home = (function (_React$Component) {
           if (question.display) {
             return _react2['default'].createElement(
               'div',
-              { key: question._id, className: 'row', onClick: _this.changeQuestions.bind(_this, question) },
+              { key: question._id, className: 'row fadeInUp animated', onClick: _this.changeQuestions.bind(_this, question) },
               _react2['default'].createElement(
                 'h3',
                 { className: 'text-center' },
@@ -466,7 +736,7 @@ var Home = (function (_React$Component) {
           if (!question.display) {
             return _react2['default'].createElement(
               'div',
-              { key: question._id, alt: question.index, className: 'row thumbnail fadeInUp animated', onClick: _this.changeQuestions.bind(_this, question) },
+              { key: question._id, alt: question.index, className: 'row thumbnail flipInX animated', onClick: _this.changeQuestions.bind(_this, question) },
               _react2['default'].createElement(
                 'h3',
                 { className: 'text-center' },
@@ -498,10 +768,10 @@ var Home = (function (_React$Component) {
 
         return _react2['default'].createElement(
           'div',
-          { className: 'container' },
+          { className: 'container fadeInUp animated' },
           _react2['default'].createElement(
             'div',
-            { className: 'row fadeInUp animated' },
+            { className: 'row' },
             _react2['default'].createElement(
               'h6',
               { className: 'text-center' },
@@ -533,7 +803,7 @@ var Home = (function (_React$Component) {
 exports['default'] = Home;
 module.exports = exports['default'];
 
-},{"../actions/HomeActions":2,"../stores/HomeStore":12,"react":"react","react-router":"react-router"}],8:[function(require,module,exports){
+},{"../actions/HomeActions":3,"../stores/HomeStore":15,"react":"react","react-router":"react-router"}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -720,7 +990,7 @@ Navbar.contextTypes = {
 exports['default'] = Navbar;
 module.exports = exports['default'];
 
-},{"../actions/NavbarActions":3,"../stores/NavbarStore":13,"react":"react","react-router":"react-router"}],9:[function(require,module,exports){
+},{"../actions/NavbarActions":4,"../stores/NavbarStore":16,"react":"react","react-router":"react-router"}],11:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -741,7 +1011,7 @@ _reactRouter2['default'].run(_routes2['default'], _reactRouter2['default'].Histo
   _react2['default'].render(_react2['default'].createElement(Handler, null), document.getElementById('app'));
 });
 
-},{"./routes":10,"react":"react","react-router":"react-router"}],10:[function(require,module,exports){
+},{"./routes":12,"react":"react","react-router":"react-router"}],12:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -764,14 +1034,116 @@ var _componentsHome = require('./components/Home');
 
 var _componentsHome2 = _interopRequireDefault(_componentsHome);
 
+var _componentsAddQuestion = require('./components/AddQuestion');
+
+var _componentsAddQuestion2 = _interopRequireDefault(_componentsAddQuestion);
+
 exports['default'] = _react2['default'].createElement(
   _reactRouter.Route,
   { handler: _componentsApp2['default'] },
-  _react2['default'].createElement(_reactRouter.Route, { path: '/', handler: _componentsHome2['default'] })
+  _react2['default'].createElement(_reactRouter.Route, { path: '/', handler: _componentsHome2['default'] }),
+  _react2['default'].createElement(_reactRouter.Route, { path: '/ask', handler: _componentsAddQuestion2['default'] })
 );
 module.exports = exports['default'];
 
-},{"./components/App":5,"./components/Home":7,"react":"react","react-router":"react-router"}],11:[function(require,module,exports){
+},{"./components/AddQuestion":6,"./components/App":7,"./components/Home":9,"react":"react","react-router":"react-router"}],13:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var _actionsAddQuestionActions = require('../actions/AddQuestionActions');
+
+var _actionsAddQuestionActions2 = _interopRequireDefault(_actionsAddQuestionActions);
+
+var AddQuestionStore = (function () {
+  function AddQuestionStore() {
+    _classCallCheck(this, AddQuestionStore);
+
+    this.bindActions(_actionsAddQuestionActions2['default']);
+    this.question = '';
+    this.choice1 = '';
+    this.choice1_img = '';
+    this.choice2 = '';
+    this.choice2_img = '';
+    this.helpBlock = '';
+    this.askValidationState = '';
+    this.questionValidationState = '';
+    this.choice1ValidationState = '';
+    this.choice1_imgValidationState = '';
+    this.choice2ValidationState = '';
+    this.choice2_imgValidationState = '';
+  }
+
+  _createClass(AddQuestionStore, [{
+    key: 'onAddQuestionSuccess',
+    value: function onAddQuestionSuccess(successMessage) {
+      this.askValidationState = 'has-success';
+      this.helpBlock = successMessage;
+    }
+  }, {
+    key: 'onAddQuestionFail',
+    value: function onAddQuestionFail(errorMessage) {
+      this.askValidationState = 'has-error';
+      this.helpBlock = errorMessage;
+    }
+  }, {
+    key: 'onUpdateQuestion',
+    value: function onUpdateQuestion(event) {
+      this.question = event.target.value;
+      this.questionValidationState = '';
+      this.helpBlock = '';
+    }
+  }, {
+    key: 'onUpdateChoice1',
+    value: function onUpdateChoice1(event) {
+      this.choice1 = event.target.value;
+      this.choice1ValidationState = '';
+    }
+  }, {
+    key: 'onUpdateChoice1_img',
+    value: function onUpdateChoice1_img(event) {
+      this.choice1_img = event.target.value;
+      this.choice1_imgValidationState = '';
+    }
+  }, {
+    key: 'onUpdateChoice2',
+    value: function onUpdateChoice2(event) {
+      this.choice2 = event.target.value;
+      this.choice2ValidationState = '';
+    }
+  }, {
+    key: 'onUpdateChoice2_img',
+    value: function onUpdateChoice2_img(event) {
+      this.choice2_img = event.target.value;
+      this.choice2_imgValidationState = '';
+    }
+  }, {
+    key: 'onInvalid',
+    value: function onInvalid() {
+      this.questionValidationState = 'has-error';
+      this.helpBlock = 'Something went wrong, Please try again.';
+    }
+  }]);
+
+  return AddQuestionStore;
+})();
+
+exports['default'] = _alt2['default'].createStore(AddQuestionStore);
+module.exports = exports['default'];
+
+},{"../actions/AddQuestionActions":1,"../alt":5}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -800,7 +1172,7 @@ var FooterStore = function FooterStore() {
 exports['default'] = _alt2['default'].createStore(FooterStore);
 module.exports = exports['default'];
 
-},{"../actions/FooterActions":1,"../alt":4}],12:[function(require,module,exports){
+},{"../actions/FooterActions":2,"../alt":5}],15:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -857,7 +1229,7 @@ var HomeStore = (function () {
 exports['default'] = _alt2['default'].createStore(HomeStore);
 module.exports = exports['default'];
 
-},{"../actions/HomeActions":2,"../alt":4}],13:[function(require,module,exports){
+},{"../actions/HomeActions":3,"../alt":5}],16:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -911,4 +1283,4 @@ var NavbarStore = (function () {
 exports['default'] = _alt2['default'].createStore(NavbarStore);
 module.exports = exports['default'];
 
-},{"../actions/NavbarActions":3,"../alt":4}]},{},[9]);
+},{"../actions/NavbarActions":4,"../alt":5}]},{},[11]);

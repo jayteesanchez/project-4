@@ -23,7 +23,7 @@ class AddQuestion extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-
+    console.log(this.state);
     var question = this.state.question.trim();
     var choice1 = this.state.choice1;
     var choice1_img = this.state.choice1_img;
@@ -59,8 +59,8 @@ class AddQuestion extends React.Component {
   render() {
     return (
       <div className='container'>
-        <div className='row flipInX animated'>
-          <div className='col-sm-8'>
+        <div className='row fadeInUp animated'>
+          <div className='col-sm-8 col-sm-offset-2'>
             <div className='panel panel-default'>
               <div className='panel-heading'>Add your Question!</div>
               <div className='panel-body'>
@@ -95,10 +95,7 @@ class AddQuestion extends React.Component {
                            onChange={AddQuestionActions.updateChoice2_img} autoFocus/>
                     <span className='help-block'>{this.state.helpBlock}</span>
                   </div>
-
-
-                  </div>
-                  <button type='submit' className='btn btn-primary'>Submit</button>
+                  <button type='submit' className='btn btn-success'>Submit</button>
                 </form>
               </div>
             </div>

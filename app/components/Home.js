@@ -46,7 +46,7 @@ class Home extends React.Component {
     var allQuestions = currentQuestions.map((question, index) => {
       if(question.display){
       return (
-        <div key={question._id} className='row' onClick={this.changeQuestions.bind(this, question)}>
+        <div key={question._id} className='row fadeInUp animated' onClick={this.changeQuestions.bind(this, question)}>
             <h3 className='text-center'>{question.question}{question.totalVote}</h3>
           <div className={'col-xs-6 col-sm-6 col-md-5 col-md-offset-1'}>
             <div className='thumbnail fadeInUp animated'>
@@ -73,7 +73,7 @@ class Home extends React.Component {
       }
       if(!question.display){
       return (
-      <div key={question._id} alt={ question.index } className='row thumbnail fadeInUp animated' onClick={this.changeQuestions.bind(this, question)}>
+      <div key={question._id} alt={ question.index } className='row thumbnail flipInX animated' onClick={this.changeQuestions.bind(this, question)}>
         <h3 className='text-center'>{question.question}?</h3>
         <h6 className='text-center'>
           <strong>{question.choice1}</strong>
@@ -86,8 +86,8 @@ class Home extends React.Component {
     });
 
     return (
-      <div className='container'>
-        <div className='row fadeInUp animated'>
+      <div className='container fadeInUp animated'>
+        <div className='row'>
           <h6 className='text-center'>Click on a title to expand or shrink a question</h6>
         </div>
           {allQuestions}
