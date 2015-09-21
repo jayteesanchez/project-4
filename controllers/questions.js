@@ -22,12 +22,11 @@ function createQuestion(request, response) {
   console.log('body:',request.body);
 
   var question = new Question({
-  question:             req.body.question,
-  choice1:              req.body.choice1,
-  choice1_img:          req.body.choice1_img,
-  choice2:              req.body.choice2,
-  choice2_img:          req.body.choice2_img,
-  user_id:              req.user.id
+  question:             request.body.question,
+  choice1:              request.body.choice1,
+  choice1_img:          request.body.choice1_img,
+  choice2:              request.body.choice2,
+  choice2_img:          request.body.choice2_img
 });
 
   question.save(function(error) {

@@ -15,9 +15,10 @@ class AddQuestionActions {
   }
 
   addQuestion(question, choice1, choice1_img, choice2, choice2_img) {
+    console.log(question, choice1, choice1_img, choice2, choice2_img)
     $.ajax({
       type: 'POST',
-      url: '/api/questions',
+      url: '/api/questions/',
       data: {
         question:    question,
         choice1:     choice1,

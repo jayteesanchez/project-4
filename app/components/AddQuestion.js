@@ -74,28 +74,28 @@ class AddQuestion extends React.Component {
                   <div className={'form-group ' + this.state.choice1ValidationState}>
                     <label className='control-label'>Choice 1</label>
                     <input type='text' className='form-control' ref='choice1TextField' value={this.state.choice1}
-                           onChange={AddQuestionActions.updateChoice1} autoFocus/>
+                           onChange={AddQuestionActions.updateChoice1} />
                     <span className='help-block'>{this.state.helpBlock}</span>
                   </div>
                   <div className={'form-group ' + this.state.choice1_imgValidationState}>
                     <label className='control-label'>Choice 1 Image URL</label>
                     <input type='text' className='form-control' ref='choice1_imgTextField' value={this.state.choice1_img}
-                           onChange={AddQuestionActions.updateChoice1_img} autoFocus/>
+                           onChange={AddQuestionActions.updateChoice1_img} />
                     <span className='help-block'>{this.state.helpBlock}</span>
                   </div>
                   <div className={'form-group ' + this.state.choice2ValidationState}>
                     <label className='control-label'>Choice 2</label>
                     <input type='text' className='form-control' ref='choice2TextField' value={this.state.choice2}
-                           onChange={AddQuestionActions.updateChoice2} autoFocus/>
+                           onChange={AddQuestionActions.updateChoice2} />
                     <span className='help-block'>{this.state.helpBlock}</span>
                   </div>
                   <div className={'form-group ' + this.state.choice2_imgValidationState}>
                     <label className='control-label'>Choice 2 Image URL</label>
                     <input type='text' className='form-control' ref='choice2_imgTextField' value={this.state.choice2_img}
-                           onChange={AddQuestionActions.updateChoice2_img} autoFocus/>
+                           onChange={AddQuestionActions.updateChoice2_img} />
                     <span className='help-block'>{this.state.helpBlock}</span>
                   </div>
-                  <button type='submit' className='btn btn-success'>Submit</button>
+                  <button type='submit' className='btn btn-success flipInX animated'>Submit</button>
                 </form>
               </div>
             </div>

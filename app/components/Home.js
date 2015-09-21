@@ -43,7 +43,7 @@ class Home extends React.Component {
     }
     var currentQuestions = this.state.questions.questions;
     if (currentQuestions) {
-    var allQuestions = currentQuestions.map((question, index) => {
+    var allQuestions = currentQuestions.reverse().map((question, index) => {
       if(question.display){
       return (
         <div key={question._id} className='row fadeInUp animated' onClick={this.changeQuestions.bind(this, question)}>

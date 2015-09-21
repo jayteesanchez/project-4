@@ -27,9 +27,10 @@ var AddQuestionActions = (function () {
     value: function addQuestion(question, choice1, choice1_img, choice2, choice2_img) {
       var _this = this;
 
+      console.log(question, choice1, choice1_img, choice2, choice2_img);
       $.ajax({
         type: 'POST',
-        url: '/api/questions',
+        url: '/api/questions/',
         data: {
           question: question,
           choice1: choice1,
@@ -330,7 +331,7 @@ var AddQuestion = (function (_React$Component) {
                       'Choice 1'
                     ),
                     _react2['default'].createElement('input', { type: 'text', className: 'form-control', ref: 'choice1TextField', value: this.state.choice1,
-                      onChange: _actionsAddQuestionActions2['default'].updateChoice1, autoFocus: true }),
+                      onChange: _actionsAddQuestionActions2['default'].updateChoice1 }),
                     _react2['default'].createElement(
                       'span',
                       { className: 'help-block' },
@@ -346,7 +347,7 @@ var AddQuestion = (function (_React$Component) {
                       'Choice 1 Image URL'
                     ),
                     _react2['default'].createElement('input', { type: 'text', className: 'form-control', ref: 'choice1_imgTextField', value: this.state.choice1_img,
-                      onChange: _actionsAddQuestionActions2['default'].updateChoice1_img, autoFocus: true }),
+                      onChange: _actionsAddQuestionActions2['default'].updateChoice1_img }),
                     _react2['default'].createElement(
                       'span',
                       { className: 'help-block' },
@@ -362,7 +363,7 @@ var AddQuestion = (function (_React$Component) {
                       'Choice 2'
                     ),
                     _react2['default'].createElement('input', { type: 'text', className: 'form-control', ref: 'choice2TextField', value: this.state.choice2,
-                      onChange: _actionsAddQuestionActions2['default'].updateChoice2, autoFocus: true }),
+                      onChange: _actionsAddQuestionActions2['default'].updateChoice2 }),
                     _react2['default'].createElement(
                       'span',
                       { className: 'help-block' },
@@ -378,7 +379,7 @@ var AddQuestion = (function (_React$Component) {
                       'Choice 2 Image URL'
                     ),
                     _react2['default'].createElement('input', { type: 'text', className: 'form-control', ref: 'choice2_imgTextField', value: this.state.choice2_img,
-                      onChange: _actionsAddQuestionActions2['default'].updateChoice2_img, autoFocus: true }),
+                      onChange: _actionsAddQuestionActions2['default'].updateChoice2_img }),
                     _react2['default'].createElement(
                       'span',
                       { className: 'help-block' },
@@ -387,7 +388,7 @@ var AddQuestion = (function (_React$Component) {
                   ),
                   _react2['default'].createElement(
                     'button',
-                    { type: 'submit', className: 'btn btn-success' },
+                    { type: 'submit', className: 'btn btn-success flipInX animated' },
                     'Submit'
                   )
                 )
@@ -668,7 +669,7 @@ var Home = (function (_React$Component) {
       };
       var currentQuestions = this.state.questions.questions;
       if (currentQuestions) {
-        var allQuestions = currentQuestions.map(function (question, index) {
+        var allQuestions = currentQuestions.reverse().map(function (question, index) {
           if (question.display) {
             return _react2['default'].createElement(
               'div',
