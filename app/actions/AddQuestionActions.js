@@ -14,17 +14,17 @@ class AddQuestionActions {
     );
   }
 
-  addQuestion(question, choice1, choice1_img, choice2, choice2_img) {
-    console.log(question, choice1, choice1_img, choice2, choice2_img)
+  addQuestion(q, c1, c1_img, c2, c2_img) {
+    console.log(q, c1, c1_img, c2, c2_img)
     $.ajax({
       type: 'POST',
       url: '/api/questions/',
       data: {
-        question:    question,
-        choice1:     choice1,
-        choice1_img: choice1_img,
-        choice2:     choice2,
-        choice2_img: choice2_img
+        question:    q,
+        choice1:     c1,
+        choice1_img: c1_img,
+        choice2:     c2,
+        choice2_img: c2_img
       }
     })
       .done((data) => {

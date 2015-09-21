@@ -24,19 +24,19 @@ var AddQuestionActions = (function () {
 
   _createClass(AddQuestionActions, [{
     key: 'addQuestion',
-    value: function addQuestion(question, choice1, choice1_img, choice2, choice2_img) {
+    value: function addQuestion(q, c1, c1_img, c2, c2_img) {
       var _this = this;
 
-      console.log(question, choice1, choice1_img, choice2, choice2_img);
+      console.log(q, c1, c1_img, c2, c2_img);
       $.ajax({
         type: 'POST',
         url: '/api/questions/',
         data: {
-          question: question,
-          choice1: choice1,
-          choice1_img: choice1_img,
-          choice2: choice2,
-          choice2_img: choice2_img
+          question: q,
+          choice1: c1,
+          choice1_img: c1_img,
+          choice2: c2,
+          choice2_img: c2_img
         }
       }).done(function (data) {
         _this.actions.addQuestionSuccess(data.message);
@@ -117,7 +117,7 @@ var HomeActions = (function () {
       $.ajax({
         type: 'PUT',
         url: '/api/questions/' + id,
-        data: { choice: choice + 1 }
+        data: { choice: choice++ }
       }).done(function () {
         _this2.actions.getQuestions();
       }).fail(function (jqXhr) {
@@ -249,35 +249,35 @@ var AddQuestion = (function (_React$Component) {
     value: function handleSubmit(event) {
       event.preventDefault();
       console.log(this.state);
-      var question = this.state.question.trim();
-      var choice1 = this.state.choice1;
-      var choice1_img = this.state.choice1_img;
-      var choice2 = this.state.choice2;
-      var choice2_img = this.state.choice2_img;
+      var q = this.state.question.trim();
+      var c1 = this.state.choice1;
+      var c1_img = this.state.choice1_img;
+      var c2 = this.state.choice2;
+      var c2_img = this.state.choice2_img;
 
-      if (!question) {
+      if (!q) {
         _actionsAddQuestionActions2['default'].invalid();
         this.refs.questionTextField.getDOMNode().focus();
       }
 
-      if (!choice1) {
+      if (!c1) {
         _actionsAddQuestionActions2['default'].invalid();
       }
 
-      if (!choice1_img) {
+      if (!c1_img) {
         _actionsAddQuestionActions2['default'].invalid();
       }
 
-      if (!choice2) {
+      if (!c2) {
         _actionsAddQuestionActions2['default'].invalid();
       }
 
-      if (!choice2_img) {
+      if (!c2_img) {
         _actionsAddQuestionActions2['default'].invalid();
       }
 
-      if (question && choice1 && choice1_img && choice2 && choice2_img) {
-        _actionsAddQuestionActions2['default'].addQuestion(question, choice1, choice1_img, choice2, choice2_img);
+      if (q && c1 && c1_img && c2 && c2_img) {
+        _actionsAddQuestionActions2['default'].addQuestion(q, c1, c1_img, c2, c2_img);
       }
     }
   }, {

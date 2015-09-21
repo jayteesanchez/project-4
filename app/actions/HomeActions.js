@@ -24,7 +24,7 @@ class HomeActions {
     $.ajax({
       type: 'PUT',
       url: '/api/questions/' + id,
-      data: { choice: choice + 1 }
+      data: { choice: choice++ }
     })
       .done(() => {
         this.actions.getQuestions();
