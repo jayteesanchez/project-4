@@ -28,8 +28,7 @@ class HomeActions {
       url: '/api/questions/' + id,
       data: { votes_choice_1: count + 1}
     })
-      .done((req, res) => {
-        console.log(req, res);
+      .done(() => {
         this.actions.getQuestions();
       })
       .fail((jqXhr) => {
@@ -43,8 +42,7 @@ class HomeActions {
       url: '/api/questions/' + id,
       data: { votes_choice_2: count + 1}
     })
-      .done((res) => {
-        console.log(req, res);
+      .done(() => {
         this.actions.getQuestions();
       })
       .fail((jqXhr) => {
@@ -88,8 +86,7 @@ class HomeActions {
       type: 'DELETE',
       url: '/api/questions/' + id
     })
-      .done((res) => {
-        console.log(res);
+      .done(() => {
         this.actions.getQuestions();
       })
       .fail((jqXhr) => {

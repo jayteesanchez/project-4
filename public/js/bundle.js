@@ -118,8 +118,7 @@ var HomeActions = (function () {
         type: 'PUT',
         url: '/api/questions/' + id,
         data: { votes_choice_1: count + 1 }
-      }).done(function (req, res) {
-        console.log(req, res);
+      }).done(function () {
         _this2.actions.getQuestions();
       }).fail(function (jqXhr) {
         _this2.actions.vote1Fail(jqXhr.responseJSON.message);
@@ -134,8 +133,7 @@ var HomeActions = (function () {
         type: 'PUT',
         url: '/api/questions/' + id,
         data: { votes_choice_2: count + 1 }
-      }).done(function (res) {
-        console.log(req, res);
+      }).done(function () {
         _this3.actions.getQuestions();
       }).fail(function (jqXhr) {
         _this3.actions.vote2Fail(jqXhr.responseJSON.message);
@@ -182,8 +180,7 @@ var HomeActions = (function () {
       $.ajax({
         type: 'DELETE',
         url: '/api/questions/' + id
-      }).done(function (res) {
-        console.log(res);
+      }).done(function () {
         _this6.actions.getQuestions();
       }).fail(function (jqXhr) {
         _this6.actions.removeQuestionsFail(jqXhr.responseJSON.message);
