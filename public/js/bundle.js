@@ -117,7 +117,7 @@ var HomeActions = (function () {
       $.ajax({
         type: 'PUT',
         url: '/api/questions/' + id,
-        data: { choice: choice++ }
+        data: { choice: choice + 1 }
       }).done(function () {
         _this2.actions.getQuestions();
       }).fail(function (jqXhr) {
