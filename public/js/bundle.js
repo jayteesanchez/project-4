@@ -95,7 +95,7 @@ var HomeActions = (function () {
   function HomeActions() {
     _classCallCheck(this, HomeActions);
 
-    this.generateActions('getQuestionsSuccess', 'getQuestionsFail', 'voteFail', 'changeDisplayFail');
+    this.generateActions('getQuestionsSuccess', 'getQuestionsFail', 'vote1Fail', 'vote2Fail', 'changeDisplayFail');
   }
 
   _createClass(HomeActions, [{
@@ -110,33 +110,50 @@ var HomeActions = (function () {
       });
     }
   }, {
-    key: 'vote',
-    value: function vote(choice, id) {
+    key: 'vote1',
+    value: function vote1(id, count) {
       var _this2 = this;
 
       $.ajax({
         type: 'PUT',
         url: '/api/questions/' + id,
-        data: { choice: choice + 1 }
-      }).done(function () {
+        data: { votes_choice_1: count + 1 }
+      }).done(function (req, res) {
+        console.log(req, res);
         _this2.actions.getQuestions();
       }).fail(function (jqXhr) {
         _this2.actions.voteFail(jqXhr.responseJSON.message);
       });
     }
   }, {
+    key: 'vote2',
+    value: function vote2(id, count) {
+      var _this3 = this;
+
+      $.ajax({
+        type: 'PUT',
+        url: '/api/questions/' + id,
+        data: { votes_choice_2: count + 1 }
+      }).done(function (req, res) {
+        console.log(req, res);
+        _this3.actions.getQuestions();
+      }).fail(function (jqXhr) {
+        _this3.actions.voteFail(jqXhr.responseJSON.message);
+      });
+    }
+  }, {
     key: 'changeDisplay',
     value: function changeDisplay(id, change) {
-      var _this3 = this;
+      var _this4 = this;
 
       $.ajax({
         type: 'PUT',
         url: '/api/questions/' + id,
         data: { display: change }
       }).done(function () {
-        _this3.actions.getQuestions();
+        _this4.actions.getQuestions();
       }).fail(function (jqXhr) {
-        _this3.actions.voteFail(jqXhr.responseJSON.message);
+        _this4.actions.voteFail(jqXhr.responseJSON.message);
       });
     }
   }]);
@@ -646,13 +663,35 @@ var Home = (function (_React$Component) {
   }, {
     key: 'handleClick',
     value: function handleClick(question, event) {
+      //handles the events for hiding hint display
+      if (event.target.id === 'clickDisplay') {
+        document.getElementById('hintDisplay').style.display = '';
+        document.getElementById('clickDisplay').style.display = 'none';
+      } else {
+        document.getElementById('hintDisplay').style.display = 'none';
+        document.getElementById('clickDisplay').style.display = '';
+      }
+      //handles the voting Action
       var choice = event.target.alt;
       var id = question._id;
-      _actionsHomeActions2['default'].vote(choice, id);
+
+      if (choice === 'votes_choice_1') {
+        var count = question.votes_choice_1;
+        _actionsHomeActions2['default'].vote1(id, count);
+      }
+      if (choice === 'votes_choice_2') {
+        var count = question.votes_choice_2;
+        _actionsHomeActions2['default'].vote2(id, count);
+      }
+      var count = 0;
     }
+  }, {
+    key: 'downVoting',
+    value: function downVoting(question, event) {}
   }, {
     key: 'changeQuestions',
     value: function changeQuestions(question, event) {
+      //handles the question reveal/hide clicks
       var change = true;
       if (question.display) var change = false;
       var id = question._id;
@@ -664,9 +703,14 @@ var Home = (function (_React$Component) {
       var _this = this;
 
       var resizeImg = {
-        width: '300px',
-        height: '300px'
+        width: '275px',
+        height: '275px'
       };
+
+      var hidden = {
+        display: 'none'
+      };
+
       var currentQuestions = this.state.questions.questions;
       if (currentQuestions) {
         var allQuestions = currentQuestions.reverse().map(function (question, index) {
@@ -678,7 +722,7 @@ var Home = (function (_React$Component) {
                 'h3',
                 { className: 'text-center' },
                 question.question,
-                question.totalVote
+                '?'
               ),
               _react2['default'].createElement(
                 'div',
@@ -700,6 +744,24 @@ var Home = (function (_React$Component) {
                           'strong',
                           null,
                           question.choice1
+                        )
+                      ),
+                      _react2['default'].createElement(
+                        'li',
+                        null,
+                        _react2['default'].createElement(
+                          'strong',
+                          null,
+                          'Votes for:'
+                        )
+                      ),
+                      _react2['default'].createElement(
+                        'li',
+                        null,
+                        _react2['default'].createElement(
+                          'strong',
+                          null,
+                          question.votes_choice_1
                         )
                       )
                     )
@@ -727,9 +789,42 @@ var Home = (function (_React$Component) {
                           null,
                           question.choice2
                         )
+                      ),
+                      _react2['default'].createElement(
+                        'li',
+                        null,
+                        _react2['default'].createElement(
+                          'strong',
+                          null,
+                          'Votes for:'
+                        )
+                      ),
+                      _react2['default'].createElement(
+                        'li',
+                        null,
+                        _react2['default'].createElement(
+                          'strong',
+                          null,
+                          question.votes_choice_2
+                        )
                       )
                     )
                   )
+                )
+              ),
+              _react2['default'].createElement(
+                'h3',
+                { className: 'text-center' },
+                _react2['default'].createElement(
+                  'button',
+                  { className: 'btn btn-default btn-sm' },
+                  _react2['default'].createElement('span', { className: 'glyphicon glyphicon-thumbs-down' }),
+                  ' Unlike'
+                ),
+                _react2['default'].createElement(
+                  'span',
+                  null,
+                  question.downVote
                 )
               )
             );
@@ -761,6 +856,18 @@ var Home = (function (_React$Component) {
                   'strong',
                   null,
                   question.choice2
+                ),
+                _react2['default'].createElement('br', null),
+                _react2['default'].createElement(
+                  'text',
+                  null,
+                  'Number of times voted:'
+                ),
+                _react2['default'].createElement('br', null),
+                _react2['default'].createElement(
+                  'strong',
+                  null,
+                  question.votes_choice_1 + question.votes_choice_2
                 )
               )
             );
@@ -775,8 +882,27 @@ var Home = (function (_React$Component) {
             { className: 'row' },
             _react2['default'].createElement(
               'h6',
-              { className: 'text-center' },
-              'Click on a title to expand or shrink a question'
+              { className: 'text-center fadeIn animated', id: 'clickDisplay', onClick: this.handleClick.bind(event, this.id) },
+              'Click for how to play...'
+            ),
+            _react2['default'].createElement(
+              'h6',
+              { className: 'text-center fadeIn animated', style: hidden, id: 'hintDisplay', onClick: this.handleClick.bind(event, this.id) },
+              _react2['default'].createElement(
+                'p',
+                null,
+                'Click on a title to expand or shrink a question, '
+              ),
+              _react2['default'].createElement(
+                'p',
+                null,
+                'DownVote for Bad Questions - a total of 4 means deletion, '
+              ),
+              _react2['default'].createElement(
+                'p',
+                null,
+                'Have fun!'
+              )
             )
           ),
           allQuestions

@@ -5,7 +5,8 @@ class HomeActions {
     this.generateActions(
       'getQuestionsSuccess',
       'getQuestionsFail',
-      'voteFail',
+      'vote1Fail',
+      'vote2Fail',
       'changeDisplayFail'
     );
   }
@@ -20,13 +21,29 @@ class HomeActions {
       });
   }
 
-  vote(choice, id) {
+  vote1(id, count) {
     $.ajax({
       type: 'PUT',
       url: '/api/questions/' + id,
-      data: { choice: choice + 1}
+      data: { votes_choice_1: count + 1}
     })
-      .done(() => {
+      .done((req, res) => {
+        console.log(req, res);
+        this.actions.getQuestions();
+      })
+      .fail((jqXhr) => {
+        this.actions.voteFail(jqXhr.responseJSON.message);
+      });
+  }
+
+  vote2(id, count) {
+    $.ajax({
+      type: 'PUT',
+      url: '/api/questions/' + id,
+      data: { votes_choice_2: count + 1}
+    })
+      .done((req, res) => {
+        console.log(req, res);
         this.actions.getQuestions();
       })
       .fail((jqXhr) => {
