@@ -22,6 +22,14 @@ class HomeStore {
   onChangeDisplayFail(errorMessage){
     toastr.error(errorMessage);
   }
+
+  onDownVoteFail(errorMessage){
+    toastr.error(errorMessage);
+  }
+
+  onRemoveQuestionFail(errorMessage){
+    toastr.error(errorMessage);
+  }
 }
 
 export default alt.createStore(HomeStore);

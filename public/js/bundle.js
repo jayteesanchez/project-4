@@ -95,7 +95,7 @@ var HomeActions = (function () {
   function HomeActions() {
     _classCallCheck(this, HomeActions);
 
-    this.generateActions('getQuestionsSuccess', 'getQuestionsFail', 'vote1Fail', 'vote2Fail', 'changeDisplayFail');
+    this.generateActions('getQuestionsSuccess', 'getQuestionsFail', 'vote1Fail', 'vote2Fail', 'changeDisplayFail', 'downVoteFail');
   }
 
   _createClass(HomeActions, [{
@@ -122,7 +122,7 @@ var HomeActions = (function () {
         console.log(req, res);
         _this2.actions.getQuestions();
       }).fail(function (jqXhr) {
-        _this2.actions.voteFail(jqXhr.responseJSON.message);
+        _this2.actions.vote1Fail(jqXhr.responseJSON.message);
       });
     }
   }, {
@@ -134,11 +134,11 @@ var HomeActions = (function () {
         type: 'PUT',
         url: '/api/questions/' + id,
         data: { votes_choice_2: count + 1 }
-      }).done(function (req, res) {
+      }).done(function (res) {
         console.log(req, res);
         _this3.actions.getQuestions();
       }).fail(function (jqXhr) {
-        _this3.actions.voteFail(jqXhr.responseJSON.message);
+        _this3.actions.vote2Fail(jqXhr.responseJSON.message);
       });
     }
   }, {
@@ -153,7 +153,40 @@ var HomeActions = (function () {
       }).done(function () {
         _this4.actions.getQuestions();
       }).fail(function (jqXhr) {
-        _this4.actions.voteFail(jqXhr.responseJSON.message);
+        _this4.actions.changeDisplayFail(jqXhr.responseJSON.message);
+      });
+    }
+  }, {
+    key: 'downVote',
+    value: function downVote(id, count) {
+      var _this5 = this;
+
+      console.log(id, count);
+      $.ajax({
+        type: 'PUT',
+        url: '/api/questions/' + id,
+        data: { downVote: count + 1 }
+      }).done(function (res) {
+        console.log(res);
+        _this5.actions.getQuestions();
+      }).fail(function (jqXhr) {
+        _this5.actions.downVoteFail(jqXhr.responseJSON.message);
+      });
+    }
+  }, {
+    key: 'removeQuestion',
+    value: function removeQuestion(id) {
+      var _this6 = this;
+
+      console.log(id);
+      $.ajax({
+        type: 'DELETE',
+        url: '/api/questions/' + id
+      }).done(function (res) {
+        console.log(res);
+        _this6.actions.getQuestions();
+      }).fail(function (jqXhr) {
+        _this6.actions.removeQuestionsFail(jqXhr.responseJSON.message);
       });
     }
   }]);
@@ -687,7 +720,15 @@ var Home = (function (_React$Component) {
     }
   }, {
     key: 'downVoting',
-    value: function downVoting(question, event) {}
+    value: function downVoting(question, event) {
+      //handles down voting logic
+      var id = question._id;
+      var count = question.downVote;
+      if (count === 4) {
+        return _actionsHomeActions2['default'].removeQuestion(id);
+      }
+      return _actionsHomeActions2['default'].downVote(id, count);
+    }
   }, {
     key: 'changeQuestions',
     value: function changeQuestions(question, event) {
@@ -717,10 +758,10 @@ var Home = (function (_React$Component) {
           if (question.display) {
             return _react2['default'].createElement(
               'div',
-              { key: question._id, className: 'row fadeInUp animated', onClick: _this.changeQuestions.bind(_this, question) },
+              { key: question._id, className: 'row fadeInUp animated' },
               _react2['default'].createElement(
                 'h3',
-                { className: 'text-center' },
+                { className: 'text-center', onClick: _this.changeQuestions.bind(_this, question) },
                 question.question,
                 '?'
               ),
@@ -817,15 +858,12 @@ var Home = (function (_React$Component) {
                 { className: 'text-center' },
                 _react2['default'].createElement(
                   'button',
-                  { className: 'btn btn-default btn-sm' },
+                  { className: 'btn btn-default btn-sm', onClick: _this.downVoting.bind(event, question) },
                   _react2['default'].createElement('span', { className: 'glyphicon glyphicon-thumbs-down' }),
-                  ' Unlike'
-                ),
-                _react2['default'].createElement(
-                  'span',
-                  null,
+                  ' ',
                   question.downVote
-                )
+                ),
+                _react2['default'].createElement('span', null)
               )
             );
           }
@@ -1346,6 +1384,16 @@ var HomeStore = (function () {
   }, {
     key: 'onChangeDisplayFail',
     value: function onChangeDisplayFail(errorMessage) {
+      toastr.error(errorMessage);
+    }
+  }, {
+    key: 'onDownVoteFail',
+    value: function onDownVoteFail(errorMessage) {
+      toastr.error(errorMessage);
+    }
+  }, {
+    key: 'onRemoveQuestionFail',
+    value: function onRemoveQuestionFail(errorMessage) {
       toastr.error(errorMessage);
     }
   }]);

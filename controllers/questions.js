@@ -60,6 +60,7 @@ function updateQuestion(request, response) {
     if(request.body.choice_2_img)       question.choice_2_img   = request.body.choice_2_img;
     if(request.body.votes_choice_1)     question.votes_choice_1 = request.body.votes_choice_1;
     if(request.body.votes_choice_2)     question.votes_choice_2 = request.body.votes_choice_2;
+    if(request.body.downVote)           question.downVote       = request.body.downVote;
     if(request.body.display)            question.display        = request.body.display;
 
     question.save(function(error) {

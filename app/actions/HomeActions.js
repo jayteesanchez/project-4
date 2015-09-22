@@ -7,7 +7,8 @@ class HomeActions {
       'getQuestionsFail',
       'vote1Fail',
       'vote2Fail',
-      'changeDisplayFail'
+      'changeDisplayFail',
+      'downVoteFail'
     );
   }
 
@@ -32,7 +33,7 @@ class HomeActions {
         this.actions.getQuestions();
       })
       .fail((jqXhr) => {
-        this.actions.voteFail(jqXhr.responseJSON.message);
+        this.actions.vote1Fail(jqXhr.responseJSON.message);
       });
   }
 
@@ -42,12 +43,12 @@ class HomeActions {
       url: '/api/questions/' + id,
       data: { votes_choice_2: count + 1}
     })
-      .done((req, res) => {
+      .done((res) => {
         console.log(req, res);
         this.actions.getQuestions();
       })
       .fail((jqXhr) => {
-        this.actions.voteFail(jqXhr.responseJSON.message);
+        this.actions.vote2Fail(jqXhr.responseJSON.message);
       });
   }
 
@@ -61,7 +62,38 @@ class HomeActions {
         this.actions.getQuestions();
       })
       .fail((jqXhr) => {
-        this.actions.voteFail(jqXhr.responseJSON.message);
+        this.actions.changeDisplayFail(jqXhr.responseJSON.message);
+      });
+  }
+
+  downVote(id, count) {
+    console.log(id, count);
+    $.ajax({
+      type: 'PUT',
+      url: '/api/questions/' + id,
+      data: { downVote: count + 1}
+    })
+      .done((res) => {
+        console.log(res);
+        this.actions.getQuestions();
+      })
+      .fail((jqXhr) => {
+        this.actions.downVoteFail(jqXhr.responseJSON.message);
+      });
+  }
+
+  removeQuestion(id) {
+    console.log(id);
+    $.ajax({
+      type: 'DELETE',
+      url: '/api/questions/' + id
+    })
+      .done((res) => {
+        console.log(res);
+        this.actions.getQuestions();
+      })
+      .fail((jqXhr) => {
+        this.actions.removeQuestionsFail(jqXhr.responseJSON.message);
       });
   }
 }

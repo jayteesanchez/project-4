@@ -48,7 +48,13 @@ class Home extends React.Component {
     }
 
   downVoting(question, event) {
-
+    //handles down voting logic
+    var id = question._id;
+    var count = question.downVote;
+    if(count === 4){
+    return HomeActions.removeQuestion(id);
+    }
+    return HomeActions.downVote(id, count);
   }
 
   changeQuestions(question, event) {
@@ -74,8 +80,8 @@ class Home extends React.Component {
     var allQuestions = currentQuestions.reverse().map((question, index) => {
       if(question.display){
       return (
-        <div key={question._id} className='row fadeInUp animated' onClick={this.changeQuestions.bind(this, question)}>
-            <h3 className='text-center'>
+        <div key={question._id} className='row fadeInUp animated'>
+            <h3 className='text-center' onClick={this.changeQuestions.bind(this, question)}>
               {question.question}?
             </h3>
           <div className={'col-xs-6 col-sm-6 col-md-5 col-md-offset-1'}>
@@ -103,10 +109,11 @@ class Home extends React.Component {
               </div>
             </div>
             <h3 className='text-center'>
-              <button className="btn btn-default btn-sm">
-                <span className="glyphicon glyphicon-thumbs-down"></span> Unlike
+              <button className="btn btn-default btn-sm" onClick={this.downVoting.bind(event, question)}>
+                <span className="glyphicon glyphicon-thumbs-down"></span>
+                &nbsp;{question.downVote}
               </button>
-              <span>{question.downVote}</span>
+              <span></span>
             </h3>
         </div>
       );
