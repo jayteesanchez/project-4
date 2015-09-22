@@ -50,7 +50,10 @@ class HomeActions {
       });
   }
 
-  changeDisplay(id, change) {
+  changeDisplay(question) {
+    var change = true;
+    var id = question._id;
+    if(question.display) var change = false;
     $.ajax({
       type: 'PUT',
       url: '/api/questions/' + id,

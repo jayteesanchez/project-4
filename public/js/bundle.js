@@ -19,7 +19,7 @@ var AddQuestionActions = (function () {
   function AddQuestionActions() {
     _classCallCheck(this, AddQuestionActions);
 
-    this.generateActions('addQuestionSuccess', 'addQuestionFail', 'updateQuestion', 'updateChoice1', 'updateChoice1_img', 'updateChoice2', 'updateChoice2_img', 'invalid');
+    this.generateActions('addQuestionSuccess', 'addQuestionFail', 'updateQuestion', 'updateChoice1', 'updateChoice1_img', 'updateChoice2', 'updateChoice2_img', 'invalidQuestion', 'invalidChoice1', 'invalidChoice1_img', 'invalidChoice2', 'invalidChoice2_img');
   }
 
   _createClass(AddQuestionActions, [{
@@ -39,6 +39,7 @@ var AddQuestionActions = (function () {
           choice2_img: c2_img
         }
       }).done(function (data) {
+        console.log(data);
         _this.actions.addQuestionSuccess(data.message);
       }).fail(function (jqXhr) {
         _this.actions.addQuestionFail(jqXhr.responseJSON.message);
@@ -141,9 +142,12 @@ var HomeActions = (function () {
     }
   }, {
     key: 'changeDisplay',
-    value: function changeDisplay(id, change) {
+    value: function changeDisplay(question) {
       var _this4 = this;
 
+      var change = true;
+      var id = question._id;
+      if (question.display) var change = false;
       $.ajax({
         type: 'PUT',
         url: '/api/questions/' + id,
@@ -295,7 +299,6 @@ var AddQuestion = (function (_React$Component) {
     key: 'handleSubmit',
     value: function handleSubmit(event) {
       event.preventDefault();
-      console.log(this.state);
       var q = this.state.question.trim();
       var c1 = this.state.choice1;
       var c1_img = this.state.choice1_img;
@@ -303,24 +306,24 @@ var AddQuestion = (function (_React$Component) {
       var c2_img = this.state.choice2_img;
 
       if (!q) {
-        _actionsAddQuestionActions2['default'].invalid();
+        _actionsAddQuestionActions2['default'].invalidQuestion();
         this.refs.questionTextField.getDOMNode().focus();
       }
 
       if (!c1) {
-        _actionsAddQuestionActions2['default'].invalid();
+        _actionsAddQuestionActions2['default'].invalidChoice1();
       }
 
       if (!c1_img) {
-        _actionsAddQuestionActions2['default'].invalid();
+        _actionsAddQuestionActions2['default'].invalidChoice1_img();
       }
 
       if (!c2) {
-        _actionsAddQuestionActions2['default'].invalid();
+        _actionsAddQuestionActions2['default'].invalidChoice2();
       }
 
       if (!c2_img) {
-        _actionsAddQuestionActions2['default'].invalid();
+        _actionsAddQuestionActions2['default'].invalidChoice2_img();
       }
 
       if (q && c1 && c1_img && c2 && c2_img) {
@@ -708,10 +711,12 @@ var Home = (function (_React$Component) {
       if (choice === 'votes_choice_1') {
         var count = question.votes_choice_1;
         _actionsHomeActions2['default'].vote1(id, count);
+        _actionsHomeActions2['default'].changeDisplay(question);
       }
       if (choice === 'votes_choice_2') {
         var count = question.votes_choice_2;
         _actionsHomeActions2['default'].vote2(id, count);
+        _actionsHomeActions2['default'].changeDisplay(question);
       }
       var count = 0;
     }
@@ -724,16 +729,16 @@ var Home = (function (_React$Component) {
       if (count === 4) {
         return _actionsHomeActions2['default'].removeQuestion(id);
       }
-      return _actionsHomeActions2['default'].downVote(id, count);
+      _actionsHomeActions2['default'].downVote(id, count);
+      _actionsHomeActions2['default'].changeDisplay(question);
     }
   }, {
     key: 'changeQuestions',
     value: function changeQuestions(question, event) {
       //handles the question reveal/hide clicks
       var change = true;
-      if (question.display) var change = false;
       var id = question._id;
-      _actionsHomeActions2['default'].changeDisplay(id, change);
+      _actionsHomeActions2['default'].changeDisplay(question);
     }
   }, {
     key: 'render',
@@ -918,7 +923,7 @@ var Home = (function (_React$Component) {
             _react2['default'].createElement(
               'h6',
               { className: 'text-center fadeIn animated', id: 'clickDisplay', onClick: this.handleClick.bind(event, this.id) },
-              'Click for how to play...'
+              'CLICK to learn how to play...'
             ),
             _react2['default'].createElement(
               'h6',
@@ -926,12 +931,18 @@ var Home = (function (_React$Component) {
               _react2['default'].createElement(
                 'p',
                 null,
-                'Click on a title to expand or shrink a question, '
+                'CLICK on a TITLE to expand or shrink a Question, '
               ),
               _react2['default'].createElement(
                 'p',
                 null,
-                'DownVote for Bad Questions - a total of 4 means deletion, '
+                'DOWNVOTE for BAD Questions - a total of ',
+                _react2['default'].createElement(
+                  'strong',
+                  null,
+                  '5'
+                ),
+                ' means DELETION, '
               ),
               _react2['default'].createElement(
                 'p',
@@ -1240,7 +1251,6 @@ var AddQuestionStore = (function () {
     this.choice2 = '';
     this.choice2_img = '';
     this.helpBlock = '';
-    this.askValidationState = '';
     this.questionValidationState = '';
     this.choice1ValidationState = '';
     this.choice1_imgValidationState = '';
@@ -1251,13 +1261,24 @@ var AddQuestionStore = (function () {
   _createClass(AddQuestionStore, [{
     key: 'onAddQuestionSuccess',
     value: function onAddQuestionSuccess(successMessage) {
-      this.askValidationState = 'has-success';
-      this.helpBlock = successMessage;
+      this.question = '';
+      this.choice1 = '';
+      this.choice1_img = '';
+      this.choice2 = '';
+      this.choice2_img = '';
+      this.helpBlock = '';
+      this.questionValidationState = '';
+      this.choice1ValidationState = '';
+      this.choice1_imgValidationState = '';
+      this.choice2ValidationState = '';
+      this.choice2_imgValidationState = '';
+      this.questionValidationState = 'has-success';
+      toastr.success('You did it! Go Home and Vote or Add Another Question!');
     }
   }, {
     key: 'onAddQuestionFail',
     value: function onAddQuestionFail(errorMessage) {
-      this.askValidationState = 'has-error';
+      this.questionValidationState = 'has-error';
       this.helpBlock = errorMessage;
     }
   }, {
@@ -1292,10 +1313,34 @@ var AddQuestionStore = (function () {
       this.choice2_imgValidationState = '';
     }
   }, {
-    key: 'onInvalid',
-    value: function onInvalid() {
+    key: 'onInvalidQuestion',
+    value: function onInvalidQuestion() {
       this.questionValidationState = 'has-error';
-      this.helpBlock = 'Something went wrong, Please try again.';
+      this.helpBlock = 'Pick a better Question?';
+    }
+  }, {
+    key: 'onInvalidChoice1',
+    value: function onInvalidChoice1() {
+      this.choice1ValidationState = 'has-error';
+      this.helpBlock = 'Pick a better Choice?';
+    }
+  }, {
+    key: 'onInvalidChoice1_img',
+    value: function onInvalidChoice1_img() {
+      this.choice1_imgValidationState = 'has-error';
+      this.helpBlock = 'You can find an image online right?';
+    }
+  }, {
+    key: 'onInvalidChoice2',
+    value: function onInvalidChoice2() {
+      this.choice2ValidationState = 'has-error';
+      this.helpBlock = 'You got one good choice, you can think of 2.';
+    }
+  }, {
+    key: 'onInvalidChoice2_img',
+    value: function onInvalidChoice2_img() {
+      this.choice2_imgValidationState = 'has-error';
+      this.helpBlock = 'Almost, just one more picture...';
     }
   }]);
 

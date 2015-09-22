@@ -10,7 +10,6 @@ class AddQuestionStore {
     this.choice2 = '';
     this.choice2_img = '';
     this.helpBlock = '';
-    this.askValidationState = '';
     this.questionValidationState = '';
     this.choice1ValidationState = '';
     this.choice1_imgValidationState = '';
@@ -19,12 +18,23 @@ class AddQuestionStore {
   }
 
   onAddQuestionSuccess(successMessage) {
-    this.askValidationState = 'has-success';
-    this.helpBlock = successMessage;
+    this.question = '';
+    this.choice1 = '';
+    this.choice1_img = '';
+    this.choice2 = '';
+    this.choice2_img = '';
+    this.helpBlock = '';
+    this.questionValidationState = '';
+    this.choice1ValidationState = '';
+    this.choice1_imgValidationState = '';
+    this.choice2ValidationState = '';
+    this.choice2_imgValidationState = '';
+    this.questionValidationState = 'has-success';
+    toastr.success('You did it! Go Home and Vote or Add Another Question!');
   }
 
   onAddQuestionFail(errorMessage) {
-    this.askValidationState = 'has-error';
+    this.questionValidationState = 'has-error';
     this.helpBlock = errorMessage;
   }
 
@@ -54,9 +64,29 @@ class AddQuestionStore {
     this.choice2_imgValidationState = '';
   }
 
-  onInvalid() {
+  onInvalidQuestion() {
     this.questionValidationState = 'has-error';
-    this.helpBlock = 'Something went wrong, Please try again.';
+    this.helpBlock = 'Pick a better Question?';
+  }
+
+  onInvalidChoice1() {
+    this.choice1ValidationState = 'has-error';
+    this.helpBlock = 'Pick a better Choice?';
+  }
+
+  onInvalidChoice1_img() {
+    this.choice1_imgValidationState = 'has-error';
+    this.helpBlock = 'You can find an image online right?';
+  }
+
+  onInvalidChoice2() {
+    this.choice2ValidationState = 'has-error';
+    this.helpBlock = 'You got one good choice, you can think of 2.';
+  }
+
+  onInvalidChoice2_img() {
+    this.choice2_imgValidationState = 'has-error';
+    this.helpBlock = 'Almost, just one more picture...';
   }
 }
 

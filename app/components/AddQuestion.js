@@ -23,7 +23,6 @@ class AddQuestion extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(this.state);
     var q = this.state.question.trim();
     var c1 = this.state.choice1;
     var c1_img = this.state.choice1_img;
@@ -31,24 +30,24 @@ class AddQuestion extends React.Component {
     var c2_img = this.state.choice2_img;
 
     if (!q) {
-      AddQuestionActions.invalid();
+      AddQuestionActions.invalidQuestion();
       this.refs.questionTextField.getDOMNode().focus();
     }
 
     if (!c1) {
-      AddQuestionActions.invalid();
+      AddQuestionActions.invalidChoice1();
     }
 
     if (!c1_img) {
-      AddQuestionActions.invalid();
+      AddQuestionActions.invalidChoice1_img();
     }
 
     if (!c2) {
-      AddQuestionActions.invalid();
+      AddQuestionActions.invalidChoice2();
     }
 
     if (!c2_img) {
-      AddQuestionActions.invalid();
+      AddQuestionActions.invalidChoice2_img();
     }
 
     if (q && c1 && c1_img && c2 && c2_img) {

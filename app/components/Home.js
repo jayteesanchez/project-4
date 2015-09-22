@@ -39,10 +39,12 @@ class Home extends React.Component {
     if (choice === 'votes_choice_1'){
     var count = question.votes_choice_1;
     HomeActions.vote1(id, count);
+    HomeActions.changeDisplay(question);
     }
     if (choice === 'votes_choice_2'){
     var count = question.votes_choice_2;
     HomeActions.vote2(id, count);
+    HomeActions.changeDisplay(question);
     }
     var count = 0;
     }
@@ -54,15 +56,15 @@ class Home extends React.Component {
     if(count === 4){
     return HomeActions.removeQuestion(id);
     }
-    return HomeActions.downVote(id, count);
+    HomeActions.downVote(id, count);
+    HomeActions.changeDisplay(question);
   }
 
   changeQuestions(question, event) {
   //handles the question reveal/hide clicks
     var change = true;
-    if(question.display) var change = false;
     var id = question._id;
-    HomeActions.changeDisplay(id, change);
+    HomeActions.changeDisplay(question);
   }
 
   render() {
@@ -137,10 +139,10 @@ class Home extends React.Component {
     return (
       <div className='container fadeInUp animated'>
         <div className='row'>
-          <h6 className='text-center fadeIn animated' id='clickDisplay' onClick={this.handleClick.bind(event, this.id)}>Click for how to play...</h6>
+          <h6 className='text-center fadeIn animated' id='clickDisplay' onClick={this.handleClick.bind(event, this.id)}>CLICK to learn how to play...</h6>
           <h6 className='text-center fadeIn animated' style={hidden} id='hintDisplay' onClick={this.handleClick.bind(event, this.id)}>
-          <p>Click on a title to expand or shrink a question, </p>
-          <p>DownVote for Bad Questions - a total of 4 means deletion, </p>
+          <p>CLICK on a TITLE to expand or shrink a Question, </p>
+          <p>DOWNVOTE for BAD Questions - a total of <strong>5</strong> means DELETION, </p>
           <p>Have fun!</p>
           </h6>
         </div>

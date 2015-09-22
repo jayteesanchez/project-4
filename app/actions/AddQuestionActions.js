@@ -10,7 +10,11 @@ class AddQuestionActions {
       'updateChoice1_img',
       'updateChoice2',
       'updateChoice2_img',
-      'invalid'
+      'invalidQuestion',
+      'invalidChoice1',
+      'invalidChoice1_img',
+      'invalidChoice2',
+      'invalidChoice2_img'
     );
   }
 
@@ -28,6 +32,7 @@ class AddQuestionActions {
       }
     })
       .done((data) => {
+        console.log(data)
         this.actions.addQuestionSuccess(data.message);
       })
       .fail((jqXhr) => {
