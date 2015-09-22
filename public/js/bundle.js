@@ -96,7 +96,7 @@ var HomeActions = (function () {
   function HomeActions() {
     _classCallCheck(this, HomeActions);
 
-    this.generateActions('getQuestionsSuccess', 'getQuestionsFail', 'vote1Fail', 'vote2Fail', 'changeDisplayFail', 'downVoteFail');
+    this.generateActions('getQuestionsSuccess', 'getQuestionsFail', 'vote1Fail', 'vote2Fail', 'voteSuccess', 'changeDisplayFail', 'downVoteSuccess', 'downVoteFail', 'removeQuestionSuccess');
   }
 
   _createClass(HomeActions, [{
@@ -119,7 +119,8 @@ var HomeActions = (function () {
         type: 'PUT',
         url: '/api/questions/' + id,
         data: { votes_choice_1: count + 1 }
-      }).done(function () {
+      }).done(function (data) {
+        _this2.actions.voteSuccess(data);
         _this2.actions.getQuestions();
       }).fail(function (jqXhr) {
         _this2.actions.vote1Fail(jqXhr.responseJSON.message);
@@ -134,7 +135,8 @@ var HomeActions = (function () {
         type: 'PUT',
         url: '/api/questions/' + id,
         data: { votes_choice_2: count + 1 }
-      }).done(function () {
+      }).done(function (data) {
+        _this3.actions.voteSuccess(data);
         _this3.actions.getQuestions();
       }).fail(function (jqXhr) {
         _this3.actions.vote2Fail(jqXhr.responseJSON.message);
@@ -169,7 +171,7 @@ var HomeActions = (function () {
         url: '/api/questions/' + id,
         data: { downVote: count + 1 }
       }).done(function (res) {
-        console.log(res);
+        _this5.actions.downVoteSuccess(res);
         _this5.actions.getQuestions();
       }).fail(function (jqXhr) {
         _this5.actions.downVoteFail(jqXhr.responseJSON.message);
@@ -184,7 +186,8 @@ var HomeActions = (function () {
       $.ajax({
         type: 'DELETE',
         url: '/api/questions/' + id
-      }).done(function () {
+      }).done(function (data) {
+        _this6.actions.removeQuestionSuccess(data);
         _this6.actions.getQuestions();
       }).fail(function (jqXhr) {
         _this6.actions.removeQuestionsFail(jqXhr.responseJSON.message);
@@ -1419,6 +1422,11 @@ var HomeStore = (function () {
       toastr.error(errorMessage);
     }
   }, {
+    key: 'onVoteSuccess',
+    value: function onVoteSuccess(successMessage) {
+      document.setTimeout(toastr.success('Vote Successful, Keep Going!'), 30000);
+    }
+  }, {
     key: 'onVoteFail',
     value: function onVoteFail(errorMessage) {
       toastr.error(errorMessage);
@@ -1429,9 +1437,19 @@ var HomeStore = (function () {
       toastr.error(errorMessage);
     }
   }, {
+    key: 'onDownVoteSuccess',
+    value: function onDownVoteSuccess(successMessage) {
+      document.setTimeout(toastr.error('You\'ve Successfully Downvoted the Question'), 30000);
+    }
+  }, {
     key: 'onDownVoteFail',
     value: function onDownVoteFail(errorMessage) {
       toastr.error(errorMessage);
+    }
+  }, {
+    key: 'onRemoveQuestionSuccess',
+    value: function onRemoveQuestionSuccess(successMessage) {
+      document.setTimeout(toastr.error('The Bad Question was Removed!'), 30000);
     }
   }, {
     key: 'onRemoveQuestionFail',

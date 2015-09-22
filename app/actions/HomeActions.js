@@ -7,8 +7,11 @@ class HomeActions {
       'getQuestionsFail',
       'vote1Fail',
       'vote2Fail',
+      'voteSuccess',
       'changeDisplayFail',
-      'downVoteFail'
+      'downVoteSuccess',
+      'downVoteFail',
+      'removeQuestionSuccess'
     );
   }
 
@@ -28,7 +31,8 @@ class HomeActions {
       url: '/api/questions/' + id,
       data: { votes_choice_1: count + 1}
     })
-      .done(() => {
+      .done((data) => {
+        this.actions.voteSuccess(data);
         this.actions.getQuestions();
       })
       .fail((jqXhr) => {
@@ -42,7 +46,8 @@ class HomeActions {
       url: '/api/questions/' + id,
       data: { votes_choice_2: count + 1}
     })
-      .done(() => {
+      .done((data) => {
+        this.actions.voteSuccess(data);
         this.actions.getQuestions();
       })
       .fail((jqXhr) => {
@@ -75,7 +80,7 @@ class HomeActions {
       data: { downVote: count + 1}
     })
       .done((res) => {
-        console.log(res);
+        this.actions.downVoteSuccess(res);
         this.actions.getQuestions();
       })
       .fail((jqXhr) => {
@@ -89,7 +94,8 @@ class HomeActions {
       type: 'DELETE',
       url: '/api/questions/' + id
     })
-      .done(() => {
+      .done((data) => {
+        this.actions.removeQuestionSuccess(data);
         this.actions.getQuestions();
       })
       .fail((jqXhr) => {
