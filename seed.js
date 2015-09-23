@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-// mongoose.connect('mongodb://localhost/project-4');
+mongoose.connect('mongodb://admin:1234@ds051933.mongolab.com:51933/heroku_m0mn1jqh');
 
 var Question = require('./models/Question');
 
