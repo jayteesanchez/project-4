@@ -30,3 +30,9 @@ node_modules
 bower_components
 
 .env
+
+.DS_Store
+
+# Compiled files
+public/css/*
+public/js/*
