@@ -152,7 +152,7 @@ class Home extends React.Component {
   return (
     <div className='container'>
         <div className='row'>
-          <h1>{this.state.questions}</h1>
+          <h1>{this.state.questions}Not Loading Resources...</h1>
         </div>
       </div>
     );
