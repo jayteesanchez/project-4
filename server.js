@@ -19,14 +19,13 @@ var routes       = require('./app/routes');
 // "app" with the variable `app`.
 var app = express();
 
-// check that MongoD is running...
-require('net').connect(27017, 'localhost').on('error', function() {
-  console.log("YOU MUST BOW BEFORE THE MONGOD FIRST, MORTAL!");
-  process.exit(0);
-});
-// load mongoose and connect to a database
-mongoose.connect('mongodb://localhost/project-4');
+var config = require('./config');
 
+// load mongoose and connect to a database
+mongoose.connect(config.database);
+mongoose.connection.on('error', function() {
+  console.info('Error: Could not connect to MongoDB. Did you forget to run `mongod`?'.red);
+});
 
 app.set('port', process.env.PORT || 3000);
 app.use(logger('dev'));
