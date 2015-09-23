@@ -772,7 +772,7 @@ var Home = (function (_React$Component) {
               ),
               _react2['default'].createElement(
                 'div',
-                { className: 'col-xs-6 col-sm-6 col-md-5 col-md-offset-1' },
+                { className: 'col-xs-6 col-sm-6 col-md-6' },
                 _react2['default'].createElement(
                   'div',
                   { className: 'thumbnail fadeInUp animated' },
@@ -784,7 +784,7 @@ var Home = (function (_React$Component) {
                       'ul',
                       { className: 'list-inline' },
                       _react2['default'].createElement(
-                        'li',
+                        'h4',
                         null,
                         _react2['default'].createElement(
                           'strong',
@@ -792,6 +792,7 @@ var Home = (function (_React$Component) {
                           question.choice1
                         )
                       ),
+                      _react2['default'].createElement('br', null),
                       _react2['default'].createElement(
                         'li',
                         null,
@@ -816,7 +817,7 @@ var Home = (function (_React$Component) {
               ),
               _react2['default'].createElement(
                 'div',
-                { className: 'col-xs-6 col-sm-6 col-md-5' },
+                { className: 'col-xs-6 col-sm-6 col-md-6' },
                 _react2['default'].createElement(
                   'div',
                   { className: 'thumbnail fadeInUp animated' },
@@ -828,7 +829,7 @@ var Home = (function (_React$Component) {
                       'ul',
                       { className: 'list-inline' },
                       _react2['default'].createElement(
-                        'li',
+                        'h4',
                         null,
                         _react2['default'].createElement(
                           'strong',
@@ -836,6 +837,7 @@ var Home = (function (_React$Component) {
                           question.choice2
                         )
                       ),
+                      _react2['default'].createElement('br', null),
                       _react2['default'].createElement(
                         'li',
                         null,
@@ -867,8 +869,7 @@ var Home = (function (_React$Component) {
                   _react2['default'].createElement('span', { className: 'glyphicon glyphicon-thumbs-down' }),
                   ' ',
                   question.downVote
-                ),
-                _react2['default'].createElement('span', null)
+                )
               )
             );
           }
@@ -877,7 +878,7 @@ var Home = (function (_React$Component) {
               'div',
               { key: question._id, alt: question.index, className: 'row thumbnail flipInX animated', onClick: _this.changeQuestions.bind(_this, question) },
               _react2['default'].createElement(
-                'h3',
+                'h4',
                 { className: 'text-center' },
                 question.question,
                 '?'
