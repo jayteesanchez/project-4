@@ -53,29 +53,7 @@ var AddQuestionActions = (function () {
 exports['default'] = _alt2['default'].createActions(AddQuestionActions);
 module.exports = exports['default'];
 
-},{"../alt":5}],2:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-var _alt = require('../alt');
-
-var _alt2 = _interopRequireDefault(_alt);
-
-var FooterActions = function FooterActions() {
-  _classCallCheck(this, FooterActions);
-};
-
-exports['default'] = _alt2['default'].createActions(FooterActions);
-module.exports = exports['default'];
-
-},{"../alt":5}],3:[function(require,module,exports){
+},{"../alt":4}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -201,7 +179,7 @@ var HomeActions = (function () {
 exports['default'] = _alt2['default'].createActions(HomeActions);
 module.exports = exports['default'];
 
-},{"../alt":5}],4:[function(require,module,exports){
+},{"../alt":4}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -227,7 +205,7 @@ var NavbarActions = function NavbarActions() {
 exports['default'] = _alt2['default'].createActions(NavbarActions);
 module.exports = exports['default'];
 
-},{"../alt":5,"underscore":"underscore"}],5:[function(require,module,exports){
+},{"../alt":4,"underscore":"underscore"}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -243,7 +221,7 @@ var _alt2 = _interopRequireDefault(_alt);
 exports['default'] = new _alt2['default']();
 module.exports = exports['default'];
 
-},{"alt":"alt"}],6:[function(require,module,exports){
+},{"alt":"alt"}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -459,7 +437,7 @@ var AddQuestion = (function (_React$Component) {
 exports['default'] = AddQuestion;
 module.exports = exports['default'];
 
-},{"../actions/AddQuestionActions":1,"../stores/AddQuestionStore":13,"react":"react"}],7:[function(require,module,exports){
+},{"../actions/AddQuestionActions":1,"../stores/AddQuestionStore":12,"react":"react"}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -507,7 +485,57 @@ var App = (function (_React$Component) {
         null,
         _react2['default'].createElement(_Navbar2['default'], null),
         _react2['default'].createElement(_reactRouter.RouteHandler, null),
-        _react2['default'].createElement(_Footer2['default'], null)
+        _react2['default'].createElement(
+          'footer',
+          null,
+          _react2['default'].createElement(
+            'div',
+            { className: 'container' },
+            _react2['default'].createElement(
+              'div',
+              { className: 'row' },
+              _react2['default'].createElement(
+                'p',
+                null,
+                'Powered by ',
+                _react2['default'].createElement(
+                  'strong',
+                  null,
+                  'Node.js'
+                ),
+                ', ',
+                _react2['default'].createElement(
+                  'strong',
+                  null,
+                  'MongoDB'
+                ),
+                ' and ',
+                _react2['default'].createElement(
+                  'strong',
+                  null,
+                  'React'
+                ),
+                ' with Flux (alt) architecture and server-side rendering.'
+              ),
+              _react2['default'].createElement(
+                'p',
+                null,
+                'You may view the ',
+                _react2['default'].createElement(
+                  'a',
+                  { href: 'https://github.com/jayteesanchez/project-4' },
+                  'Source Code'
+                ),
+                ' behind this project on GitHub.'
+              ),
+              _react2['default'].createElement(
+                'p',
+                null,
+                '© 2015 Jaytee Sanchez'
+              )
+            )
+          )
+        )
       );
     }
   }]);
@@ -518,127 +546,10 @@ var App = (function (_React$Component) {
 exports['default'] = App;
 module.exports = exports['default'];
 
-},{"./Footer":8,"./Navbar":10,"react":"react","react-router":"react-router"}],8:[function(require,module,exports){
-'use strict';
+},{"./Footer":7,"./Navbar":9,"react":"react","react-router":"react-router"}],7:[function(require,module,exports){
+"use strict";
 
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRouter = require('react-router');
-
-var _storesFooterStore = require('../stores/FooterStore');
-
-var _storesFooterStore2 = _interopRequireDefault(_storesFooterStore);
-
-var _actionsFooterActions = require('../actions/FooterActions');
-
-var _actionsFooterActions2 = _interopRequireDefault(_actionsFooterActions);
-
-var Footer = (function (_React$Component) {
-  _inherits(Footer, _React$Component);
-
-  function Footer(props) {
-    _classCallCheck(this, Footer);
-
-    _get(Object.getPrototypeOf(Footer.prototype), 'constructor', this).call(this, props);
-    this.state = _storesFooterStore2['default'].getState();
-    this.onChange = this.onChange.bind(this);
-  }
-
-  _createClass(Footer, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      _storesFooterStore2['default'].listen(this.onChange);
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      _storesFooterStore2['default'].unlisten(this.onChange);
-    }
-  }, {
-    key: 'onChange',
-    value: function onChange(state) {
-      this.setState(state);
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return _react2['default'].createElement(
-        'footer',
-        null,
-        _react2['default'].createElement(
-          'div',
-          { className: 'container' },
-          _react2['default'].createElement(
-            'div',
-            { className: 'row' },
-            _react2['default'].createElement(
-              'p',
-              null,
-              'Powered by ',
-              _react2['default'].createElement(
-                'strong',
-                null,
-                'Node.js'
-              ),
-              ', ',
-              _react2['default'].createElement(
-                'strong',
-                null,
-                'MongoDB'
-              ),
-              ' and ',
-              _react2['default'].createElement(
-                'strong',
-                null,
-                'React'
-              ),
-              ' with Flux (alt) architecture and server-side rendering.'
-            ),
-            _react2['default'].createElement(
-              'p',
-              null,
-              'You may view the ',
-              _react2['default'].createElement(
-                'a',
-                { href: 'https://github.com/jayteesanchez/project-4' },
-                'Source Code'
-              ),
-              ' behind this project on GitHub.'
-            ),
-            _react2['default'].createElement(
-              'p',
-              null,
-              '© 2015 Jaytee Sanchez'
-            )
-          )
-        )
-      );
-    }
-  }]);
-
-  return Footer;
-})(_react2['default'].Component);
-
-exports['default'] = Footer;
-module.exports = exports['default'];
-
-},{"../actions/FooterActions":2,"../stores/FooterStore":14,"react":"react","react-router":"react-router"}],9:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -980,7 +891,7 @@ var Home = (function (_React$Component) {
 exports['default'] = Home;
 module.exports = exports['default'];
 
-},{"../actions/HomeActions":3,"../stores/HomeStore":15,"react":"react","react-router":"react-router"}],10:[function(require,module,exports){
+},{"../actions/HomeActions":2,"../stores/HomeStore":13,"react":"react","react-router":"react-router"}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1167,7 +1078,7 @@ Navbar.contextTypes = {
 exports['default'] = Navbar;
 module.exports = exports['default'];
 
-},{"../actions/NavbarActions":4,"../stores/NavbarStore":16,"react":"react","react-router":"react-router"}],11:[function(require,module,exports){
+},{"../actions/NavbarActions":3,"../stores/NavbarStore":14,"react":"react","react-router":"react-router"}],10:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -1188,7 +1099,7 @@ _reactRouter2['default'].run(_routes2['default'], _reactRouter2['default'].Histo
   _react2['default'].render(_react2['default'].createElement(Handler, null), document.getElementById('app'));
 });
 
-},{"./routes":12,"react":"react","react-router":"react-router"}],12:[function(require,module,exports){
+},{"./routes":11,"react":"react","react-router":"react-router"}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1223,7 +1134,7 @@ exports['default'] = _react2['default'].createElement(
 );
 module.exports = exports['default'];
 
-},{"./components/AddQuestion":6,"./components/App":7,"./components/Home":9,"react":"react","react-router":"react-router"}],13:[function(require,module,exports){
+},{"./components/AddQuestion":5,"./components/App":6,"./components/Home":8,"react":"react","react-router":"react-router"}],12:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1354,36 +1265,7 @@ var AddQuestionStore = (function () {
 exports['default'] = _alt2['default'].createStore(AddQuestionStore);
 module.exports = exports['default'];
 
-},{"../actions/AddQuestionActions":1,"../alt":5}],14:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-var _alt = require('../alt');
-
-var _alt2 = _interopRequireDefault(_alt);
-
-var _actionsFooterActions = require('../actions/FooterActions');
-
-var _actionsFooterActions2 = _interopRequireDefault(_actionsFooterActions);
-
-var FooterStore = function FooterStore() {
-  _classCallCheck(this, FooterStore);
-
-  this.bindActions(_actionsFooterActions2['default']);
-  this.questions = [];
-};
-
-exports['default'] = _alt2['default'].createStore(FooterStore);
-module.exports = exports['default'];
-
-},{"../actions/FooterActions":2,"../alt":5}],15:[function(require,module,exports){
+},{"../actions/AddQuestionActions":1,"../alt":4}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1425,7 +1307,7 @@ var HomeStore = (function () {
   }, {
     key: 'onVoteSuccess',
     value: function onVoteSuccess(successMessage) {
-      document.setTimeout(toastr.success('Vote Successful, Keep Going!'), 30000);
+      window.setTimeout(toastr.success('Vote Successful, Keep Going!'), 30000);
     }
   }, {
     key: 'onVoteFail',
@@ -1440,7 +1322,7 @@ var HomeStore = (function () {
   }, {
     key: 'onDownVoteSuccess',
     value: function onDownVoteSuccess(successMessage) {
-      document.setTimeout(toastr.error('You\'ve Successfully Downvoted the Question'), 30000);
+      window.setTimeout(toastr.error('You\'ve Successfully Downvoted the Question'), 30000);
     }
   }, {
     key: 'onDownVoteFail',
@@ -1450,7 +1332,7 @@ var HomeStore = (function () {
   }, {
     key: 'onRemoveQuestionSuccess',
     value: function onRemoveQuestionSuccess(successMessage) {
-      document.setTimeout(toastr.error('The Bad Question was Removed!'), 30000);
+      window.setTimeout(toastr.error('The Bad Question was Removed!'), 30000);
     }
   }, {
     key: 'onRemoveQuestionFail',
@@ -1465,7 +1347,7 @@ var HomeStore = (function () {
 exports['default'] = _alt2['default'].createStore(HomeStore);
 module.exports = exports['default'];
 
-},{"../actions/HomeActions":3,"../alt":5}],16:[function(require,module,exports){
+},{"../actions/HomeActions":2,"../alt":4}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1519,4 +1401,4 @@ var NavbarStore = (function () {
 exports['default'] = _alt2['default'].createStore(NavbarStore);
 module.exports = exports['default'];
 
-},{"../actions/NavbarActions":4,"../alt":5}]},{},[11]);
+},{"../actions/NavbarActions":3,"../alt":4}]},{},[10]);

@@ -16,7 +16,7 @@ class HomeStore {
   }
 
   onVoteSuccess(successMessage) {
-    document.setTimeout(toastr.success('Vote Successful, Keep Going!'), 30000);
+    window.setTimeout(toastr.success('Vote Successful, Keep Going!'), 30000);
   }
 
   onVoteFail(errorMessage) {
@@ -28,7 +28,7 @@ class HomeStore {
   }
 
   onDownVoteSuccess(successMessage){
-    document.setTimeout(toastr.error('You\'ve Successfully Downvoted the Question'), 30000);
+    window.setTimeout(toastr.error('You\'ve Successfully Downvoted the Question'), 30000);
   }
 
   onDownVoteFail(errorMessage){
@@ -36,7 +36,7 @@ class HomeStore {
   }
 
   onRemoveQuestionSuccess(successMessage){
-    document.setTimeout(toastr.error('The Bad Question was Removed!'), 30000);
+    window.setTimeout(toastr.error('The Bad Question was Removed!'), 30000);
   }
   onRemoveQuestionFail(errorMessage){
     toastr.error(errorMessage);
