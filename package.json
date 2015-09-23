@@ -2,7 +2,7 @@
   "name": "project-4",
   "version": "1.0.0",
   "engines": {
-    "node": "1.6.2"
+    "node": "0.12.1"
   },
   "description": "An app to help people make choices",
   "main": "server.js",
