@@ -93,23 +93,5 @@ gulp.task('browserify-watch', ['browserify-vendor'], function() {
   }
 });
 
-/*
- |--------------------------------------------------------------------------
- | Compile LESS stylesheets.
- |--------------------------------------------------------------------------
- */
-// gulp.task('styles', function() {
-//   return gulp.src('app/stylesheets/main.less')
-//     .pipe(plumber())
-//     .pipe(less())
-//     .pipe(autoprefixer())
-//     .pipe(gulpif(production, cssmin()))
-//     .pipe(gulp.dest('public/css'));
-// });
-
-// gulp.task('watch', function() {
-//   gulp.watch('app/stylesheets/**/*.less', ['styles']);
-// });
-
 gulp.task('default', ['vendor', 'browserify-watch']);
 gulp.task('build', ['vendor', 'browserify']);
