@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/project-4');
+// mongoose.connect('mongodb://localhost/project-4');
 
 var Question = require('./models/Question');
 
