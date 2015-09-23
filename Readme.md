@@ -22,22 +22,22 @@ An app that will help you make choices by asking other people that dont know you
 
  ##MVP
 
- [X] As a user I want people to vote for the choice I should make.
+ - [x] As a user I want people to vote for the choice I should make.
 
- [X] As a user I want to decide the choices that will be voted on.
+ - [x] As a user I want to decide the choices that will be voted on.
 
- [X] As a user I want to see the total votes of each choice.
+ - [x] As a user I want to see the total votes of each choice.
 
- [X] As a user I want to easily see a list of choices to vote on.
+ - [x] As a user I want to easily see a list of choices to vote on.
 
 
  ##ICEBOX
 
- [ ] As a user I want too see choices based on popularity.
+ - [ ] As a user I want too see choices based on popularity.
 
- [ ] As a user I want to be able to have a chat with other users.
+ - [ ] As a user I want to be able to have a chat with other users.
 
- [ ] As a user I want to be able to follow other users.
+ - [ ] As a user I want to be able to follow other users.
 
 ##Getting Started
 
