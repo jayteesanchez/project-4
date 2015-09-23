@@ -1,6 +1,9 @@
 {
   "name": "project-4",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "engines": {
+    "node": "1.6.2"
+  },
   "description": "An app to help people make choices",
   "main": "server.js",
   "scripts": {
