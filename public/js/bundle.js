@@ -488,47 +488,43 @@ var App = (function (_React$Component) {
             'div',
             { className: 'container' },
             _react2['default'].createElement(
-              'div',
-              { className: 'row' },
+              'p',
+              null,
+              'Powered by ',
               _react2['default'].createElement(
-                'p',
+                'strong',
                 null,
-                'Powered by ',
-                _react2['default'].createElement(
-                  'strong',
-                  null,
-                  'Node.js'
-                ),
-                ', ',
-                _react2['default'].createElement(
-                  'strong',
-                  null,
-                  'MongoDB'
-                ),
-                ' and ',
-                _react2['default'].createElement(
-                  'strong',
-                  null,
-                  'React'
-                ),
-                ' with Flux (alt) architecture and server-side rendering.'
+                'Node.js'
               ),
+              ', ',
               _react2['default'].createElement(
-                'p',
+                'strong',
                 null,
-                'You may view the ',
-                _react2['default'].createElement(
-                  'a',
-                  { href: 'https://github.com/jayteesanchez/project-4' },
-                  'Source Code'
-                ),
-                ' behind this project on GitHub.'
+                'MongoDB'
               ),
+              ' and ',
               _react2['default'].createElement(
-                'p',
+                'strong',
                 null,
-                '© 2015 Jaytee Sanchez'
-              )
+                'React'
+              ),
+              ' with Flux (alt) architecture and server-side rendering.'
+            ),
+            _react2['default'].createElement(
+              'p',
+              null,
+              'You may view the ',
+              _react2['default'].createElement(
+                'a',
+                { href: 'https://github.com/jayteesanchez/project-4' },
+                'Source Code'
+              ),
+              ' behind this project on GitHub.'
+            ),
+            _react2['default'].createElement(
+              'p',
+              null,
+              '© 2015 Jaytee Sanchez'
             )
           )
         )
@@ -829,9 +825,13 @@ var Home = (function (_React$Component) {
             'div',
             { className: 'row' },
             _react2['default'].createElement(
-              'h6',
-              { className: 'text-center fadeIn animated', id: 'clickDisplay', onClick: this.handleClick.bind(event, this.id) },
-              'CLICK to learn how to play...'
+              'button',
+              null,
+              _react2['default'].createElement(
+                'h6',
+                { className: 'text-center fadeIn animated', id: 'clickDisplay', onClick: this.handleClick.bind(event, this.id) },
+                'CLICK to learn how to play...'
+              )
             ),
             _react2['default'].createElement(
               'h6',

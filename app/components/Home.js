@@ -138,7 +138,9 @@ class Home extends React.Component {
     return (
       <div className='container fadeInUp animated'>
         <div className='row'>
-          <h6 className='text-center fadeIn animated' id='clickDisplay' onClick={this.handleClick.bind(event, this.id)}>CLICK to learn how to play...</h6>
+          <button>
+            <h6 className='text-center fadeIn animated' id='clickDisplay' onClick={this.handleClick.bind(event, this.id)}>CLICK to learn how to play...</h6>
+          </button>
           <h6 className='text-center fadeIn animated' style={hidden} id='hintDisplay' onClick={this.handleClick.bind(event, this.id)}>
           <p>CLICK on a TITLE to expand or shrink a Question, </p>
           <p>DOWNVOTE for BAD Questions - a total of <strong>5</strong> means DELETION, </p>
