@@ -437,7 +437,7 @@ var AddQuestion = (function (_React$Component) {
 exports['default'] = AddQuestion;
 module.exports = exports['default'];
 
-},{"../actions/AddQuestionActions":1,"../stores/AddQuestionStore":12,"react":"react"}],6:[function(require,module,exports){
+},{"../actions/AddQuestionActions":1,"../stores/AddQuestionStore":11,"react":"react"}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -463,10 +463,6 @@ var _reactRouter = require('react-router');
 var _Navbar = require('./Navbar');
 
 var _Navbar2 = _interopRequireDefault(_Navbar);
-
-var _Footer = require('./Footer');
-
-var _Footer2 = _interopRequireDefault(_Footer);
 
 var App = (function (_React$Component) {
   _inherits(App, _React$Component);
@@ -546,10 +542,7 @@ var App = (function (_React$Component) {
 exports['default'] = App;
 module.exports = exports['default'];
 
-},{"./Footer":7,"./Navbar":9,"react":"react","react-router":"react-router"}],7:[function(require,module,exports){
-"use strict";
-
-},{}],8:[function(require,module,exports){
+},{"./Navbar":8,"react":"react","react-router":"react-router"}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -878,7 +871,8 @@ var Home = (function (_React$Component) {
           _react2['default'].createElement(
             'h1',
             null,
-            this.state.questions
+            this.state.questions,
+            'Not Loading Resources...'
           )
         )
       );
@@ -891,7 +885,7 @@ var Home = (function (_React$Component) {
 exports['default'] = Home;
 module.exports = exports['default'];
 
-},{"../actions/HomeActions":2,"../stores/HomeStore":13,"react":"react","react-router":"react-router"}],9:[function(require,module,exports){
+},{"../actions/HomeActions":2,"../stores/HomeStore":12,"react":"react","react-router":"react-router"}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1078,7 +1072,7 @@ Navbar.contextTypes = {
 exports['default'] = Navbar;
 module.exports = exports['default'];
 
-},{"../actions/NavbarActions":3,"../stores/NavbarStore":14,"react":"react","react-router":"react-router"}],10:[function(require,module,exports){
+},{"../actions/NavbarActions":3,"../stores/NavbarStore":13,"react":"react","react-router":"react-router"}],9:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -1099,7 +1093,7 @@ _reactRouter2['default'].run(_routes2['default'], _reactRouter2['default'].Histo
   _react2['default'].render(_react2['default'].createElement(Handler, null), document.getElementById('app'));
 });
 
-},{"./routes":11,"react":"react","react-router":"react-router"}],11:[function(require,module,exports){
+},{"./routes":10,"react":"react","react-router":"react-router"}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1134,7 +1128,7 @@ exports['default'] = _react2['default'].createElement(
 );
 module.exports = exports['default'];
 
-},{"./components/AddQuestion":5,"./components/App":6,"./components/Home":8,"react":"react","react-router":"react-router"}],12:[function(require,module,exports){
+},{"./components/AddQuestion":5,"./components/App":6,"./components/Home":7,"react":"react","react-router":"react-router"}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1265,7 +1259,7 @@ var AddQuestionStore = (function () {
 exports['default'] = _alt2['default'].createStore(AddQuestionStore);
 module.exports = exports['default'];
 
-},{"../actions/AddQuestionActions":1,"../alt":4}],13:[function(require,module,exports){
+},{"../actions/AddQuestionActions":1,"../alt":4}],12:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1347,7 +1341,7 @@ var HomeStore = (function () {
 exports['default'] = _alt2['default'].createStore(HomeStore);
 module.exports = exports['default'];
 
-},{"../actions/HomeActions":2,"../alt":4}],14:[function(require,module,exports){
+},{"../actions/HomeActions":2,"../alt":4}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1401,4 +1395,4 @@ var NavbarStore = (function () {
 exports['default'] = _alt2['default'].createStore(NavbarStore);
 module.exports = exports['default'];
 
-},{"../actions/NavbarActions":3,"../alt":4}]},{},[10]);
+},{"../actions/NavbarActions":3,"../alt":4}]},{},[9]);
