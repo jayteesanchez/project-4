@@ -82,12 +82,12 @@ class Home extends React.Component {
     var allQuestions = currentQuestions.reverse().map((question, index) => {
       if(question.display){
       return (
-        <div key={question._id} className='row fadeInUp animated'>
-            <h3 className='text-center' onClick={this.changeQuestions.bind(this, question)}>
+        <div key={question._id} className='row fadeInUp animated text-center'>
+            <h3 className='fadeIn animated' onClick={this.changeQuestions.bind(this, question)}>
               {question.question}?
             </h3>
-          <div className={'col-xs-6 col-sm-6 col-md-6'}>
-            <div className='thumbnail fadeInUp animated'>
+          <div className='col-xs-6 col-sm-6 col-md-6'>
+            <div className='thumbnail fadeInUp animated btn'>
               <img style={resizeImg} alt={'votes_choice_1'} onClick={this.handleClick.bind(event, question)} src={question.choice1_img}/>
               <div className='caption text-center'>
                 <ul className='list-inline'>
@@ -98,8 +98,8 @@ class Home extends React.Component {
               </div>
             </div>
           </div>
-            <div className={'col-xs-6 col-sm-6 col-md-6'}>
-              <div className='thumbnail fadeInUp animated'>
+            <div className='col-xs-6 col-sm-6 col-md-6'>
+              <div className='thumbnail fadeInUp animated btn'>
                 <img style={resizeImg} alt={'votes_choice_2'} onClick={this.handleClick.bind(event, question)} src={question.choice2_img}/>
                 <div className='caption text-center'>
                   <ul className='list-inline'>
@@ -121,7 +121,7 @@ class Home extends React.Component {
       }
       if(!question.display){
       return (
-      <div key={question._id} alt={ question.index } className='row thumbnail flipInX animated' onClick={this.changeQuestions.bind(this, question)}>
+      <div key={question._id} alt={ question.index } className='row thumbnail btn flipInX animated' onClick={this.changeQuestions.bind(this, question)}>
         <h4 className='text-center'>{question.question}?</h4>
         <h6 className='text-center'>
           <strong>{question.choice1}</strong>
@@ -136,10 +136,10 @@ class Home extends React.Component {
     });
 
     return (
-      <div className='container fadeInUp animated'>
+      <div className='container fadeInUp animated text-center'>
         <div className='row'>
-          <h6 className='text-center fadeIn animated' id='clickDisplay' onClick={this.handleClick.bind(event, this.id)}>CLICK to learn how to play...</h6>
-          <h6 className='text-center fadeIn animated' style={hidden} id='hintDisplay' onClick={this.handleClick.bind(event, this.id)}>
+          <h6 className='text-center fadeIn animated btn' id='clickDisplay' onClick={this.handleClick.bind(event, this.id)}>CLICK HERE to learn how to play...</h6>
+          <h6 className='text-center fadeIn animated btn' style={hidden} id='hintDisplay' onClick={this.handleClick.bind(event, this.id)}>
           <p>CLICK on a TITLE to expand or shrink a Question, </p>
           <p>DOWNVOTE for BAD Questions - a total of <strong>5</strong> means DELETION, </p>
           <p>Have fun!</p>
