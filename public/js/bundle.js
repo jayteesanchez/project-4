@@ -663,10 +663,10 @@ var Home = (function (_React$Component) {
           if (question.display) {
             return _react2['default'].createElement(
               'div',
-              { key: question._id, className: 'row fadeInUp animated' },
+              { key: question._id, className: 'row fadeInUp animated text-center' },
               _react2['default'].createElement(
                 'h3',
-                { className: 'text-center', onClick: _this.changeQuestions.bind(_this, question) },
+                { className: 'fadeIn animated', onClick: _this.changeQuestions.bind(_this, question) },
                 question.question,
                 '?'
               ),
@@ -675,7 +675,7 @@ var Home = (function (_React$Component) {
                 { className: 'col-xs-6 col-sm-6 col-md-6' },
                 _react2['default'].createElement(
                   'div',
-                  { className: 'thumbnail fadeInUp animated' },
+                  { className: 'thumbnail fadeInUp animated btn' },
                   _react2['default'].createElement('img', { style: resizeImg, alt: 'votes_choice_1', onClick: _this.handleClick.bind(event, question), src: question.choice1_img }),
                   _react2['default'].createElement(
                     'div',
@@ -720,7 +720,7 @@ var Home = (function (_React$Component) {
                 { className: 'col-xs-6 col-sm-6 col-md-6' },
                 _react2['default'].createElement(
                   'div',
-                  { className: 'thumbnail fadeInUp animated' },
+                  { className: 'thumbnail fadeInUp animated btn' },
                   _react2['default'].createElement('img', { style: resizeImg, alt: 'votes_choice_2', onClick: _this.handleClick.bind(event, question), src: question.choice2_img }),
                   _react2['default'].createElement(
                     'div',
@@ -776,7 +776,7 @@ var Home = (function (_React$Component) {
           if (!question.display) {
             return _react2['default'].createElement(
               'div',
-              { key: question._id, alt: question.index, className: 'row thumbnail flipInX animated', onClick: _this.changeQuestions.bind(_this, question) },
+              { key: question._id, alt: question.index, className: 'row thumbnail btn flipInX animated', onClick: _this.changeQuestions.bind(_this, question) },
               _react2['default'].createElement(
                 'h4',
                 { className: 'text-center' },
@@ -820,22 +820,18 @@ var Home = (function (_React$Component) {
 
         return _react2['default'].createElement(
           'div',
-          { className: 'container fadeInUp animated' },
+          { className: 'container fadeInUp animated text-center' },
           _react2['default'].createElement(
             'div',
             { className: 'row' },
             _react2['default'].createElement(
-              'button',
-              null,
-              _react2['default'].createElement(
-                'h6',
-                { className: 'text-center fadeIn animated', id: 'clickDisplay', onClick: this.handleClick.bind(event, this.id) },
-                'CLICK to learn how to play...'
-              )
+              'h6',
+              { className: 'text-center fadeIn animated btn', id: 'clickDisplay', onClick: this.handleClick.bind(event, this.id) },
+              'CLICK HERE to learn how to play...'
             ),
             _react2['default'].createElement(
               'h6',
-              { className: 'text-center fadeIn animated', style: hidden, id: 'hintDisplay', onClick: this.handleClick.bind(event, this.id) },
+              { className: 'text-center fadeIn animated btn', style: hidden, id: 'hintDisplay', onClick: this.handleClick.bind(event, this.id) },
               _react2['default'].createElement(
                 'p',
                 null,
@@ -1002,25 +998,7 @@ var Navbar = (function (_React$Component) {
         ),
         _react2['default'].createElement(
           'div',
-          { id: 'navbar', className: 'navbar-collapse collapse' },
-          _react2['default'].createElement(
-            'form',
-            { ref: 'searchForm', className: 'navbar-form navbar-left animated', onSubmit: this.handleSubmit.bind(this) },
-            _react2['default'].createElement(
-              'div',
-              { className: 'input-group' },
-              _react2['default'].createElement('input', { type: 'text', className: 'form-control', placeholder: ' Questions', value: this.state.searchQuery, onChange: _actionsNavbarActions2['default'].updateSearchQuery }),
-              _react2['default'].createElement(
-                'span',
-                { className: 'input-group-btn' },
-                _react2['default'].createElement(
-                  'button',
-                  { className: 'btn btn-default', onClick: this.handleSubmit.bind(this) },
-                  'SEARCH'
-                )
-              )
-            )
-          ),
+          { id: 'navbar', className: 'navbar-collapse collapse navbar-right' },
           _react2['default'].createElement(
             'ul',
             { className: 'nav navbar-nav' },
@@ -1044,11 +1022,11 @@ var Navbar = (function (_React$Component) {
             ),
             _react2['default'].createElement(
               'li',
-              { className: 'navbar-right' },
+              null,
               _react2['default'].createElement(
                 'p',
-                { className: 'navbar-text navbar-right' },
-                'Users Online',
+                { className: 'navbar-text' },
+                'Users Online ',
                 _react2['default'].createElement(
                   'span',
                   { className: 'badge badge-up badge-danger' },

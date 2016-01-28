@@ -68,21 +68,13 @@ class Navbar extends React.Component {
             CHOICES
           </Link>
         </div>
-        <div id='navbar' className='navbar-collapse collapse'>
-          <form ref='searchForm' className='navbar-form navbar-left animated' onSubmit={this.handleSubmit.bind(this)}>
-            <div className='input-group'>
-              <input type='text' className='form-control' placeholder={' Questions'} value={this.state.searchQuery} onChange={NavbarActions.updateSearchQuery} />
-              <span className='input-group-btn'>
-                <button className='btn btn-default' onClick={this.handleSubmit.bind(this)}>SEARCH</button>
-              </span>
-            </div>
-          </form>
+        <div id='navbar' className='navbar-collapse collapse navbar-right'>
           <ul className='nav navbar-nav'>
             <li><Link to='/' active>Home</Link></li>
             <li><Link to='/ask'>Ask a Question</Link></li>
-            <li className='navbar-right'>
-              <p className='navbar-text navbar-right'>
-                Users Online
+            <li>
+              <p className='navbar-text'>
+                Users Online&nbsp;
                 <span className='badge badge-up badge-danger'>{this.state.onlineUsers}</span>
               </p>
             </li>
